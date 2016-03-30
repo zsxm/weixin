@@ -1,10 +1,10 @@
 package service
 
 import (
-	"weixin/source/common/consts"
-	"weixin/source/common/entity"
-	"weixin/source/common/log"
-	"weixin/source/common/util"
+	"weixin/source/consts"
+	"weixin/source/util"
+	"weixin/source/wx/entity"
+	"weixin/source/wx/log"
 
 	"github.com/zsxm/scgo/chttp"
 	"github.com/zsxm/scgo/tools/date"

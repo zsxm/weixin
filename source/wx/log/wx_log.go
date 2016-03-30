@@ -5,7 +5,7 @@ import (
 	"github.com/zsxm/scgo/logger"
 )
 
-var loger *logger.Log = logger.New("[COMMON]")
+var loger *logger.Log = logger.New("[WX]")
 
 func Debug(msg ...interface{}) {
 	loger.Debug(msg...)

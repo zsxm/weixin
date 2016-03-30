@@ -2,7 +2,7 @@ package util
 
 import (
 	"bytes"
-	"weixin/source/common/entity"
+	"weixin/source/wx/entity"
 
 	"github.com/zsxm/scgo/cxml"
 )

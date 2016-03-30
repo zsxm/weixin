@@ -28,6 +28,13 @@ func main() {
 		},
 		Template: chttp.Template{
 			Dir: "template",
+			Include: chttp.Include{
+				Dir: "comm",
+				Files: []string{
+					"header",
+					"left.menu",
+				},
+			},
 		},
 		Debug: true,
 		Port:  ":8080",

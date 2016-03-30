@@ -1,16 +1,61 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 	<head>
-      	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>微信测试页面</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>微信测试学习</title>
 		<link rel="shortcut icon" type="image/ico" href="/static/favicon.ico">
-		<link rel="stylesheet" href="/static/css/comm/font-awesome.min.css" >
-		<link rel="stylesheet" href="/static/css/comm/bootstrap/bootstrap.min.css" >
-		<script type="text/javascript" src="/static/js/comm/jquery/jquery-1.11.3.min.js"></script>
+		<link href="/static/css/comm/bootstrap/bootstrap.min.css" rel="stylesheet">
+	    <link href="/static/css/comm/bootstrap/font-awesome.min.css" rel="stylesheet">
+	    <link href="/static/css/comm/bootstrap/animate.min.css" rel="stylesheet">
+		
+		<script type="text/javascript" src="/static/js/comm/jquery/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="/static/js/comm/bootstrap/bootstrap.min.js"></script>
 		<script type="text/javascript" src="/static/js/comm/lufylegend/lufylegend-1.10.0.js"></script>
 	</head>
 	<body>
-	<h1>配置生成页面</h1>
+		<div class="container">
+			{{template "header.html" .}}
+			<div class="row clearfix">
+			{{template "left.menu.html" .}}
+				<div class="col-md-9 column">
+					<form action="/weixin/save" method="post" class="form-horizontal" role="form">
+						<div class="form-group">
+					    	<label class="col-sm-4 control-label">公众微信号添加</label>
+					   	</div>
+						<div class="form-group">
+					     	<label for="name" class="col-sm-4 control-label">订阅/公众号名称</label>
+					      	<div class="col-sm-2">
+					         	<input type="text" class="form-control" id="name" name="name" placeholder="订阅/公众号名称">
+					      	</div>
+					   	</div>
+						<div class="form-group">
+					     	<label for="name" class="col-sm-1 control-label">appid</label>
+					      	<div class="col-sm-2">
+					         	<input type="text" class="form-control" id="appid" name="appid" placeholder="appid">
+					      	</div>
+					   	</div>
+						<div class="form-group">
+					     	<label for="name" class="col-sm-1 control-label">appsecret</label>
+					      	<div class="col-sm-2">
+					         	<input type="text" class="form-control" id="appsecret" name="appsecret" placeholder="appsecret">
+					      	</div>
+					   	</div>
+						<div class="form-group">
+					     	<label for="name" class="col-sm-1 control-label">token</label>
+					      	<div class="col-sm-2">
+					         	<input type="text" class="form-control" id="token" name="token" placeholder="token">
+					      	</div>
+					   	</div>
+						<div class="form-group">
+				      		<div class="col-sm-offset-2 col-sm-10">
+				         		<button type="submit" class="btn btn-default">保存</button>
+				      		</div>
+				   		</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

@@ -1,10 +1,10 @@
 package action
 
 import (
-	"weixin/source/common/consts"
-	"weixin/source/common/log"
-	"weixin/source/common/service"
-	"weixin/source/common/util"
+	"weixin/source/consts"
+	"weixin/source/util"
+	"weixin/source/wx/log"
+	"weixin/source/wx/service"
 
 	"github.com/zsxm/scgo/chttp"
 )
@@ -12,10 +12,30 @@ import (
 func init() {
 	chttp.Action("/weixin", weixin)
 	chttp.Action("/weixin/index", index)
+	chttp.Action("/weixin/save", save)
+	chttp.Action("/weixin/add", add)
+}
+
+func add(c chttp.Context) {
+	c.HTML("weixin", nil)
+}
+
+func save(c chttp.Context) {
+	r, err := service.WeixinService.SaveForMap("weixin", c.Params)
+	if err != nil {
+		log.Error(err)
+	}
+	ra, err := r.RowsAffected()
+	if err != nil {
+		log.Error(err)
+	}
+	log.Println("save row", ra)
+	c.Redirect("/weixin/index")
 }
 
 func index(c chttp.Context) {
-	c.HTML("/weixin/weixin", nil)
+	log.Println("index")
+	c.HTML("weixin.list", nil)
 }
 
 func weixin(c chttp.Context) {

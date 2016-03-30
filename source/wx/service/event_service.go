@@ -1,8 +1,8 @@
 package service
 
 import (
-	"weixin/source/common/consts"
-	"weixin/source/common/entity"
+	"weixin/source/consts"
+	"weixin/source/wx/entity"
 
 	"github.com/zsxm/scgo/chttp"
 )
