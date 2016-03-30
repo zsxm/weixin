@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-	chttp.Action("/weixin", weixin)
+	chttp.Action("/weixin/demo", weixin)
 	chttp.Action("/weixin/index", index)
 	chttp.Action("/weixin/save", save)
 	chttp.Action("/weixin/add", add)
