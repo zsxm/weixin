@@ -1,0 +1,147 @@
+2016/03/28 15:13:42 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:15:25 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:15:45 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:15:53 [ZSXM-SCGO] INFO 未找到 URL  /weixin/token ,请求方式 GET
+2016/03/28 15:15:53 [ZSXM-SCGO] INFO open template/error404.html: The system cannot find the path specified.
+2016/03/28 15:16:39 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:16:40 [ZSXM-SCGO] INFO open template/error404.html: The system cannot find the path specified.
+2016/03/28 15:16:48 [ZSXM-SCGO] INFO 未找到 URL  /weixin/token ,请求方式 GET
+2016/03/28 15:16:48 [ZSXM-SCGO] INFO open template/error404.html: The system cannot find the path specified.
+2016/03/28 15:17:34 [ZSXM-SCGO] INFO 未找到 URL  /weixin/token ,请求方式 GET
+2016/03/28 15:18:12 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:18:30 [ZSXM-SCGO] INFO 未找到 URL  /weixin/token ,请求方式 GET
+2016/03/28 15:19:10 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:20:01 [common] INFO 1111111111
+2016/03/28 15:20:01 [common] INFO 22222222222222
+2016/03/28 15:20:01 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:20:09 [common] INFO map[]
+2016/03/28 15:20:27 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:20:32 [common] INFO map[]
+2016/03/28 15:20:35 [common] INFO map[]
+2016/03/28 15:20:36 [common] INFO map[]
+2016/03/28 15:20:36 [common] INFO map[]
+2016/03/28 15:20:36 [common] INFO map[]
+2016/03/28 15:20:36 [common] INFO map[]
+2016/03/28 15:20:36 [common] INFO map[]
+2016/03/28 15:20:36 [common] INFO map[]
+2016/03/28 15:20:36 [common] INFO map[]
+2016/03/28 15:20:36 [common] INFO map[]
+2016/03/28 15:20:36 [common] INFO map[]
+2016/03/28 15:20:36 [common] INFO map[]
+2016/03/28 15:20:36 [common] INFO map[]
+2016/03/28 15:21:12 [common] INFO map[]
+2016/03/28 15:21:13 [common] INFO map[]
+2016/03/28 15:21:17 [common] INFO map[]
+2016/03/28 15:25:32 [common] INFO map[]
+2016/03/28 15:25:40 [common] INFO map[signature:[cd91cc97b1a4d97e98bc7f8572f43930d1fb7da1] echostr:[9180883915441241846] timestamp:[1459149938] nonce:[529882599]]
+2016/03/28 15:26:14 [common] INFO map[signature:[89b2982d7e297e9a7b4e6978215cda021957a9c0] echostr:[4156601306032373495] timestamp:[1459149973] nonce:[306513639]]
+2016/03/28 15:39:22 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:39:28 [common] INFO map[signature:[d39e121494b57b3308f4423e2adbe6c41c6364f1] echostr:[7788191802925580223] timestamp:[1459150766] nonce:[570834316]]
+2016/03/28 15:39:28 [common] INFO d39e121494b57b3308f4423e2adbe6c41c6364f1 1459150766 570834316 7788191802925580223
+2016/03/28 15:39:34 [common] INFO map[timestamp:[1459150773] nonce:[976035489] signature:[66d47b86dafdaac315cf2c8e0a4f48580e27f63f] echostr:[164671397471772663]]
+2016/03/28 15:39:34 [common] INFO 66d47b86dafdaac315cf2c8e0a4f48580e27f63f 1459150773 976035489 164671397471772663
+2016/03/28 15:50:09 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:50:12 [common] INFO map[echostr:[7407322302057804731] timestamp:[1459151411] nonce:[1155958081] signature:[877c8e0d35f9eb79d4f65a2ca1d587c49eb333f0]]
+2016/03/28 15:50:12 [common] INFO �|�5��y��Z,�ՇĞ�3� 877c8e0d35f9eb79d4f65a2ca1d587c49eb333f0 false
+2016/03/28 15:51:00 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:51:05 [common] INFO map[signature:[6d75a2443b4eac14f0e49bc8c77db651ee7a4e71] echostr:[5038155377497734010] timestamp:[1459151464] nonce:[132551090]]
+2016/03/28 15:51:05 [common] INFO 6d75a2443b4eac14f0e49bc8c77db651ee7a4e71 6d75a2443b4eac14f0e49bc8c77db651ee7a4e71 true
+2016/03/28 15:52:24 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:52:29 [common] INFO csignature true
+2016/03/28 15:52:38 [common] INFO csignature true
+2016/03/28 15:53:36 [ZSXM-SCGO] INFO 未找到 URL  /weixin/token ,请求方式 GET ,当前请求方式 POST
+2016/03/28 15:54:09 [ZSXM-SCGO] INFO 未找到 URL  /weixin/token ,请求方式 GET ,当前请求方式 POST
+2016/03/28 15:56:58 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 15:57:17 [common] INFO map[]
+2016/03/28 16:01:47 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 16:01:58 [common] INFO map[signature:[7a31b02086b02c86cdef066fba25bcde28fc8ea9] timestamp:[1459152117] nonce:[665758481]]
+2016/03/28 16:03:38 [common] INFO map[signature:[32e921813371d5063d1cd864d1d65c36c5832c8b] timestamp:[1459152216] nonce:[16498238]]
+2016/03/28 16:03:50 [common] INFO map[nonce:[608785163] signature:[76339c1c223e1f1a365ede5e7f5e732b9e757b80] timestamp:[1459152229]]
+2016/03/28 16:18:20 [common] INFO csignature false
+2016/03/28 16:18:37 [common] INFO map[signature:[0631102d209932cdb5694c78e54af72b8debc911] timestamp:[1459153116] nonce:[1776082051]]
+2016/03/28 16:19:23 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 16:19:29 [common] INFO map[]
+2016/03/28 16:23:05 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 16:23:12 [common] INFO <xml><ToUserName><![CDATA[gh_4c5d3e510995]]></ToUserName>
+<FromUserName><![CDATA[oBQiqwVbc9fPuGxvvzGeuGLk1vK4]]></FromUserName>
+<CreateTime>1459153391</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[，]]></Content>
+<MsgId>6267016094600506199</MsgId>
+</xml> <nil>
+2016/03/28 16:23:18 [common] INFO <xml><ToUserName><![CDATA[gh_4c5d3e510995]]></ToUserName>
+<FromUserName><![CDATA[oBQiqwVbc9fPuGxvvzGeuGLk1vK4]]></FromUserName>
+<CreateTime>1459153397</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[啦啦]]></Content>
+<MsgId>6267016120370309978</MsgId>
+</xml> <nil>
+2016/03/28 16:24:13 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 16:24:21 [common] INFO <xml><ToUserName><![CDATA[gh_4c5d3e510995]]></ToUserName>
+<FromUserName><![CDATA[oBQiqwVbc9fPuGxvvzGeuGLk1vK4]]></FromUserName>
+<CreateTime>1459153459</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[g]]></Content>
+<MsgId>6267016386658282343</MsgId>
+</xml> <nil> map[Cache-Control:[no-cache] User-Agent:[Mozilla/4.0] Accept:[*/*] Pragma:[no-cache] Content-Length:[274] Content-Type:[text/xml]]
+2016/03/28 16:32:02 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 16:32:49 [common] INFO <xml><ToUserName><![CDATA[gh_4c5d3e510995]]></ToUserName>
+<FromUserName><![CDATA[oBQiqwVbc9fPuGxvvzGeuGLk1vK4]]></FromUserName>
+<CreateTime>1459153968</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[a]]></Content>
+<MsgId>6267018572796636216</MsgId>
+</xml> <nil>
+2016/03/28 16:33:13 [common] INFO <xml><ToUserName><![CDATA[gh_4c5d3e510995]]></ToUserName>
+<FromUserName><![CDATA[oBQiqwVbc9fPuGxvvzGeuGLk1vK4]]></FromUserName>
+<CreateTime>1459153992</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[asdasdfasdf]]></Content>
+<MsgId>6267018675875851327</MsgId>
+</xml> <nil>
+2016/03/28 16:33:39 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 16:44:08 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 16:45:10 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 16:48:07 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 16:48:46 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 16:52:35 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 16:53:06 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 16:53:41 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 18:33:11 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 18:33:12 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1459161191 text 123 6267049595345418817   }
+2016/03/28 18:33:12 [common] INFO 214 <nil>
+2016/03/28 18:33:24 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1459161203 text 1111 6267049646885026381   }
+2016/03/28 18:33:24 [common] INFO 214 <nil>
+2016/03/28 18:34:19 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 18:34:20 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1459161259 text aaaa 6267049887403194994   }
+2016/03/28 18:34:20 [common] INFO 193 <nil>
+2016/03/28 18:36:19 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 18:36:22 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1459161381 text aa 6267050411389205193   }
+2016/03/28 18:36:22 [common] INFO 286 <nil>
+2016/03/28 18:37:01 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 18:37:04 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1459161423 text aa 6267050591777831660   }
+2016/03/28 18:37:04 [common] INFO <xml>
+ <ToUserName>&lt;![CDATA[gh_4c5d3e510995]]&gt;</ToUserName>
+ <TFromUserName>&lt;![CDATA[oBQiqwVbc9fPuGxvvzGeuGLk1vK4]]&gt;</TFromUserName>
+ <TCreateTime>1231232312</TCreateTime>
+ <TMsgType>&lt;![CDATA[text]]&gt;</TMsgType>
+ <Content>&lt;![CDATA[回复内容]]&gt;</Content>
+</xml>
+2016/03/28 18:37:04 [common] INFO 286 <nil>
+2016/03/28 18:49:36 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 18:49:38 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1459162176 text aaa 6267053825888206105   }
+2016/03/28 18:49:38 [common] INFO 262 <nil>
+2016/03/28 18:50:01 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 18:50:07 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1459162203 text sdf 6267053941852323110   }
+2016/03/28 18:50:07 [common] INFO [60 120 109 108 62 10 32 60 84 111 85 115 101 114 78 97 109 101 62 60 33 91 67 68 65 84 65 91 103 104 95 52 99 53 100 51 101 53 49 48 57 57 53 93 93 62 60 47 84 111 85 115 101 114 78 97 109 101 62 10 32 60 84 70 114 111 109 85 115 101 114 78 97 109 101 62 60 33 91 67 68 65 84 65 91 111 66 81 105 113 119 86 98 99 57 102 80 117 71 120 118 118 122 71 101 117 71 76 107 49 118 75 52 93 93 62 60 47 84 70 114 111 109 85 115 101 114 78 97 109 101 62 10 32 60 84 67 114 101 97 116 101 84 105 109 101 62 49 50 51 49 50 51 50 51 49 50 60 47 84 67 114 101 97 116 101 84 105 109 101 62 10 32 60 84 77 115 103 84 121 112 101 62 60 33 91 67 68 65 84 65 91 116 101 120 116 93 93 62 60 47 84 77 115 103 84 121 112 101 62 10 32 60 67 111 110 116 101 110 116 62 60 33 91 67 68 65 84 65 91 229 155 158 229 164 141 229 134 133 229 174 185 93 93 62 60 47 67 111 110 116 101 110 116 62 10 60 47 120 109 108 62]
+2016/03/28 18:50:07 [common] INFO 262 <nil>
+2016/03/28 18:50:21 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/28 18:50:22 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1459162221 text fff 6267054019161734444   }
+2016/03/28 18:50:22 [common] INFO <xml>
+ <ToUserName><![CDATA[gh_4c5d3e510995]]></ToUserName>
+ <TFromUserName><![CDATA[oBQiqwVbc9fPuGxvvzGeuGLk1vK4]]></TFromUserName>
+ <TCreateTime>1231232312</TCreateTime>
+ <TMsgType><![CDATA[text]]></TMsgType>
+ <Content><![CDATA[回复内容]]></Content>
+</xml>
+2016/03/28 18:50:22 [common] INFO 262 <nil>

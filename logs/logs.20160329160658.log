@@ -1,0 +1,118 @@
+2016/03/29 09:43:10 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 09:44:14 [ZSXM-SCGO] INFO ----------------------- /weixin/token?signature=d1477f0f6ef6173012991d88cee55b51327243d0&timestamp=1459215851&nonce=1503554500
+2016/03/29 09:59:20 [ZSXM-SCGO] INFO ----------------------- /weixin/token?signature=1aae22e51e6d3ddf59375120b4a1e79b6d1fa3a5&timestamp=1459216759&nonce=1927108779
+2016/03/29 10:02:17 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 10:02:19 [ZSXM-SCGO] INFO ----------------------- /weixin/token?signature=b4211ebb5bcb336fa55fe34cd89a0c64b15210ea&timestamp=1459216938&nonce=1508338282
+2016/03/29 10:02:19 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1459216938 text aaa 6267289026887288015   }
+2016/03/29 13:16:31 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 13:17:06 [ZSXM-SCGO] INFO ----------------------- /weixin/token?signature=46e7c84d26fac72e8e0124c162e81385ea2fc0cd&timestamp=1459228626&nonce=2016786742
+2016/03/29 13:17:06 [common] INFO csignature false
+2016/03/29 13:18:55 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 13:18:57 [ZSXM-SCGO] INFO ----------------------- /weixin/token?signature=f64ad9d14667fe09307ac53dfe2f530e374b063f&timestamp=1459228737&nonce=1043632583
+2016/03/29 13:18:57 [common] INFO csignature false
+2016/03/29 13:20:19 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 13:20:23 [ZSXM-SCGO] INFO ----------------------- /weixin/token?signature=377254f1d6699e8a6f1f7bad1522413ba2f4e80a&timestamp=1459228823&nonce=2123022995
+2016/03/29 13:20:23 [common] INFO csignature true
+2016/03/29 13:20:23 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459228823s text a 6267340072573605477   }
+2016/03/29 13:21:17 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 13:21:20 [common] INFO csignature true
+2016/03/29 13:21:20 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459228879s text aa 6267340313091774071   }
+2016/03/29 13:22:09 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 13:22:12 [common] INFO csignature true
+2016/03/29 13:22:12 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459228932s text d 6267340540725040787   }
+2016/03/29 13:23:58 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 13:24:01 [common] INFO csignature true
+2016/03/29 13:24:01 [common] INFO RequestMsg &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459229041s text adsf 6267341008876476088   }
+2016/03/29 13:25:31 [common] INFO csignature true
+2016/03/29 13:25:45 [common] INFO csignature true
+2016/03/29 13:33:34 [common] INFO csignature true
+2016/03/29 13:33:34 [common] INFO RequestMsg &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459229613s text aa 6267343465597769587   }
+2016/03/29 13:35:33 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 13:35:41 [common] INFO csignature true
+2016/03/29 13:35:41 [common] INFO RequestMsg &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.45922974s text a 6267344011058616208   }
+2016/03/29 13:47:43 [common] INFO csignature true
+2016/03/29 13:47:43 [common] INFO RequestMsg &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459230462s text aaaa 6267347112025004246   }
+2016/03/29 13:52:38 [common] INFO csignature true
+2016/03/29 13:52:38 [common] INFO RequestMsg &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459230758s text aa 6267348383335323967   }
+2016/03/29 13:54:03 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 13:54:06 [common] INFO csignature true
+2016/03/29 13:54:06 [common] INFO RequestMsg &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459230846s text f 6267348761292446038   }
+2016/03/29 13:54:47 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 13:54:50 [common] INFO csignature true
+2016/03/29 13:54:50 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.45923089s MsgType:text Content:aaa MsgId:6267348950271007088 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:43:05 [common] INFO csignature true
+2016/03/29 14:43:05 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459233784s MsgType:text Content:abc MsgId:6267361379906362929 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:44:11 [common] INFO csignature true
+2016/03/29 14:44:11 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.45923383s MsgType:text Content:/:@x MsgId:6267361577474858564 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:44:11 [common] INFO csignature true
+2016/03/29 14:44:11 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459233835s MsgType:text Content:a MsgId:6267361598949695047 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:44:11 [common] INFO csignature true
+2016/03/29 14:44:11 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.45923383s MsgType:text Content:/:@x MsgId:6267361577474858564 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:44:11 [common] INFO csignature true
+2016/03/29 14:44:11 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459233835s MsgType:text Content:a MsgId:6267361598949695047 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:44:13 [common] INFO csignature true
+2016/03/29 14:44:13 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459233835s MsgType:text Content:a MsgId:6267361598949695047 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:44:21 [common] INFO csignature true
+2016/03/29 14:44:21 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.45923383s MsgType:text Content:/:@x MsgId:6267361577474858564 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:46:40 [common] INFO csignature true
+2016/03/29 14:46:40 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459234s MsgType:text Content:a MsgId:6267362307619298977 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:46:44 [common] INFO csignature true
+2016/03/29 14:46:44 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459234004s MsgType:text Content:/:turn MsgId:6267362324799168164 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:46:54 [common] INFO csignature true
+2016/03/29 14:46:54 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459234014s MsgType:text Content:adsfasdfsdadsf MsgId:6267362367748841131 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:47:04 [common] INFO csignature true
+2016/03/29 14:47:04 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459234023s MsgType:image Content: MsgId:6267362406403546804 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:47:13 [common] INFO csignature true
+2016/03/29 14:47:13 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459234033s MsgType:text Content:aaa MsgId:6267362449353219775 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:47:14 [common] INFO csignature true
+2016/03/29 14:47:14 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459234033s MsgType:image Content: MsgId:6267362449353219776 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:50:11 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 14:50:25 [common] INFO csignature true
+2016/03/29 14:50:25 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459234225s MsgType:text Content:aa MediaId: MsgId:6267363273986940688 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:50:32 [common] INFO csignature true
+2016/03/29 14:50:32 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459234232s MsgType:image Content: MediaId:Gq-5exqgmNk_JArE4jEQ8AYJukCB_nFxWTxjLujxZE02qsUfmf-rCI9x_lt5tHmC MsgId:6267363304051711764 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 14:51:34 [common] INFO csignature true
+2016/03/29 14:51:34 [common] INFO &{ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459234294s MsgType:text Content:ddd MediaId: MsgId:6267363570339684149 Event: Format: Recognition:}
+RequestMsg
+2016/03/29 15:11:52 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 15:11:56 [common] INFO csignature true
+2016/03/29 15:24:29 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 15:24:32 [common] INFO send msg len 266
+2016/03/29 15:25:17 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 15:25:21 [common] INFO send msg len 266
+2016/03/29 15:38:08 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 15:38:12 [common] INFO &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459237092s text a  6267375587658179555   }
+2016/03/29 15:38:12 [common] INFO send msg len 266
+2016/03/29 15:39:13 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 15:39:51 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 15:39:54 [common] INFO request msg type: text
+2016/03/29 15:39:54 [common] INFO msg struct: &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459237194s text fff  6267376025744843803   }
+2016/03/29 15:39:54 [common] INFO send msg len 266
+2016/03/29 15:40:09 [common] INFO request msg type: image
+2016/03/29 15:40:09 [common] INFO msg struct: &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459237205s image  Ce7v8HLp7DjW-yAoAZ0Kwkpp8FjY778ZYL75v1eCCQr2yow5FzUzkCft1g98guPr 6267376072989484063   }
+2016/03/29 15:40:09 [common] INFO send msg len 329
+2016/03/29 15:40:45 [common] INFO request msg type: image
+2016/03/29 15:40:45 [common] INFO msg struct: &{gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459237245s image  QAaUNjftaNOIuj-y2k6Fc4gj4plhAWVy4Ef7VLCDefbdtL6lzZqI8QXABd_NkmIu 6267376244788175939   }
+2016/03/29 15:40:45 [common] INFO send msg len 329
+2016/03/29 16:06:41 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 16:06:54 [common] INFO request msg type: text
+2016/03/29 16:06:54 [common] INFO msg struct: &{{     } gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459238813s text aa  6267382979296896824  }
+2016/03/29 16:06:54 [common] INFO send msg len 266
+2016/03/29 16:06:58 [common] INFO request msg type: text
+2016/03/29 16:06:58 [common] INFO msg struct: &{{     } gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459238817s text asdasdf  6267382996476766011  }

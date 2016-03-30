@@ -1,0 +1,76 @@
+2016/03/29 16:06:58 [common] INFO send msg len 266
+2016/03/29 16:07:09 [common] INFO request msg type: image
+2016/03/29 16:07:09 [common] INFO msg struct: &{{     } gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459238829s image  xIJCUdDehZQGulMMSUFSonqafJ72QxgkL_1qavdpv-Qk-ZegDl9_pEGgyfXBearf 6267383048016373576  }
+2016/03/29 16:07:09 [common] INFO send msg len 329
+2016/03/29 16:07:32 [common] INFO request msg type: text
+2016/03/29 16:07:32 [common] INFO msg struct: &{{     } gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459238852s text /::$  6267383146800621398  }
+2016/03/29 16:07:32 [common] INFO send msg len 266
+2016/03/29 16:07:44 [common] INFO request msg type: text
+2016/03/29 16:07:44 [common] INFO msg struct: &{{     } gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459238864s text /::D  6267383198340228957  }
+2016/03/29 16:07:44 [common] INFO send msg len 266
+2016/03/29 16:08:34 [common] INFO request msg type: event
+2016/03/29 16:08:34 [common] INFO msg struct: &{{subscribe     } gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459238914s event   0  }
+2016/03/29 16:08:34 [common] INFO &{{subscribe     } gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459238914s event   0  }
+2016/03/29 16:08:50 [common] INFO request msg type: event
+2016/03/29 16:08:50 [common] INFO msg struct: &{{unsubscribe     } gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.45923893s event   0  }
+2016/03/29 16:08:50 [common] INFO &{{unsubscribe     } gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.45923893s event   0  }
+2016/03/29 16:09:08 [common] INFO request msg type: event
+2016/03/29 16:09:08 [common] INFO msg struct: &{{subscribe     } gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459238947s event   0  }
+2016/03/29 16:09:08 [common] INFO &{{subscribe     } gh_4c5d3e510995 oBQiqwVbc9fPuGxvvzGeuGLk1vK4 1.459238947s event   0  }
+2016/03/29 16:10:09 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 16:10:11 [common] INFO request msg type: text
+2016/03/29 16:10:11 [common] INFO &{Event:{Event: EventKey: Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.45923901s MsgType:text Content:df MediaId: MsgId:6267383825405454231 Format: Recognition:} msg struct:
+
+2016/03/29 16:10:11 [common] INFO send msg len 266
+2016/03/29 16:10:38 [common] INFO request msg type: event
+2016/03/29 16:10:38 [common] INFO &{Event:{Event:unsubscribe EventKey: Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459239038s MsgType:event Content: MediaId: MsgId:0 Format: Recognition:} msg struct:
+
+2016/03/29 16:11:25 [common] INFO request msg type: event
+2016/03/29 16:11:25 [common] INFO &{Event:{Event:subscribe EventKey: Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459239085s MsgType:event Content: MediaId: MsgId:0 Format: Recognition:} msg struct:
+
+2016/03/29 16:25:57 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 18:48:29 [ZSXM-SCGO] INFO HTTP PROT :8080
+2016/03/29 18:48:30 [common] INFO request msg type: text
+2016/03/29 18:48:30 [common] INFO &{Event:{Event: EventKey: Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.45924851s MsgType:text Content:sss MediaId: MsgId:6267424627594772591 Format: Recognition:} msg struct:
+
+2016/03/29 18:48:30 [common] INFO send msg len 266
+2016/03/29 18:49:22 [common] INFO request msg type: event
+2016/03/29 18:49:22 [common] INFO &{Event:{Event:CLICK EventKey:V1001_TODAY_MUSIC Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459248562s MsgType:event Content: MediaId: MsgId:0 Format: Recognition:} msg struct:
+
+2016/03/29 18:50:38 [common] INFO request msg type: image
+2016/03/29 18:50:38 [common] INFO &{Event:{Event: EventKey: Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459248637s MsgType:image Content: MediaId:2VpZBDLELsLMNDJcUxEwz3UCDdTPb8810VYELVm3s1oQ4auKYwtlN3-17JT7cZMd MsgId:6267425173055619345 Format: Recognition:} msg struct:
+
+2016/03/29 18:50:38 [common] INFO send msg len 329
+2016/03/29 18:57:10 [common] INFO request msg type: shortvideo
+2016/03/29 18:57:10 [common] INFO &{Event:{Event: EventKey: Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459249029s MsgType:shortvideo Content: MediaId:JMaEeo8pKR3pBSIjiWtXj0eDZwg98jo_vBd4KurW_qe8YS4oKkfFH6nDV0_H8NTv MsgId:6267426856682799652 Format: Recognition:} msg struct:
+
+2016/03/29 18:57:24 [common] INFO request msg type: location
+2016/03/29 18:57:24 [common] INFO &{Event:{Event: EventKey: Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459249044s MsgType:location Content: MediaId: MsgId:6267426921107309111 Format: Recognition:} msg struct:
+
+2016/03/29 18:57:48 [common] INFO request msg type: image
+2016/03/29 18:57:48 [common] INFO &{Event:{Event: EventKey: Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459249068s MsgType:image Content: MediaId:GnT_ljilyIEo17NoV-kOd6nGoiM2OiIgxKxIq0GzV4ntAhhlQ-1kFEf5rDYGkUhw MsgId:6267427024186524229 Format: Recognition:} msg struct:
+
+2016/03/29 18:57:48 [common] INFO send msg len 329
+2016/03/29 18:58:11 [common] INFO request msg type: voice
+2016/03/29 18:58:11 [common] INFO &{Event:{Event: EventKey: Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459249091s MsgType:voice Content: MediaId:do9o98wDVnoaTSzyCR2RWqH1_eVxD3oDI1DGrvgTfQxaMOrzrEEspV0-Jhr3hi8u MsgId:6267427122970772055 Format:amr Recognition:} msg struct:
+
+2016/03/29 19:06:22 [common] INFO request msg type: event
+2016/03/29 19:06:22 [common] INFO &{Event:{Event:pic_weixin EventKey:rselfmenu_1_2 Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459249582s MsgType:event Content: MediaId: MsgId:0 Format: Recognition:} msg struct:
+
+2016/03/29 19:06:29 [common] INFO request msg type: image
+2016/03/29 19:06:29 [common] INFO &{Event:{Event: EventKey: Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459249589s MsgType:image Content: MediaId:waqN3SIZQMLeOzbIuyRM5kyzsUFbsNez3RCnaur9r9vpS_5_R-fUaeAueAgBSilG MsgId:6267429261864485856 Format: Recognition:} msg struct:
+
+2016/03/29 19:06:29 [common] INFO send msg len 329
+2016/03/29 21:50:37 [common] INFO request msg type: event
+2016/03/29 21:50:37 [common] INFO &{Event:{Event:pic_weixin EventKey:rselfmenu_1_2 Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459259422s MsgType:event Content: MediaId: MsgId:0 Format: Recognition:} msg struct:
+
+2016/03/29 21:50:39 [common] INFO request msg type: image
+2016/03/29 21:50:39 [common] INFO &{Event:{Event: EventKey: Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459259422s MsgType:image Content: MediaId:gczFo_4tFXLZufz_H5D1HwLPh5N4xbiUyKf1NFrsNX5j3RIyqHCpLdUoJ1MK9fWQ MsgId:6267471494277914440 Format: Recognition:} msg struct:
+
+2016/03/29 21:50:39 [common] INFO send msg len 329
+2016/03/30 09:38:08 [ZSXM-SCGO] INFO 未找到 URL  /chatol/chatol ,请求方式 GET
+2016/03/30 09:38:09 [ZSXM-SCGO] INFO 未找到 URL  /chatol/chatol ,请求方式 GET
+2016/03/30 10:16:09 [common] INFO request msg type: text
+2016/03/30 10:16:09 [common] INFO &{Event:{Event: EventKey: Ticket: Latitude: Longitude: Precision:} ToUserName:gh_4c5d3e510995 FromUserName:oBQiqwVbc9fPuGxvvzGeuGLk1vK4 CreateTime:1.459304168s MsgType:text Content:a枯 MediaId: MsgId:6267663676884551253 Format: Recognition:} msg struct:
+
+2016/03/30 10:16:09 [common] INFO send msg len 266

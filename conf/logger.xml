@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+	<logger>
+		<console>true</console>
+		<file>true</file>
+		<level>4</level>
+		<fileName>logs.</fileName>
+		<maxSize>10240</maxSize>
+	</logger>
+</config>
