@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>微信配置平台登录</title>
+		<link rel="shortcut icon" type="image/ico" href="/static/favicon.ico">
+		<link href="/static/css/comm/bootstrap/bootstrap.min.css" rel="stylesheet">
+		<link href="/static/css/comm/bootstrap/font-awesome.min.css" rel="stylesheet">
+		<link href="/static/css/comm/bootstrap/animate.min.css" rel="stylesheet">
+		
+		<script type="text/javascript" src="/static/js/comm/jquery/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="/static/js/comm/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/static/js/comm/lufylegend/lufylegend-1.10.0.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<div class="jumbotron">
+						<p>介绍</p>
+					</div>
+					<div class="row clearfix">
+						<div class="col-md-4 column"></div>
+						<div class="col-md-4 column">
+							<h3>登录.</h3>
+							<form action="/user/login" method="post" role="form">
+								<div class="form-group">
+									<label for="account">帐号</label>
+									<input type="text" class="form-control" id="account" name="account"/>
+								</div>
+								<div class="form-group">
+									<label for="passwd">密码</label>
+									<input type="password" class="form-control" id="passwd" name="passwd" />
+								</div>
+								<button type="button" class="btn btn-default">注册</button>
+								<button type="submit" class="btn btn-default">登录</button>
+							</form>
+							
+						</div>
+						<div class="col-md-4 column"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

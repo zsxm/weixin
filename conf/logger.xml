@@ -3,8 +3,8 @@
 	<logger>
 		<console>true</console>
 		<file>true</file>
-		<level>4</level>
+		<level>5</level>
 		<fileName>logs.</fileName>
-		<maxSize>10240</maxSize>
+		<maxSize>102400</maxSize>
 	</logger>
 </config>

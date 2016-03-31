@@ -20,7 +20,25 @@
 			<div class="row clearfix">
 			{{template "left.menu.html" .}}
 				<div class="col-md-9 column">
-					首页 content
+					<table class="table table-condensed">
+						<thead>
+							<tr>
+								<th>名称</th>
+								<th>appid</th>
+								<th>appsecret</th>
+								<th>token</th>
+							</tr>
+						</thead>
+						<tbody>
+						{{range $k,$v:=.Data}}
+							<tr>
+								<td>{{$v.name}}</td>
+								<td>{{$v.appid}}</td>
+								<td>{{$v.appsecret}}</td>
+							</tr>
+						{{end}}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
