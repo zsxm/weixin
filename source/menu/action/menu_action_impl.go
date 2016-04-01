@@ -10,8 +10,8 @@ var control = chttp.NewControl()
 
 func init() {
 	controlConf.SetProject("weixin")
-	controlConf.SetModule("pubnum")
-	controlConf.SetTitle("公众号管理")
-	controlConf.SetComment("公众号")
+	controlConf.SetModule("menu")
+	controlConf.SetTitle("菜单管理")
+	controlConf.SetComment("菜单")
 	control.Init(controlConf)
 }

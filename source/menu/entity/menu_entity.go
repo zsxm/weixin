@@ -5,7 +5,7 @@ import (
 )
 
 //go:generate $GOPATH/src/github.com/zsxm/scgo/tools/scgen/scgen.exe -fileDir=$GOFILE -projectDir=weixin -moduleName=menu -goSource=source
-//go:@Table value=menu
+//go:@Table value=menu comment=菜单 title=菜单管理
 type Menu struct {
 
 	//go:@Column value=id

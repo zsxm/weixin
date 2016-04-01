@@ -5,7 +5,7 @@ import (
 )
 
 //go:generate $GOPATH/src/github.com/zsxm/scgo/tools/scgen/scgen.exe -fileDir=$GOFILE -projectDir=weixin -moduleName=user -goSource=source
-//go:@Table value=user
+//go:@Table value=user comment=用户 title=用户管理
 type User struct {
 
 	//go:@Column value=id

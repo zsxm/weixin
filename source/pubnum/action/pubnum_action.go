@@ -12,12 +12,12 @@ import (
 )
 
 func init() {
-	chttp.Action("/pubnum/list", list).Get()
+	//chttp.Action("/pubnum/list", list).Get()
+	control.Add("/pubnum/list", list).Get()
 	chttp.Action("/pubnum/add", add).Get()
 	chttp.Action("/pubnum/save", save).Post()
 	chttp.Action("/pubnum/get/id", get).Get()
 	chttp.Action("/pubnum/enable", enable).Get()
-
 }
 
 //启用公众号
