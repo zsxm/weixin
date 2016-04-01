@@ -35,8 +35,9 @@ func main() {
 			Include: config.Include{
 				Dir: "comm",
 				Files: []string{
-					"header",
-					"left.menu",
+					"temp.header",
+					"temp.left.menu",
+					"temp.top",
 				},
 			},
 		},
@@ -46,7 +47,7 @@ func main() {
 	}
 	//redis 配置
 	cache.Conf = &cache.Config{
-		Address:  "10.100.130.54:6379",
+		Address:  "127.0.0.1:6379",
 		Password: "foobared",
 	}
 	//redis 初始化化

@@ -47,6 +47,7 @@ func get(c chttp.Context) {
 	}
 	userid := pri.Id
 	e.Userid().SetValue(userid)
+	e.Userid().FieldExp().Eq().And()
 	bean.SetEntity(e)
 	err = service.PubnumService.Select(bean)
 	if err != nil {
