@@ -8,14 +8,15 @@ import (
 	"github.com/zsxm/scgo/cjson"
 )
 
-func SendGet(url, jsonData string) string {
+//Get请求发送数据,响应string
+func SendGet(url, data string) string {
 	request := chttplib.Get(url)
-	if jsonData != "" {
-		request.Body(jsonData)
+	if data != "" {
+		request.Body(data)
 	}
 	res, err := request.String()
 
-	res = `{"access_token":"Y93-GXoRJAb33tUwiQIkZjm2MqmWlA3jQ28rGXPZV-0clPNM5WYBdImNHalz9JDq3lZKAlg27uBD5pMgLDMY4txxx6fCSJseHFi_bdvctiDcyvV4C3rFhqd7y9xnAKcdSCRcADADNC","expires_in":7200}`
+	//res = `{"access_token":"Y93-GXoRJAb33tUwiQIkZjm2MqmWlA3jQ28rGXPZV-0clPNM5WYBdImNHalz9JDq3lZKAlg27uBD5pMgLDMY4txxx6fCSJseHFi_bdvctiDcyvV4C3rFhqd7y9xnAKcdSCRcADADNC","expires_in":7200}`
 	//res = `{"errcode":40013,"errmsg":"invalid appid"}`
 	if err != nil {
 		loger.Error(err)
@@ -25,10 +26,11 @@ func SendGet(url, jsonData string) string {
 	return ""
 }
 
-func SendPost(url, jsonData string) string {
+//Post请求发送数据,响应string
+func SendPost(url, data string) string {
 	request := chttplib.Post(url)
-	if jsonData != "" {
-		request.Body(jsonData)
+	if data != "" {
+		request.Body(data)
 	}
 	res, err := request.String()
 
@@ -40,8 +42,10 @@ func SendPost(url, jsonData string) string {
 	return ""
 }
 
-func SendGetJson(url, jsonData string) *cjson.JSON {
-	res := SendGet(url, jsonData)
+//Get请求发送数据,响应json
+func SendGetJson(url, data string) *cjson.JSON {
+	res := SendGet(url, data)
+	loger.Info("send url", url, "data", data)
 	if res != "" {
 		cjs := cjson.JsonToMap(res)
 		var code, codemsg string
@@ -66,8 +70,10 @@ func SendGetJson(url, jsonData string) *cjson.JSON {
 	return nil
 }
 
-func SendPostJson(url, jsonData string) *cjson.JSON {
-	res := SendPost(url, jsonData)
+//Post请求发送数据,响应json
+func SendPostJson(url, data string) *cjson.JSON {
+	res := SendPost(url, data)
+	loger.Info("send url", url, "data", data)
 	if res != "" {
 		cjs := cjson.JsonToMap(res)
 		var code, codemsg string

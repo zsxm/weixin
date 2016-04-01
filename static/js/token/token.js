@@ -8,7 +8,7 @@ $(function(){
 	});
 	
 	$("#get").click(function(){
-		var url="/token/api/get";
+		var url="/token/api/get/token";
 		var pubnumid=$("#pubnumid").val();
 		$.get(url,{pubnumid:pubnumid},function(result){
 			if(result.code=="0"){
