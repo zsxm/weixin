@@ -18,7 +18,7 @@ func add(c chttp.Context) {
 }
 
 func save(c chttp.Context) {
-	r, err := service.WeixinService.SaveForMap("weixin", c.Params)
+	r, err := service.WeixinService.SaveForMap("weixin", c.ParamMaps())
 	if err != nil {
 		log.Error(err)
 	}

@@ -22,8 +22,8 @@ func init() {
 
 //启用公众号
 func enable(c chttp.Context) {
-	pubnumid := c.GetParam("pubnumid")
-	prin, err := c.Session.Principal()
+	pubnumid := c.Param("pubnumid")
+	prin, err := c.Session().Principal()
 	if err != nil {
 		log.Error(err)
 	}
@@ -41,7 +41,7 @@ func enable(c chttp.Context) {
 func get(c chttp.Context) {
 	bean := entity.NewPubnumBean()
 	e := entity.NewPubnum()
-	pri, err := c.Session.Principal()
+	pri, err := c.Session().Principal()
 	if err != nil {
 		log.Error(err)
 	}
@@ -60,7 +60,7 @@ func get(c chttp.Context) {
 func save(c chttp.Context) {
 	e := entity.NewPubnum()
 	c.BindData(e)
-	pri, err := c.Session.Principal()
+	pri, err := c.Session().Principal()
 	if err != nil {
 		log.Error(err)
 	}
@@ -87,7 +87,7 @@ func add(c chttp.Context) {
 //公众号列表
 func list(c chttp.Context) {
 	bean := entity.NewPubnumBean()
-	pri, err := c.Session.Principal()
+	pri, err := c.Session().Principal()
 	if err != nil {
 		log.Error(err)
 	}

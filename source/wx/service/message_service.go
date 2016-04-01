@@ -25,7 +25,7 @@ func Image(reqMsg *entity.RequestMsg, c chttp.Context) {
 	if err != nil {
 		log.Error(err)
 	}
-	c.Response.Header().Set("Content-Type", "text/xml")
+	c.Response().Header().Set("Content-Type", "text/xml")
 	r, err := c.Write(imgMsg)
 	if err != nil {
 		log.Error(err)
@@ -46,7 +46,7 @@ func Text(reqMsg *entity.RequestMsg, c chttp.Context) {
 	if err != nil {
 		log.Error(err)
 	}
-	c.Response.Header().Set("Content-Type", "text/xml")
+	c.Response().Header().Set("Content-Type", "text/xml")
 	r, err := c.Write(textMsg)
 	if err != nil {
 		log.Error(err)
@@ -56,10 +56,10 @@ func Text(reqMsg *entity.RequestMsg, c chttp.Context) {
 
 //验证token
 func TokenChk(c chttp.Context) bool {
-	var signature = c.GetParam("signature")
-	var timestamp = c.GetParam("timestamp")
-	var nonce = c.GetParam("nonce")
-	var echostr = c.GetParam("echostr")
+	var signature = c.Param("signature")
+	var timestamp = c.Param("timestamp")
+	var nonce = c.Param("nonce")
+	var echostr = c.Param("echostr")
 	b := util.SignValidation(signature, timestamp, nonce)
 	if b {
 		if echostr != "" {

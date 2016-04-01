@@ -15,7 +15,7 @@ func init() {
 
 func weixin(c chttp.Context) {
 	b := service.TokenChk(c)
-	if b && c.Method == "POST" {
+	if b && c.Method() == "POST" {
 		msg, err := c.ReadBody()
 		if err != nil {
 			log.Error(err)

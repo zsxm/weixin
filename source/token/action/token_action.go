@@ -21,7 +21,7 @@ func init() {
 
 //gen
 func index(c chttp.Context) {
-	log.Println("c.Session.Id()", c.Session.Id())
+	log.Println("c.Session.Id()", c.Session().Id())
 	c.HTML("/token/token", nil)
 }
 
@@ -31,7 +31,7 @@ func index(c chttp.Context) {
 //3 根据公众号id获取公众号基本信息
 //4 根据token获取wxip
 func apiGetWxIP(c chttp.Context) {
-	prin, err := c.Session.Principal()
+	prin, err := c.Session().Principal()
 	if err != nil {
 		log.Error(err)
 	}
@@ -42,7 +42,7 @@ func apiGetWxIP(c chttp.Context) {
 }
 
 func apiGetToken(c chttp.Context) {
-	pubnumid := c.GetParam("pubnumid")
+	pubnumid := c.Param("pubnumid")
 	var result = c.NewResult()
 	if pubnumid != "-1" {
 		res, err := service.TokenService.Query("select max(created) created from token where pubnumid=?", pubnumid)

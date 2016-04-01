@@ -25,7 +25,7 @@ func typeShow(c chttp.Context) {
 
 //保存菜单类型
 func typeSave(c chttp.Context) {
-	service.SaveMenuType(c.Params)
+	service.SaveMenuType(c.ParamMaps())
 	c.Redirect("/menu/type/list")
 }
 
