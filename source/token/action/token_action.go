@@ -2,7 +2,6 @@
 package action
 
 import (
-	"fmt"
 	"weixin/source/pubnum/api"
 	"weixin/source/token/entity"
 	"weixin/source/token/log"
@@ -16,6 +15,8 @@ import (
 func init() {
 	chttp.Action("/token/index", index).Get()
 	chttp.Action("/token/api/get/token", apiGetToken).Get()
+	chttp.Action("/token/api/get/wxip", apiGetWxIP).Get()
+
 }
 
 //gen
@@ -24,8 +25,25 @@ func index(c chttp.Context) {
 	c.HTML("/token/token", nil)
 }
 
+//获取微信IP
+//1 获取登录用户id
+//2 根据用户id获取公众号id
+//3 根据公众号id获取公众号基本信息
+//4 根据token获取wxip
+func apiGetWxIP(c chttp.Context) {
+	prin, err := c.Session.Principal()
+	if err != nil {
+		log.Error(err)
+	}
+	userid := prin.Id
+	token := service.GetCacheToken(userid)
+	cjson := service.GetWeiXinIP(token)
+	c.HTML("/token/wxip", cjson.Data())
+}
+
 func apiGetToken(c chttp.Context) {
 	pubnumid := c.GetParam("pubnumid")
+	var result = c.NewResult()
 	if pubnumid != "-1" {
 		res, err := service.TokenService.Query("select max(created) created from token where pubnumid=?", pubnumid)
 		if err != nil {
@@ -37,7 +55,7 @@ func apiGetToken(c chttp.Context) {
 			created = res.Get(0).Get("created")
 			b = tools.TimePoor(created, 7000)
 		}
-		var resJson, access_token string
+		var access_token string
 		//获得公众号信息
 		pubNum := api.GetPubnum(pubnumid)
 		e := entity.NewToken()
@@ -47,10 +65,11 @@ func apiGetToken(c chttp.Context) {
 			e.Created().FieldExp().Eq().And()
 			e.Pubnumid().FieldExp().Eq().And()
 			service.TokenService.SelectOne(e)
-			access_token = e.Token().Value()
-			resJson = fmt.Sprintf(`{"code":%s,"codemsg":"%s","token":"%s"}`, "0", "ok", e.Token().Value())
 
+			access_token = e.Token().Value()
+			result.Data = e.Token().Value()
 		} else { //超时
+			//调用接口
 			cjson := service.GetWeiXinToKen(pubNum.Appid().Value(), pubNum.Appsecret().Value())
 			if cjson != nil {
 				code := cjson.Get("code").String()
@@ -63,13 +82,17 @@ func apiGetToken(c chttp.Context) {
 					if _, err := service.TokenService.Save(e); err != nil {
 						log.Error(err)
 					}
-					resJson = fmt.Sprintf(`{"code":%s,"codemsg":"%s","token":"%s"}`, code, codemsg, cjson.Get("access_token").String())
 					b = true
+					result.Code = code
+					result.Codemsg = codemsg
+					result.Data = cjson.Get("access_token").String()
 				} else {
-					resJson = fmt.Sprintf(`{"code":"%s","codemsg":"%s"}`, code, codemsg)
+					result.Code = code
+					result.Codemsg = codemsg
 				}
 			} else {
-				resJson = `{"code":"-100","codemsg":"获得token失败"}`
+				result.Code = "-100"
+				result.Codemsg = "获得token失败"
 			}
 		}
 		if b {
@@ -80,15 +103,12 @@ func apiGetToken(c chttp.Context) {
 				WxToken: pubNum.Token().Value(),
 				Token:   access_token,
 			}
+			//设置缓存
 			api.SetCachePubNum(pubnumid, cpn)
 		}
-		c.JSON(resJson, false)
 	} else {
-		c.JSON(`{"code":"-100","codemsg":"请选择订阅/公众号"}`, false)
+		result.Code = "-100"
+		result.Codemsg = "请选择订阅/公众号"
 	}
-}
-
-func apiGetWXIP() {
-	var token string
-	service.GetWeiXinIP(token)
+	c.JSON(result, false)
 }

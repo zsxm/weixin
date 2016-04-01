@@ -3,14 +3,13 @@ package service
 
 import (
 	"fmt"
-	"weixin/source/webservice"
+	"weixin/source/pubnum/api"
+	"weixin/source/util/webservice"
 
 	"github.com/zsxm/scgo/cjson"
-	"github.com/zsxm/scgo/data/cache"
 )
 
 const (
-	cache_pubnum_session_id_key = "%s_pubnum"
 	//获取token
 	token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s"
 	//获取微信服务器IP地址
@@ -28,29 +27,19 @@ func GetWeiXinToKen(appid, secret string) *cjson.JSON {
 }
 
 //接口 获取微信服务器IP地址
-func GetWeiXinIP(token string) {
+func GetWeiXinIP(token string) *cjson.JSON {
+	url := fmt.Sprintf(weixin_ip, token)
+	cjson := webservice.SendGetJson(url, "")
+	return cjson
 }
 
-//获取缓存里面的公众号id
-func GetCachePubNumId(sessionid string) (string, error) {
-	key := fmt.Sprintf(cache_pubnum_session_id_key, sessionid)
-	pubnumid, err := cache.Get(key)
-	if err != nil {
-		return "", err
-	}
-	err = cache.Expire(key, 7000)
-	if err != nil {
-		return "", err
-	}
-	return pubnumid, nil
-}
-
-//设置缓存里面的公众号id
-func SetCachePubNumId(sessionid, pubnumid string) error {
-	key := fmt.Sprintf(cache_pubnum_session_id_key, sessionid)
-	err := cache.Set(key, pubnumid)
-	if err != nil {
-		return err
-	}
-	return nil
+//根据登录用户id，获取缓存中的token
+//1 根据用户id获取公众号id
+//2 根据公众号id获取公众号基本信息
+//3 公众号基本信息获取tokenw
+func GetCacheToken(userid string) string {
+	pubnumid := api.GetCachePubNumId(userid)
+	pubnum := api.CachePubNum(pubnumid)
+	token := pubnum.Token
+	return token
 }

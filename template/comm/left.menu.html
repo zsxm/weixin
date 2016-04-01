@@ -1,33 +1,62 @@
+				<script type="text/javascript">
+					$(function(){
+						var thisurl = "{{.Url}}";
+						if(thisurl!=""){
+							if(thisurl.indexOf("/")==0){
+								thisurl=thisurl.substr(1,thisurl.length);
+								var id=thisurl.substr(0,thisurl.indexOf("/"));
+								id="panel-element-"+id
+								$("#"+id).addClass("in");
+							}
+						}
+					});
+				</script>			
 				<div class="col-md-3 column">
-					<div class="panel-group" id="panel-625924">
-					
+					<div class="panel-group">
+						<!-- 公众号管理 -->
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								 <a class="panel-title" data-toggle="collapse" data-parent="#panel-625924" href="#panel-element-335632">公众号管理</a>
+								 <a class="panel-title" data-toggle="collapse" data-parent="#panel-pubnum" href="#panel-element-pubnum">公众号管理</a>
 							</div>
-							<div id="panel-element-335632" class="panel-collapse collapse in">
-								<div class="panel-body">
-									<a href="/pubnum/add">公众号添加</a>
-								</div>
+							<div id="panel-element-pubnum" class="panel-collapse collapse">
 								<div class="panel-body">
 									<a href="/pubnum/list">公众号列表</a>
 								</div>
+								<div class="panel-body">
+									<a href="/pubnum/add">公众号添加</a>
+								</div>
 							</div>
 						</div>
-						
+						<!-- token管理 -->
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								 <a class="panel-title" data-toggle="collapse" data-parent="#panel-625924" href="#panel-element-347900">token管理</a>
+								 <a class="panel-title" data-toggle="collapse" data-parent="#panel-token" href="#panel-element-token">Token管理</a>
 							</div>
-							<div id="panel-element-347900" class="panel-collapse collapse">
+							<div id="panel-element-token" class="panel-collapse collapse">
 								<div class="panel-body">
-									<a href="/token/index">获取access token</a>
+									<a href="/token/index">获取access_token</a>
 								</div>
 								<div class="panel-body">
-									<a href="/token/index">获取微信服务器IP地址</a>
+									<a href="/token/api/get/wxip">获取微信服务器IP地址</a>
 								</div>
 							</div>
 						</div>
-						
+						<!-- 自定义菜单管理 -->
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								 <a class="panel-title" data-toggle="collapse" data-parent="#panel-menu" href="#panel-element-menu">自定义菜单管理</a>
+							</div>
+							<div id="panel-element-menu" class="panel-collapse collapse">
+								<div class="panel-body">
+									<a href="/menu/type/list">类型</a>
+								</div>
+								<div class="panel-body">
+									<a href="/menu/add">创建</a>
+								</div>
+								<div class="panel-body">
+									<a href="/menu/index">查询</a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>

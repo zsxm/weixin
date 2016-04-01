@@ -1,8 +1,8 @@
 package service
 
 import (
-	"weixin/source/consts"
 	"weixin/source/util"
+	"weixin/source/util/consts"
 	"weixin/source/wx/entity"
 	"weixin/source/wx/log"
 

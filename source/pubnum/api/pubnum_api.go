@@ -11,13 +11,15 @@ import (
 )
 
 const (
-	cache_pubnum_key           = "%s_pubnum"
+	cache_pubnum_userid_id_key = "%s_userid_pubnumid"
+	cache_pubnum_key           = "%s_pubnumid"
 	cache_pubnum_field_appid   = "_appid"
 	cache_pubnum_field_secret  = "_secret"
 	cache_pubnum_field_wxtoken = "_wxtoken"
 	cache_pubnum_field_token   = "_token"
 )
 
+//查询一个
 func GetPubnum(id string) *entity.Pubnum {
 	pubnum := entity.NewPubnum()
 	pubnum.Id().SetValue(id)
@@ -34,7 +36,7 @@ type CachePubnum struct {
 
 }
 
-//通过公众号id获得公众号基本信息
+//通过公众号id设置公众号基本信息
 func SetCachePubNum(pubnum string, cpn CachePubnum) error {
 	key := fmt.Sprintf(cache_pubnum_key, pubnum)
 	log.Info("设置缓存的公众号基本信息 key=", key)
@@ -76,4 +78,33 @@ func CachePubNum(pubnum string) CachePubnum {
 		log.Error(err)
 	}
 	return cpn
+}
+
+//通过userid获取缓存里面的公众号id
+func GetCachePubNumId(userid string) string {
+	key := fmt.Sprintf(cache_pubnum_userid_id_key, userid)
+	pubnumid, err := cache.Get(key)
+	if err != nil {
+		log.Error(err)
+		return ""
+	}
+	if err != nil {
+		log.Error(err)
+		return ""
+	}
+	return pubnumid
+}
+
+//通过userid设置缓存里面的公众号id
+func SetCachePubNumId(userid, pubnumid string) error {
+	key := fmt.Sprintf(cache_pubnum_userid_id_key, userid)
+	err := cache.Set(key, pubnumid)
+	if err != nil {
+		return err
+	}
+	err = cache.Expire(key, 7000)
+	if err != nil {
+		return err
+	}
+	return nil
 }

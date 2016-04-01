@@ -12,7 +12,9 @@
 		
 		<script type="text/javascript" src="/static/js/comm/jquery/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="/static/js/comm/bootstrap/bootstrap.min.js"></script>
-		<script type="text/javascript" src="/static/js/comm/lufylegend/lufylegend-1.10.0.js"></script>
+		<script type="text/javascript" src="/static/js/comm/handlebars/handlebars.min.js"></script>
+		
+		<script type="text/javascript" src="/static/js/pubnum/pubnum.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -31,13 +33,16 @@
 							</tr>
 						</thead>
 						<tbody>
-						{{range $k,$v:=.Data}}
+						{{range $k,$v:=.Datas}}
 							<tr>
 								<td>{{$v.name}}</td>
 								<td>{{$v.appid}}</td>
 								<td>{{$v.appsecret}}</td>
 								<td>{{$v.token}}</td>
-								<td><a href="">操作</a></td>
+								<td>
+									{{if checkPumNumEnable $v.userid $v.id}}已启用{{else}}<a href="#" onclick="enable('{{$v.id}}')">启用</a>{{end}}
+								</td>
+								
 							</tr>
 						{{end}}
 						</tbody>
