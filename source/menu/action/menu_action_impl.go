@@ -5,13 +5,10 @@ import (
 	"github.com/zsxm/scgo/chttp"
 )
 
-var controlConf = chttp.ControlConfigConfig()
-var control = chttp.NewControl()
-
-func init() {
-	controlConf.SetProject("weixin")
-	controlConf.SetModule("menu")
-	controlConf.SetTitle("菜单管理")
-	controlConf.SetComment("菜单")
-	control.Init(controlConf)
+var controlConf *chttp.ControlConfig = &chttp.ControlConfig{
+	Project: "weixin",
+	Module:  "menu",
+	Title:   "菜单管理",
+	Comment: "菜单",
 }
+var control = chttp.NewControl(controlConf)

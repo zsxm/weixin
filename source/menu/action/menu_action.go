@@ -10,11 +10,11 @@ import (
 )
 
 func init() {
-	chttp.Action("/menu/index", index).Get()
-	chttp.Action("/menu/add", add).Get()
-	chttp.Action("/menu/save", save).Post()
-	chttp.Action("/menu/type/list", typeShow).Get()
-	chttp.Action("/menu/type/save", typeSave).Post()
+	control.Add("/menu/index", index).Get()
+	control.Add("/menu/create", create).Get()
+	control.Add("/menu/save", save).Post()
+	control.Add("/menu/type/list", typeShow).Get()
+	control.Add("/menu/type/save", typeSave).Post()
 }
 
 func typeShow(c chttp.Context) {
@@ -34,7 +34,8 @@ func index(c chttp.Context) {
 	c.HTML("/menu/menu.list", nil)
 }
 
-func add(c chttp.Context) {
+//创建
+func create(c chttp.Context) {
 	c.HTML("/menu/menu", nil)
 }
 

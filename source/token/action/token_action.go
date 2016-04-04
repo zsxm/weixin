@@ -13,9 +13,9 @@ import (
 )
 
 func init() {
-	chttp.Action("/token/index", index).Get()
-	chttp.Action("/token/api/get/token", apiGetToken).Get()
-	chttp.Action("/token/api/get/wxip", apiGetWxIP).Get()
+	control.Add("/token/index", index).Get()
+	control.Add("/token/api/get/token", apiGetToken).Get()
+	control.Add("/token/api/get/wxip", apiGetWxIP).Get()
 
 }
 
@@ -31,11 +31,12 @@ func index(c chttp.Context) {
 //3 根据公众号id获取公众号基本信息
 //4 根据token获取wxip
 func apiGetWxIP(c chttp.Context) {
-	prin, err := c.Session().Principal()
+
+	dmp, err := c.Session().GetMap()
 	if err != nil {
 		log.Error(err)
 	}
-	userid := prin.Id
+	userid := dmp.Get("id")
 	token := service.GetCacheToken(userid)
 	cjson := service.GetWeiXinIP(token)
 	c.HTML("/token/wxip", cjson.Data())

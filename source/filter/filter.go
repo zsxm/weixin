@@ -11,7 +11,12 @@ func init() {
 }
 
 func LoginFilter(fc chttp.FilterContext) error {
-	if !fc.Session().IsLogin() {
+	dmp, err := fc.Session().GetMap()
+	if err != nil {
+		fc.HTML("/login", "未登录")
+		return errors.New("未登录")
+	}
+	if dmp.Get("id") == "" {
 		fc.HTML("/login", "未登录")
 		return errors.New("未登录")
 	}

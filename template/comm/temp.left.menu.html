@@ -1,14 +1,7 @@
 				<script type="text/javascript">
 					$(function(){
-						var thisurl = "{{.Url}}";
-						if(thisurl!=""){
-							if(thisurl.indexOf("/")==0){
-								thisurl=thisurl.substr(1,thisurl.length);
-								var id=thisurl.substr(0,thisurl.indexOf("/"));
-								id="panel-element-"+id
-								$("#"+id).addClass("in");
-							}
-						}
+						var module="{{.CC.Module}}";
+						$("#panel-element-"+module).addClass("in");
 					});
 				</script>			
 				<div class="col-md-3 column">
@@ -51,7 +44,7 @@
 									<a href="/menu/type/list">类型</a>
 								</div>
 								<div class="panel-body">
-									<a href="/menu/add">创建</a>
+									<a href="/menu/create">创建</a>
 								</div>
 								<div class="panel-body">
 									<a href="/menu/index">查询</a>

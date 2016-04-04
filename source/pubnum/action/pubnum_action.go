@@ -12,22 +12,21 @@ import (
 )
 
 func init() {
-	//chttp.Action("/pubnum/list", list).Get()
 	control.Add("/pubnum/list", list).Get()
-	chttp.Action("/pubnum/add", add).Get()
-	chttp.Action("/pubnum/save", save).Post()
-	chttp.Action("/pubnum/get/id", get).Get()
-	chttp.Action("/pubnum/enable", enable).Get()
+	control.Add("/pubnum/add", add).Get()
+	control.Add("/pubnum/save", save).Post()
+	control.Add("/pubnum/get/id", get).Get()
+	control.Add("/pubnum/enable", enable).Get()
 }
 
 //启用公众号
 func enable(c chttp.Context) {
 	pubnumid := c.Param("pubnumid")
-	prin, err := c.Session().Principal()
+	dmp, err := c.Session().GetMap()
 	if err != nil {
 		log.Error(err)
 	}
-	userid := prin.Id
+	userid := dmp.Get("id")
 	result := c.NewResult()
 	err = api.SetCachePubNumId(userid, pubnumid)
 	if err != nil {
@@ -41,11 +40,12 @@ func enable(c chttp.Context) {
 func get(c chttp.Context) {
 	bean := entity.NewPubnumBean()
 	e := entity.NewPubnum()
-	pri, err := c.Session().Principal()
+
+	dmp, err := c.Session().GetMap()
 	if err != nil {
 		log.Error(err)
 	}
-	userid := pri.Id
+	userid := dmp.Get("id")
 	e.Userid().SetValue(userid)
 	e.Userid().FieldExp().Eq().And()
 	bean.SetEntity(e)
@@ -60,11 +60,12 @@ func get(c chttp.Context) {
 func save(c chttp.Context) {
 	e := entity.NewPubnum()
 	c.BindData(e)
-	pri, err := c.Session().Principal()
+
+	dmp, err := c.Session().GetMap()
 	if err != nil {
 		log.Error(err)
 	}
-	userid := pri.Id
+	userid := dmp.Get("id")
 	e.Userid().SetValue(userid)             //用户id
 	e.Created().SetValue(date.NowUnixStr()) //创建时间
 	res, err := service.PubnumService.Save(e)
@@ -87,11 +88,11 @@ func add(c chttp.Context) {
 //公众号列表
 func list(c chttp.Context) {
 	bean := entity.NewPubnumBean()
-	pri, err := c.Session().Principal()
+	dmp, err := c.Session().GetMap()
 	if err != nil {
 		log.Error(err)
 	}
-	userid := pri.Id
+	userid := dmp.Get("id")
 	e := entity.NewPubnum()
 	e.Userid().SetValue(userid)
 	e.Userid().FieldExp().Eq().And()
