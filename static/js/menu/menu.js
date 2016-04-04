@@ -9,7 +9,7 @@ var menu={
 		//if(length==0){
 			$("#defaultBtn").click(function(){
 				menu.genLeve1Btn();
-				if(menu.leve1BtnsSize()==3){
+				if(menu.leve1BtnsSize()==menu.leve1){
 					$(this).hide();
 				}
 			});
@@ -40,7 +40,7 @@ var menu={
 		var id=new Date().getTime();
 		var html='<li id="leve2_'+id+'" class="leve2btn" onclick="menu.leve2Edit($(this))"><a id="tleve2_'+id+'" href="javascript:void(0)">子菜单名称</a></li>';
 		obj.before(html);
-		if(menu.leve2BtnsSize(o)==5){
+		if(menu.leve2BtnsSize(o)==menu.leve2){
 			obj.remove();
 		}else{
 			obj.before('<li id="dleve2_'+id+'" class="divider"></li>');
@@ -66,6 +66,7 @@ var menu={
 		var attrs=menu.getAttrs("leve1_"+id);
 		menu.setCtrol(id,obj.text(),attrs.menutype,attrs.url,attrs.key);
 		menu.setDeleteMenu(id,"删除菜单");
+		$("#name").attr("maxlength",menu.leve1TxtMax);
 	},
 	leve2Edit:function(o){//二级编辑
 		var obj=$(o);
@@ -74,6 +75,7 @@ var menu={
 		var attrs=menu.getAttrs("tleve2_"+id);
 		menu.setCtrol(id,obj.find("a").text(),attrs.menutype,attrs.url,attrs.key);
 		menu.setDeleteMenu(id,"删除子菜单");
+		$("#name").attr("maxlength",menu.leve2TxtMax);
 	},
 	getAttrs:function(id){//获得属性值 return json
 		var o=$("#"+id);
@@ -197,6 +199,7 @@ var menu={
 	}
 	
 };
+
 menu.init();
 
 $(function(){
