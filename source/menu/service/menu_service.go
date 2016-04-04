@@ -9,6 +9,7 @@ import (
 )
 
 func SaveMenuType(tmp map[string][]string) int {
+	tmp["name"] = []string{tmp["value"][0] + "_" + tmp["name"][0]}
 	res, err := MenuService.SaveForMap("menu_type", tmp)
 	if err != nil {
 		log.Error(err)

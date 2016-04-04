@@ -6,7 +6,6 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>微信配置平台_{{.CC.Title}}</title>
 		{{template "temp.header.html" .}}
-		<script type="text/javascript" src="/static/js/menu/menu.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -14,16 +13,49 @@
 			<div class="row clearfix">
 			{{template "temp.left.menu.html" .}}
 				<div class="col-md-9 column">
-					<form action="/pubnum/save" method="post" class="form-horizontal" role="form">
-						<div class="form-group">
-					    	<label class="col-sm-4 control-label"><h4>自定义菜单创建</h4></label>
-					   	</div>
-						<div>
-							qwer
+					{{if isBlank .Data}}
+					请到公众号管理启用一个公众号配置
+					{{else}}
+					<div id="menusCreate" class="col-md-6 column">
+						<div style="height:300px;">
+							<button type="button" class="btn btn-default btn-info btn-block">XXX标题</button>
 						</div>
-					</form>
+						<div id="btns">
+							<div id="defaultBtn" class="btn-group">
+								<button class="btn btn-default" >&nbsp;&nbsp;ADD+&nbsp;&nbsp;</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 column">
+						<div class="form-group">
+							<button id="deleteMenuBtn" type="button" class="btn btn-default btn-info">删除菜单</button>
+					   	</div>
+						<div class="form-group">
+					     	<label for="name" class="control-label">名称</label>
+					        <input type="text" class="form-control" id="name" name="name" placeholder="名称">
+					   	</div>
+						<div id="ctrol">
+							<div class="form-group">
+						     	<label for="menuType" class="control-label">类型</label>
+								<select id="menuType" name="menuType" class="form-control"></select>
+						   	</div>
+							<div id="divUrl" class="form-group">
+						     	<label for="url" class="control-label">URL</label>
+						        <input type="text" class="form-control" id="url" name="url" placeholder="URL">
+						   	</div>
+							<div id="divKey" class="form-group">
+						     	<label for="url" class="control-label">KEY</label>
+						        <input type="text" class="form-control" id="key" name="key" placeholder="KEY">
+						   	</div>
+							<div class="form-group">
+					         	<button id="save" type="button" class="btn btn-default">保存</button>
+					   		</div>
+						</div>
+					</div>
+					{{end}}
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="/static/js/menu/menu.js"></script>
 	</body>
 </html>
