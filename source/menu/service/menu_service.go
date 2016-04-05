@@ -2,12 +2,37 @@
 package service
 
 import (
-	//	"weixin/source/menu/entity"
+	"fmt"
 	"weixin/source/menu/log"
+	tokenapi "weixin/source/token/api"
+	"weixin/source/util/webservice"
 
+	"github.com/zsxm/scgo/cjson"
 	"github.com/zsxm/scgo/data"
 )
 
+const (
+	menu_get    = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=%s"
+	menu_create = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s"
+)
+
+//创建菜单
+func CreateMenu(userid, data string) *cjson.JSON {
+	token := tokenapi.GetCacheToken(userid)
+	url := fmt.Sprintf(menu_create, token)
+	cjsn := webservice.SendPostJson(url, data)
+	return cjsn
+}
+
+//通过接口获得菜单
+func GetMenu(userid string) *cjson.JSON {
+	token := tokenapi.GetCacheToken(userid)
+	url := fmt.Sprintf(menu_get, token)
+	cjsn := webservice.SendGetJson(url, "")
+	return cjsn
+}
+
+//保存菜单类型
 func SaveMenuType(tmp map[string][]string) int {
 	tmp["name"] = []string{tmp["value"][0] + "_" + tmp["name"][0]}
 	res, err := MenuService.SaveForMap("menu_type", tmp)
@@ -21,6 +46,7 @@ func SaveMenuType(tmp map[string][]string) int {
 	return int(r)
 }
 
+//获得菜单类型
 func MenuTypeList() data.QueryResult {
 	var sql = "select * from menu_type"
 	res, err := MenuService.Query(sql)

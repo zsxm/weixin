@@ -11,12 +11,17 @@ import (
 //Get请求发送数据,响应string
 func SendGet(url, data string) string {
 	request := chttplib.Get(url)
+	var res string
+	var err error
 	if data != "" {
 		request.Body(data)
 	}
-	res, err := request.String()
+	loger.Info("URL:", url)
+	loger.Info("DATA:", data)
+	res, err = request.String()
+	loger.Info("SendGet Response:", res)
 
-	//res = `{"access_token":"Y93-GXoRJAb33tUwiQIkZjm2MqmWlA3jQ28rGXPZV-0clPNM5WYBdImNHalz9JDq3lZKAlg27uBD5pMgLDMY4txxx6fCSJseHFi_bdvctiDcyvV4C3rFhqd7y9xnAKcdSCRcADADNC","expires_in":7200}`
+	//res = `{"menu":{"button":[{"type":"click","name":"菜单1","key":"V1001_TODAY_MUSIC","sub_button":[]},{"name":"菜单2","sub_button":[{"type":"view","name":"搜索","url":"http:\/\/www.soso.com\/","sub_button":[]},{"type":"view","name":"视频","url":"http:\/\/v.qq.com\/","sub_button":[]},{"type":"click","name":"赞一下我们","key":"V1001_GOOD","sub_button":[]}]},{"name":"菜单三","sub_button":[{"type":"click","name":"子菜单名称","key":"keyabce","sub_button":[]}]}]}}`
 	//res = `{"errcode":40013,"errmsg":"invalid appid"}`
 	if err != nil {
 		loger.Error(err)
@@ -32,7 +37,10 @@ func SendPost(url, data string) string {
 	if data != "" {
 		request.Body(data)
 	}
+	loger.Info("URL:", url)
+	loger.Info("DATA:", data)
 	res, err := request.String()
+	loger.Info("SendPost Response:", res)
 
 	if err != nil {
 		loger.Error(err)

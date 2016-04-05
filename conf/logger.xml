@@ -5,6 +5,6 @@
 		<file>true</file>
 		<level>5</level>
 		<fileName>logs.</fileName>
-		<maxSize>102400</maxSize>
+		<maxSize>10485760</maxSize>
 	</logger>
 </config>

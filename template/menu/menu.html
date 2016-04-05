@@ -13,14 +13,14 @@
 			<div class="row clearfix">
 			{{template "temp.left.menu.html" .}}
 				<div class="col-md-9 column">
-					{{if isBlank .Data}}
+					{{if isBlank .Data.id}}
 					请到公众号管理启用一个公众号配置
 					{{else}}
 					<div id="menusCreate" class="col-md-6 column">
 						<div style="height:300px;">
-							<button type="button" class="btn btn-default btn-info btn-block">XXX标题</button>
+							<button type="button" class="btn btn-default btn-info btn-block">{{.Data.name}}</button>
 						</div>
-						<div id="btns">
+						<div id="btns" style="margin-left:5px;">
 							<div id="defaultBtn" class="btn-group">
 								<button class="btn btn-default" >&nbsp;&nbsp;ADD+&nbsp;&nbsp;</button>
 							</div>
@@ -47,10 +47,10 @@
 						     	<label for="url" class="control-label">KEY</label>
 						        <input type="text" class="form-control" id="key" name="key" placeholder="KEY">
 						   	</div>
-							<div class="form-group">
-					         	<button id="save" type="button" class="btn btn-default">保存</button>
-					   		</div>
 						</div>
+						<div class="form-group">
+				         	<button id="saveBtn" type="button" class="btn btn-default">保存</button>
+				   		</div>
 					</div>
 					{{end}}
 				</div>
