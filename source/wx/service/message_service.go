@@ -1,8 +1,10 @@
 package service
 
 import (
+	"fmt"
 	"weixin/source/util"
 	"weixin/source/util/consts"
+	"weixin/source/websocket"
 	"weixin/source/wx/entity"
 	"weixin/source/wx/log"
 
@@ -40,7 +42,11 @@ func Text(reqMsg *entity.RequestMsg, c chttp.Context) {
 	text.ToUserName = util.Value2CDATA(reqMsg.FromUserName)
 	text.FromUserName = util.Value2CDATA(reqMsg.ToUserName)
 	text.MsgType = util.Value2CDATA(consts.MSG_TEXT)
-	text.Content = util.Value2CDATA("Hello ,", reqMsg.ToUserName)
+	content := fmt.Sprint("Hello , ", reqMsg.ToUserName, " , ", reqMsg.Content)
+	text.Content = util.Value2CDATA(content)
+
+	msg := websocket.Message{Value: []byte(content), Key: reqMsg.ToUserName}
+	websocket.H.Message <- msg
 
 	textMsg, err := util.ResponseMsg(text)
 	if err != nil {

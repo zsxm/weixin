@@ -8,5 +8,6 @@ import (
 	_ "weixin/source/token/action"
 	_ "weixin/source/user/action"
 	_ "weixin/source/util/funmp"
+	_ "weixin/source/websocket"
 	_ "weixin/source/wx/action"
 )

@@ -99,6 +99,7 @@ func apiGetToken(c chttp.Context) {
 		if b {
 			//缓存公众号基本信息
 			cpn := api.CachePubnum{
+				Name:    pubNum.Name().Value(),
 				Appid:   pubNum.Appid().Value(),
 				Secret:  pubNum.Appsecret().Value(),
 				WxToken: pubNum.Token().Value(),

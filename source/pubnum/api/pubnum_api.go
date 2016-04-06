@@ -13,6 +13,7 @@ import (
 const (
 	cache_pubnum_userid_id_key = "%s_userid_pubnumid"
 	cache_pubnum_key           = "%s_pubnumid"
+	cache_pubnum_field_name    = "_name"
 	cache_pubnum_field_appid   = "_appid"
 	cache_pubnum_field_secret  = "_secret"
 	cache_pubnum_field_wxtoken = "_wxtoken"
@@ -29,6 +30,7 @@ func GetPubnum(id string) *entity.Pubnum {
 }
 
 type CachePubnum struct {
+	Name    string //名称
 	Appid   string //第三方用户唯一凭证
 	Secret  string //第三方用户唯一凭证密钥，即appsecret
 	WxToken string //微信号token
@@ -40,6 +42,9 @@ type CachePubnum struct {
 func SetCachePubNum(pubnum string, cpn CachePubnum) error {
 	key := fmt.Sprintf(cache_pubnum_key, pubnum)
 	log.Info("设置缓存的公众号基本信息 key=", key)
+	if err := cache.HSet(key, cache_pubnum_field_name, cpn.Name); err != nil {
+		return err
+	}
 	if err := cache.HSet(key, cache_pubnum_field_appid, cpn.Appid); err != nil {
 		return err
 	}
@@ -61,6 +66,9 @@ func CachePubNum(pubnum string) CachePubnum {
 	cpn := CachePubnum{}
 	key := fmt.Sprintf(cache_pubnum_key, pubnum)
 	log.Info("获取缓存的公众号基本信息 key=", key)
+	if name, err := cache.HGet(key, cache_pubnum_field_name); err == nil {
+		cpn.Name = name
+	}
 	if appid, err := cache.HGet(key, cache_pubnum_field_appid); err == nil {
 		cpn.Appid = appid
 	}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>微信测试学习</title>
+		{{template "temp.header.html" .}}
+		<script type="text/javascript">
+		$(function(){
+			var ws;
+			var init=function() {
+			   if (ws != null) {
+			     ws.close();
+			     ws = null;
+			   }
+			   var msg = $("#msg");
+			   ws = new WebSocket("ws://localhost:8080/socket/conn");
+			   ws.onopen = function () {
+			     msg.append("open</br>");
+			   };
+			   ws.onmessage = function (e) {
+			   		console.log(e.data);
+			      msg.append("msg:"+e.data+"</br>");
+			   };
+			   ws.onclose = function (e) {
+			      msg.append("onclose");
+			   };
+			};
+			init();
+			$("#send").click(function(){
+			   var m = $("#message").val();
+			   console.log("send:" + m);
+			   ws.send(m);
+			});
+		})
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			{{template "temp.top.html" .}}
+			<div class="row clearfix">
+			{{template "temp.left.menu.html" .}}
+				<div class="col-md-9 column">
+					<form name="msgform" action="#">
+						<input type="text" id="message" name="message" size="80" value="">
+						<input type="button" id="send" value="send">
+					</form>
+					<div id="msg"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

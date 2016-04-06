@@ -49,7 +49,6 @@ func login(c chttp.Context) {
 		e.SetId(id)
 		c.Session().SetEntity(e)
 		c.Session().Set("lasttime", date.NowUnixStr())
-
 		c.Redirect("/pubnum/list")
 	} else {
 		log.Info("登录失败")
