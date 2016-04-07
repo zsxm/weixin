@@ -109,3 +109,49 @@ func SendPostJson(url, data string) *cjson.JSON {
 func SendGetXml(url, xmlData string) {
 
 }
+
+//上传媒体 return json str
+func SendMediaUpload(filename string, target_url string) string {
+	response, err := PostFile(filename, target_url)
+	if err != nil {
+		loger.Error("PostFile:", err)
+		return ""
+	}
+	defer response.Body.Close()
+	bye := make([]byte, response.ContentLength)
+	c, err := response.Body.Read(bye)
+
+	if err != nil && err.Error() != "EOF" {
+		loger.Error("response body read:", err)
+		return ""
+	}
+	loger.Info("Response Body Read Size:", c)
+	return string(bye)
+}
+
+//上传媒体 return json object
+func SendMediaUploadJson(filename string, target_url string) *cjson.JSON {
+	res := SendMediaUpload(filename, target_url)
+	if res != "" {
+		cjs := cjson.JsonToMap(res)
+		var code, codemsg string
+		if cjs.Size() > 0 {
+			code = cjs.Get("errcode").String()
+			if code != "" {
+				cjs.Set("code", code)
+				ec, err := strconv.Atoi(code)
+				if err != nil {
+					loger.Error("errcode", code, err)
+				} else {
+					codemsg = util.ErrorMsg(ec)
+					cjs.Set("codemsg", codemsg)
+				}
+			} else {
+				cjs.Set("code", "0")
+				cjs.Set("codemsg", "ok")
+			}
+		}
+		return cjs
+	}
+	return nil
+}

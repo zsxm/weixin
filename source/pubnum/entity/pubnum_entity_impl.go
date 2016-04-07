@@ -4,8 +4,10 @@ package entity
 import (
 	"bytes"
 	"fmt"
-	"github.com/zsxm/scgo/data"
 	"strconv"
+
+	"github.com/zsxm/scgo/data"
+	"github.com/zsxm/scgo/tools"
 )
 
 //----------------------PubnumBean begin--------------------------------------
@@ -196,7 +198,7 @@ func (this *Pubnum) FieldNames() data.FieldNames {
 }
 
 func (this *Pubnum) Field(filedName string) data.EntityField {
-	switch filedName {
+	switch tools.Lower(filedName) {
 	case "id":
 		this.id.SetPrimaryKey(true)
 		return this.id.StructType()

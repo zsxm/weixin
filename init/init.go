@@ -3,6 +3,7 @@ package init
 import (
 	_ "weixin/source/common/action"
 	_ "weixin/source/filter"
+	_ "weixin/source/media/action"
 	_ "weixin/source/menu/action"
 	_ "weixin/source/pubnum/action"
 	_ "weixin/source/token/action"

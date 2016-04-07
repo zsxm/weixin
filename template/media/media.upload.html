@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>微信配置平台_{{.CC.Title}}</title>
+		{{template "temp.header.html" .}}
+		
+		<script type="text/javascript">
+			$(function(){
+				var STYLE_SETTING = 'style="width:{width};height:{height};"';
+				var INPUT='<div><input type="text" id="tmpfiguretitle" name="tmpfiguretitle" class="form-control" filepath="noupload"/></div>';
+				var url="/media/temp/upload";
+				$("#file").fileinput({
+					uploadUrl: url,//上传地址
+					initialPreview:[],//默认加载文件
+					initialPreviewConfig:[],//默认加载文件配置
+					enctype: 'multipart/form-data',
+					//minFileCount: 2,//至少有两个文件
+					overwriteInitial: false,//重新选择文件后是否覆盖 initialPreview
+					language:"zh",//设置语言
+					//showUpload:false,//隐藏上传按钮
+					maxFileCount: 1,//选择文件数量
+					//maxImageWidth: 600,//文件宽度
+			        maxFileSize: 2048,//文件大小 kb
+					//elErrorContainer: "#errorBlock",
+					previewFileType:"image",//只选择image类型文件
+					allowedFileExtensions:["jpg","jpeg", "png", "gif","bmp","mp3","wma","wav","amr"],
+			        initialCaption: "请选择上传素材",
+					browseLabel: '选择文件',//选择按钮文字 
+					//removeLabel: '删除所有',//移除按钮文字
+					showRemove:false//隐藏移动按钮
+					/*,previewTemplates:{//模版
+							image:'<div class="file-preview-frame" id="{previewId}" data-fileindex="{fileindex}">'
+							+'<img src="{data}" class="file-preview-image" title="{caption}" title="{caption}" ' + STYLE_SETTING + '>{footer}配图标题'+INPUT+'</div>'
+					}*/
+				}).on("fileuploaded",function(event,data,prvid,index){
+					alert(data.response);
+					if (data.response) {
+						
+					}
+				})/*.on("fileremoved",function(event,prvid,index){//未上传时点击删除
+					//alert(event+"  "+prvid+"  "+index);
+				})*/;
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			{{template "temp.top.html" .}}
+			<div class="row clearfix">
+			{{template "temp.left.menu.html" .}}
+				<div class="col-md-9 column">
+					<form action="/media/temp/upload" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+						<div class="form-group">
+					    	<label class="col-sm-4 control-label"><h4>临时素材上传</h4></label>
+					   	</div>
+						<div class="form-group">
+					      	<div>
+					         	<input type="file" id="file" name="file" value="" accept="image/*" class="file-loading"/>
+					      	</div>
+					   	</div>
+						<div class="form-group">
+				      		<div>
+				         		<button type="submit" class="btn btn-default">保存</button>
+				      		</div>
+				   		</div>
+			        </form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
