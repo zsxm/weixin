@@ -23,7 +23,7 @@
 					//showUpload:false,//隐藏上传按钮
 					maxFileCount: 1,//选择文件数量
 					//maxImageWidth: 600,//文件宽度
-			        maxFileSize: 2048,//文件大小 kb
+			        maxFileSize: 256,//文件大小 2048kb 
 					//elErrorContainer: "#errorBlock",
 					previewFileType:"image",//只选择image类型文件
 					allowedFileExtensions:["jpg","jpeg", "png", "gif","bmp","mp3","wma","wav","amr"],
@@ -36,9 +36,8 @@
 							+'<img src="{data}" class="file-preview-image" title="{caption}" title="{caption}" ' + STYLE_SETTING + '>{footer}配图标题'+INPUT+'</div>'
 					}*/
 				}).on("fileuploaded",function(event,data,prvid,index){
-					alert(data.response);
-					if (data.response) {
-						
+					if (data.response.Code=="0") {
+						alert("临时素材上传成功");						
 					}
 				})/*.on("fileremoved",function(event,prvid,index){//未上传时点击删除
 					//alert(event+"  "+prvid+"  "+index);
@@ -61,11 +60,6 @@
 					         	<input type="file" id="file" name="file" value="" accept="image/*" class="file-loading"/>
 					      	</div>
 					   	</div>
-						<div class="form-group">
-				      		<div>
-				         		<button type="submit" class="btn btn-default">保存</button>
-				      		</div>
-				   		</div>
 			        </form>
 				</div>
 			</div>

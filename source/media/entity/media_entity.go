@@ -15,6 +15,9 @@ type Media struct {
 	//go:@Column value=mediaId
 	mediaId data.String
 
+	//go:@Column value=localName
+	localName data.String
+
 	//go:@Column value=ctype
 	ctype data.String
 

@@ -14,7 +14,28 @@ func init() {
 	control.Add("/media/index", index).Get()
 	control.Add("/media/temp/toupload", tempToUpload).Get()
 	control.Add("/media/temp/upload", tempUpload).Post()
-	control.Add("/media/temp/get", tempGet).Get()
+	control.Add("/media/temp/list", tempList).Get()
+	control.Add("/media/line/get", tempGetList).Get()       //线上
+	control.Add("/media/temp/local/get", tempGetList).Get() //本地
+}
+
+//获取临时文件列表
+func tempGetList(c chttp.Context) {
+	t := c.Param("type")
+	mediaType := c.Param("mediaType")
+	if t == "local" {
+		bean := entity.NewMediaBean()
+		media := entity.NewMedia()
+		media.SetCtype(mediaType)
+		media.Ctype().FieldExp().Eq().And()
+		media.Created().FieldSort().Desc(1)
+		bean.SetEntity(media)
+		service.MediaService.Select(bean)
+		log.Println(bean.Entitys().JSON())
+		c.JSON(bean.Entitys().JSON(), false)
+	} else if t == "line" {
+
+	}
 }
 
 func index(c chttp.Context) {
@@ -25,7 +46,7 @@ func index(c chttp.Context) {
 
 //临时素材上传跳转
 func tempToUpload(c chttp.Context) {
-	c.HTML("/media/media.upload", nil)
+	c.HTML("/media/temp.media.upload", nil)
 }
 
 //临时素材上传
@@ -53,6 +74,7 @@ func tempUpload(c chttp.Context) {
 			e := entity.NewMedia()
 			e.SetCtype(ctype)
 			e.SetMediaId(mediaId)
+			e.SetLocalName(filePath)
 			e.Created().SetValue(created)
 			_, err = service.MediaService.Save(e)
 			if err != nil {
@@ -71,7 +93,27 @@ func tempUpload(c chttp.Context) {
 	c.JSON(r, false)
 }
 
-//临时素材获取
-func tempGet(c chttp.Context) {
-	c.HTML("/media/media.upload", nil)
+//临时素材列表
+func tempList(c chttp.Context) {
+	dmp, err := c.Session().GetMap()
+	if err != nil {
+		log.Error(err)
+	}
+	userid := dmp.Get("id")
+	cjsn := service.GetMediaCounts(userid)
+	log.Println("cjsn ", cjsn.DataMap())
+	if cjsn.Get("code").String() == "0" {
+		err = c.Session().SetKeyMap("media_counts", cjsn.DataMap())
+		if err != nil {
+			log.Error(err)
+		}
+	} else {
+		data, err := c.Session().GetKeyMap("media_counts")
+		if err != nil {
+			log.Error(err)
+		}
+		c.HTML("/media/temp.media.list", data)
+		return
+	}
+	c.HTML("/media/temp.media.list", cjsn.Data())
 }

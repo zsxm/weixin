@@ -54,56 +54,58 @@ func SendPost(url, data string) string {
 func SendGetJson(url, data string) *cjson.JSON {
 	res := SendGet(url, data)
 	loger.Info("send url", url, "data", data)
+	var cjsn *cjson.JSON
 	if res != "" {
-		cjs := cjson.JsonToMap(res)
+		cjsn = cjson.JsonToMap(res)
 		var code, codemsg string
-		if cjs.Size() > 0 {
-			code = cjs.Get("errcode").String()
+		if cjsn.Size() > 0 {
+			code = cjsn.Get("errcode").String()
 			if code != "" {
-				cjs.Set("code", code)
+				cjsn.Set("code", code)
 				ec, err := strconv.Atoi(code)
 				if err != nil {
 					loger.Error("errcode", code, err)
 				} else {
 					codemsg = util.ErrorMsg(ec)
-					cjs.Set("codemsg", codemsg)
+					cjsn.Set("codemsg", codemsg)
 				}
 			} else {
-				cjs.Set("code", "0")
-				cjs.Set("codemsg", "ok")
+				cjsn.Set("code", "0")
+				cjsn.Set("codemsg", "ok")
 			}
 		}
-		return cjs
+		return cjsn
 	}
-	return nil
+	return cjsn
 }
 
 //Post请求发送数据,响应json
 func SendPostJson(url, data string) *cjson.JSON {
 	res := SendPost(url, data)
 	loger.Info("send url", url, "data", data)
+	var cjsn *cjson.JSON
 	if res != "" {
-		cjs := cjson.JsonToMap(res)
+		cjsn = cjson.JsonToMap(res)
 		var code, codemsg string
-		if cjs.Size() > 0 {
-			code = cjs.Get("errcode").String()
+		if cjsn.Size() > 0 {
+			code = cjsn.Get("errcode").String()
 			if code != "" {
-				cjs.Set("code", code)
+				cjsn.Set("code", code)
 				ec, err := strconv.Atoi(code)
 				if err != nil {
 					loger.Error("errcode", code, err)
 				} else {
 					codemsg = util.ErrorMsg(ec)
-					cjs.Set("codemsg", codemsg)
+					cjsn.Set("codemsg", codemsg)
 				}
 			} else {
-				cjs.Set("code", "0")
-				cjs.Set("codemsg", "ok")
+				cjsn.Set("code", "0")
+				cjsn.Set("codemsg", "ok")
 			}
 		}
-		return cjs
+		return cjsn
 	}
-	return nil
+	return cjsn
 }
 
 func SendGetXml(url, xmlData string) {
@@ -132,26 +134,27 @@ func SendMediaUpload(filename string, target_url string) string {
 //上传媒体 return json object
 func SendMediaUploadJson(filename string, target_url string) *cjson.JSON {
 	res := SendMediaUpload(filename, target_url)
+	var cjsn *cjson.JSON
 	if res != "" {
-		cjs := cjson.JsonToMap(res)
+		cjsn = cjson.JsonToMap(res)
 		var code, codemsg string
-		if cjs.Size() > 0 {
-			code = cjs.Get("errcode").String()
+		if cjsn.Size() > 0 {
+			code = cjsn.Get("errcode").String()
 			if code != "" {
-				cjs.Set("code", code)
+				cjsn.Set("code", code)
 				ec, err := strconv.Atoi(code)
 				if err != nil {
 					loger.Error("errcode", code, err)
 				} else {
 					codemsg = util.ErrorMsg(ec)
-					cjs.Set("codemsg", codemsg)
+					cjsn.Set("codemsg", codemsg)
 				}
 			} else {
-				cjs.Set("code", "0")
-				cjs.Set("codemsg", "ok")
+				cjsn.Set("code", "0")
+				cjsn.Set("codemsg", "ok")
 			}
 		}
-		return cjs
+		return cjsn
 	}
-	return nil
+	return cjsn
 }

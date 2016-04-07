@@ -145,6 +145,14 @@ func (this *Media) SetMediaId(value string) {
 	this.mediaId.SetValue(value)
 }
 
+func (this *Media) LocalName() *data.String {
+	return &this.localName
+}
+
+func (this *Media) SetLocalName(value string) {
+	this.localName.SetValue(value)
+}
+
 func (this *Media) Ctype() *data.String {
 	return &this.ctype
 }
@@ -180,6 +188,8 @@ func (this *Media) Field(filedName string) data.EntityField {
 		return this.id.StructType()
 	case "mediaid":
 		return this.mediaId.StructType()
+	case "localname":
+		return this.localName.StructType()
 	case "ctype":
 		return this.ctype.StructType()
 	case "created":
@@ -195,6 +205,8 @@ func (this *Media) JSON() string {
 	b.WriteString(",")
 	b.WriteString(fmt.Sprintf(`"mediaId":%q`, this.mediaId.Value()))
 	b.WriteString(",")
+	b.WriteString(fmt.Sprintf(`"localName":%q`, this.localName.Value()))
+	b.WriteString(",")
 	b.WriteString(fmt.Sprintf(`"ctype":%q`, this.ctype.Value()))
 	b.WriteString(",")
 	b.WriteString(fmt.Sprintf(`"created":%q`, this.created.Value()))
@@ -208,11 +220,11 @@ func (this *Media) JSON() string {
 func init() {
 	mediaTableInformation.SetTableName("media")
 	mediaColumnsArr := []string{
-		"id", "mediaId", "ctype", "created", 
+		"id", "mediaId", "localName", "ctype", "created", 
 	}
 	mediaTableInformation.SetColumns(mediaColumnsArr)
 	mediaFieldNamesArr := []string{
-		"id", "mediaId", "ctype", "created", 
+		"id", "mediaId", "localName", "ctype", "created", 
 	}
 	mediaFieldNames.SetNames(mediaFieldNamesArr)
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>微信配置平台_{{.CC.Title}}</title>
+		{{template "temp.header.html" .}}
+		<script type="text/javascript" src="/static/js/media/media.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			{{template "temp.top.html" .}}
+			<div class="row clearfix">
+			{{template "temp.left.menu.html" .}}
+				<div class="col-md-9 column">
+					<div class="form-group">
+				    	<label class="control-label"><h4>临时素材列表</h4></label>
+				   	</div>
+					<div class="form-group">
+				      	<div class="col-sm-3">
+							<select id="mediaType" name="mediaType" class="form-control">
+								<option value="-1">素材类型</option>
+								<option value="image">图片</option>
+								<option value="video">视频</option>
+								<option value="voice">语音</option>
+								<option value="news">图文</option>
+							</select>
+				      	</div>
+		         		<button type="button" id="getLocalListBtn" class="btn btn-default">临时本地列表</button>
+						<button type="button" id="getLineListBtn" class="btn btn-default">永久线上列表</button>
+				      	<div class="col-sm-9">
+					    	<label class="control-label">
+								&nbsp;永久素材数量&nbsp;
+								语音总数：{{.Data.voice_count}}
+								视频总数：{{.Data.video_count}}
+								图片总数：{{.Data.image_count}}
+								图文总数：{{.Data.news_count}}
+							</label>
+				      	</div>
+			   		</div>
+					<table id="mediaList" class="table table-condensed">
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
