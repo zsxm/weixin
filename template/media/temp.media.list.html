@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>微信配置平台_{{.CC.Title}}</title>
 		{{template "temp.header.html" .}}
-		<script type="text/javascript" src="/static/js/media/media.js"></script>
+		<script type="text/javascript" src="/static/js/media/temp.media.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -20,7 +20,7 @@
 					<div class="form-group">
 				      	<div class="col-sm-3">
 							<select id="mediaType" name="mediaType" class="form-control">
-								<option value="-1">素材类型</option>
+								<option value="-1">请选择素材类型</option>
 								<option value="image">图片</option>
 								<option value="video">视频</option>
 								<option value="voice">语音</option>
@@ -39,7 +39,7 @@
 							</label>
 				      	</div>
 			   		</div>
-					<table id="mediaList" class="table table-condensed">
+					<table id="mediaList" class="table table-bordered table-hover table-condensed">
 					</table>
 				</div>
 			</div>

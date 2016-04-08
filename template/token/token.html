@@ -18,6 +18,7 @@
 						<div class="form-group">
 					     	<label for="name" class="col-sm-2 control-label">订阅/公众号</label>
 					      	<div class="col-sm-3">
+								<input type="hidden" id="id" value="{{.Data.Id}}"/>
 								<select id="pubnumid" name="pubnumid" class="form-control">
 								</select>
 					      	</div>
@@ -25,8 +26,8 @@
 						
 						<div class="form-group">
 					     	<label for="name" class="col-sm-2 control-label">Tokean</label>
-					      	<div class="col-sm-3">
-								<textarea id="token" class="form-control" style="resize: none;width: 400px;height: 100px;"></textarea>
+					      	<div class="col-sm-10">
+					         	<input type="text" class="form-control" id="token" name="token" placeholder="token" value="{{.Data.Token}}">
 					      	</div>
 					   	</div>
 						

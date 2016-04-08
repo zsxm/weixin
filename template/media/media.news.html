@@ -1,0 +1,51 @@
+<script type="text/javascript" src="/static/js/media/media.news.upload.js"></script>
+
+<div class="col-md-10 column">
+	<p>
+		<form action="/media/upload" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+			<div class="form-group">
+		      	<div class="col-sm-4">
+		         	<input type="text" class="form-control" id="title" name="title" placeholder="标题">
+		      	</div>
+		      	<div class="col-sm-6">
+		         	<input type="text" class="form-control" id="author" name="author" placeholder="作者">
+		      	</div>
+		   	</div>
+			<div class="form-group">
+		      	<div>
+					<textarea id="content"></textarea>
+		      	</div>
+		   	</div>
+			<div class="form-group">
+		      	<div>
+		         	<input type="file" id="newsFile" name="file" value="" accept="image/*" multiple="multiple" class="file-loading"/>
+		      	</div>
+		   	</div>
+	    </form>
+	</p>
+</div>
+<div class="col-md-2 column">
+	<div class="btn-group btn-group-vertical">
+		<a href="#modal-container-149424" role="button" class="btn btn-default" data-toggle="modal">图片</a>
+		<a href="#modal-container-149424" role="button" class="btn btn-default" data-toggle="modal">视频</a>
+		<a href="#modal-container-149424" role="button" class="btn btn-default" data-toggle="modal">语音</a>
+	</div>
+	
+	<div class="modal fade" id="modal-container-149424" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel">标题</h4>
+				</div>
+				<div class="modal-body">
+					内容...
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -21,11 +21,11 @@
 					overwriteInitial: false,//重新选择文件后是否覆盖 initialPreview
 					language:"zh",//设置语言
 					//showUpload:false,//隐藏上传按钮
-					maxFileCount: 1,//选择文件数量
+					maxFileCount: 10,//选择文件数量
 					//maxImageWidth: 600,//文件宽度
-			        maxFileSize: 256,//文件大小 2048kb 
+			       // maxFileSize: 256,//文件大小 2048kb 
 					//elErrorContainer: "#errorBlock",
-					previewFileType:"image",//只选择image类型文件
+					previewFileType:["image"],//只选择image类型文件
 					allowedFileExtensions:["jpg","jpeg", "png", "gif","bmp","mp3","wma","wav","amr"],
 			        initialCaption: "请选择上传素材",
 					browseLabel: '选择文件',//选择按钮文字 
@@ -38,6 +38,8 @@
 				}).on("fileuploaded",function(event,data,prvid,index){
 					if (data.response.Code=="0") {
 						alert("临时素材上传成功");						
+					}else{
+						alert(data.response.Codemsg);	
 					}
 				})/*.on("fileremoved",function(event,prvid,index){//未上传时点击删除
 					//alert(event+"  "+prvid+"  "+index);
@@ -57,7 +59,7 @@
 					   	</div>
 						<div class="form-group">
 					      	<div>
-					         	<input type="file" id="file" name="file" value="" accept="image/*" class="file-loading"/>
+					         	<input type="file" id="file" name="file" value="" accept="image/*" multiple class="file-loading"/>
 					      	</div>
 					   	</div>
 			        </form>

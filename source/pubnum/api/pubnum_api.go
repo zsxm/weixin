@@ -7,6 +7,7 @@ import (
 	"weixin/source/pubnum/log"
 	"weixin/source/pubnum/service"
 
+	"github.com/zsxm/scgo/data"
 	"github.com/zsxm/scgo/data/cache"
 )
 
@@ -57,7 +58,7 @@ func SetCachePubNum(pubnum string, cpn CachePubnum) error {
 	if err := cache.HSet(key, cache_pubnum_field_token, cpn.Token); err != nil {
 		return err
 	}
-	err := cache.Expire(key, 7000)
+	err := cache.Expire(key, 7200)
 	return err
 }
 
@@ -81,7 +82,7 @@ func CachePubNum(pubnum string) CachePubnum {
 	if token, err := cache.HGet(key, cache_pubnum_field_token); err == nil {
 		cpn.Token = token
 	}
-	err := cache.Expire(key, 7000)
+	err := cache.Expire(key, 7200)
 	if err != nil {
 		log.Error(err)
 	}
@@ -110,9 +111,14 @@ func SetCachePubNumId(userid, pubnumid string) error {
 	if err != nil {
 		return err
 	}
-	err = cache.Expire(key, 7000)
+	err = cache.Expire(key, 7200)
 	if err != nil {
 		return err
 	}
 	return nil
+}
+
+//获得所有的pubnum
+func PubNumIdList() (data.QueryResult, error) {
+	return service.PubnumService.Query("select id from pubnum")
 }

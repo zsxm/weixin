@@ -14,7 +14,9 @@ func init() {
 	control.Add("/media/index", index).Get()
 	control.Add("/media/temp/toupload", tempToUpload).Get()
 	control.Add("/media/temp/upload", tempUpload).Post()
-	control.Add("/media/temp/list", tempList).Get()
+	control.Add("/media/toupload", toUpload).Get()
+	control.Add("/media/upload", upload).Post()
+	control.Add("/media/list", tempList).Get()
 	control.Add("/media/line/get", tempGetList).Get()       //线上
 	control.Add("/media/temp/local/get", tempGetList).Get() //本地
 }
@@ -31,10 +33,15 @@ func tempGetList(c chttp.Context) {
 		media.Created().FieldSort().Desc(1)
 		bean.SetEntity(media)
 		service.MediaService.Select(bean)
-		log.Println(bean.Entitys().JSON())
 		c.JSON(bean.Entitys().JSON(), false)
 	} else if t == "line" {
-
+		dmp, err := c.Session().GetMap()
+		if err != nil {
+			log.Error(err)
+		}
+		userid := dmp.Get("id")
+		cjsn := service.GetMediaList(userid, mediaType, "0", "20")
+		c.JSON(cjsn.Data(), false)
 	}
 }
 
@@ -47,6 +54,21 @@ func index(c chttp.Context) {
 //临时素材上传跳转
 func tempToUpload(c chttp.Context) {
 	c.HTML("/media/temp.media.upload", nil)
+}
+
+//永久素材上传跳转
+func toUpload(c chttp.Context) {
+	c.HTML("/media/media.upload", nil)
+}
+
+//永久素材上传
+func upload(c chttp.Context) {
+	mfile := c.MultiFile()
+	mfile.DirName = "media"
+	err := mfile.Upload("")
+	log.Println("error", err)
+	r := c.NewResult()
+	c.JSON(r, false)
 }
 
 //临时素材上传
@@ -93,27 +115,31 @@ func tempUpload(c chttp.Context) {
 	c.JSON(r, false)
 }
 
-//临时素材列表
+//临时素材列表 跳转
 func tempList(c chttp.Context) {
-	dmp, err := c.Session().GetMap()
+	//获取素材数量
+	data, err := c.Session().GetKeyMap("media_counts")
 	if err != nil {
 		log.Error(err)
 	}
-	userid := dmp.Get("id")
-	cjsn := service.GetMediaCounts(userid)
-	log.Println("cjsn ", cjsn.DataMap())
-	if cjsn.Get("code").String() == "0" {
-		err = c.Session().SetKeyMap("media_counts", cjsn.DataMap())
+	if data.Get("code") != "0" {
+		dmp, err := c.Session().GetMap()
 		if err != nil {
 			log.Error(err)
 		}
+		userid := dmp.Get("id")
+		cjsn := service.GetMediaCounts(userid)
+		log.Println("cjsn ", cjsn.DataMap())
+		if cjsn.Get("code").String() == "0" {
+			err = c.Session().SetKeyMap("media_counts", cjsn.DataMap())
+			if err != nil {
+				log.Error(err)
+			}
+		}
+		c.HTML("/media/temp.media.list", cjsn.Data())
+		return
 	} else {
-		data, err := c.Session().GetKeyMap("media_counts")
-		if err != nil {
-			log.Error(err)
-		}
 		c.HTML("/media/temp.media.list", data)
 		return
 	}
-	c.HTML("/media/temp.media.list", cjsn.Data())
 }

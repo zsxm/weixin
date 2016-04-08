@@ -2,6 +2,7 @@ package init
 
 import (
 	_ "weixin/source/common/action"
+	_ "weixin/source/common/task"
 	_ "weixin/source/filter"
 	_ "weixin/source/media/action"
 	_ "weixin/source/menu/action"
