@@ -1,4 +1,5 @@
 $(function(){
+	$('#show_cover_pic').checkboxpicker();
 	//CKEDITOR.config.readOnly = true;//禁用或启用ckeditor
 	//CKEDITOR.instances.content.setData("正文");//设置内容
 	//CKEDITOR.instances.content.getData();//获取内容
@@ -63,6 +64,7 @@ $(function(){
 		}else{
 			alert(data.response.Codemsg);	
 		}
+		console.log(data.response);
 	})/*.on("fileremoved",function(event,prvid,index){//未上传时点击删除
 		//alert(event+"  "+prvid+"  "+index);
 	})*/;
