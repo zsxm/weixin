@@ -46,12 +46,11 @@ func main() {
 		Welcome: "/",
 	}
 	//redis 配置
-	cache.Conf = &cache.Config{
+	//redis 初始化化
+	cache.Init(&cache.Config{
 		Address:  "127.0.0.1:6379",
 		Password: "foobared",
-	}
-	//redis 初始化化
-	cache.Init(*cache.Conf)
+	})
 
 	//session选项配置
 	session.OptionsConfig = &session.Options{

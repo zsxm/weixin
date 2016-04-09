@@ -114,6 +114,7 @@ func GetToKen(pubnumid string, poor bool) chttp.Result {
 			Secret:  pubNum.Appsecret().Value(),
 			WxToken: pubNum.Token().Value(),
 			Token:   access_token,
+			Userid:  pubNum.Userid().Value(),
 		}
 		//设置缓存
 		api.SetCachePubNum(pubnumid, cpn)

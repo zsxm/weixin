@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	pubnumApi "weixin/source/pubnum/api"
 	"weixin/source/util"
 	"weixin/source/util/consts"
 	"weixin/source/websocket"
@@ -45,7 +46,8 @@ func Text(reqMsg *entity.RequestMsg, c chttp.Context) {
 	content := fmt.Sprint("Hello , ", reqMsg.ToUserName, " , ", reqMsg.Content)
 	text.Content = util.Value2CDATA(content)
 
-	msg := websocket.Message{Value: []byte(content), Key: reqMsg.ToUserName}
+	userid := pubnumApi.GetPubNumUserid(reqMsg.ToUserName)
+	msg := websocket.Message{Value: []byte(content), ReceId: userid}
 	websocket.H.Message <- msg
 
 	textMsg, err := util.ResponseMsg(text)

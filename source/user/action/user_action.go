@@ -11,8 +11,13 @@ import (
 )
 
 func init() {
-	chttp.Action("/", index).Get() //首页登录
+	chttp.Action("/", index).Get()        //首页登录
+	chttp.Action("/login", toLogin).Get() //首页登录
 	control.Add("/user/login", login).Post()
+}
+
+func toLogin(c chttp.Context) {
+	c.HTML("/login", nil)
 }
 
 func index(c chttp.Context) {
@@ -23,7 +28,7 @@ func index(c chttp.Context) {
 	if dmp.Get("id") != "" {
 		c.Redirect("/pubnum/list")
 	} else {
-		c.HTML("/login", nil)
+		c.Redirect("/login")
 	}
 }
 

@@ -10,22 +10,22 @@
 		$(function(){
 			var ws;
 			var init=function() {
-			   if (ws != null) {
-			     ws.close();
-			     ws = null;
-			   }
-			   var msg = $("#msg");
-			   ws = new WebSocket("ws://localhost:8080/socket/conn");
-			   ws.onopen = function () {
-			     msg.append("open</br>");
-			   };
-			   ws.onmessage = function (e) {
+			   	if (ws != null) {
+			     	ws.close();
+			     	ws = null;
+			   	}
+			   	var msg = $("#msg");
+			   	ws = new WebSocket("ws://{{.Host}}/socket/conn");
+			   	ws.onopen = function () {
+			     	msg.append("open</br>");
+			   	};
+			   	ws.onmessage = function (e) {
 			   		console.log(e.data);
-			      msg.append("msg:"+e.data+"</br>");
-			   };
-			   ws.onclose = function (e) {
-			      msg.append("onclose");
-			   };
+			      	msg.append("msg:"+e.data+"</br>");
+			   	};
+			   	ws.onclose = function (e) {
+			      	msg.append("onclose");
+			   	};
 			};
 			init();
 			$("#send").click(function(){
