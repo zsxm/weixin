@@ -169,6 +169,38 @@ func (this *Media) SetCreated(value int) {
 	this.created.SetValue(strconv.Itoa(value))
 }
 
+func (this *Media) Url() *data.String {
+	return &this.url
+}
+
+func (this *Media) SetUrl(value string) {
+	this.url.SetValue(value)
+}
+
+func (this *Media) SaveType() *data.Integer {
+	return &this.saveType
+}
+
+func (this *Media) SetSaveType(value int) {
+	this.saveType.SetValue(strconv.Itoa(value))
+}
+
+func (this *Media) Title() *data.String {
+	return &this.title
+}
+
+func (this *Media) SetTitle(value string) {
+	this.title.SetValue(value)
+}
+
+func (this *Media) Introduction() *data.String {
+	return &this.introduction
+}
+
+func (this *Media) SetIntroduction(value string) {
+	this.introduction.SetValue(value)
+}
+
 func (this *Media) SetValue(filedName, value string) {
 	this.Field(filedName).SetValue(value)
 }
@@ -194,6 +226,14 @@ func (this *Media) Field(filedName string) data.EntityField {
 		return this.ctype.StructType()
 	case "created":
 		return this.created.StructType()
+	case "url":
+		return this.url.StructType()
+	case "savetype":
+		return this.saveType.StructType()
+	case "title":
+		return this.title.StructType()
+	case "introduction":
+		return this.introduction.StructType()
 	}
 	return nil
 }
@@ -210,6 +250,14 @@ func (this *Media) JSON() string {
 	b.WriteString(fmt.Sprintf(`"ctype":%q`, this.ctype.Value()))
 	b.WriteString(",")
 	b.WriteString(fmt.Sprintf(`"created":%q`, this.created.Value()))
+	b.WriteString(",")
+	b.WriteString(fmt.Sprintf(`"url":%q`, this.url.Value()))
+	b.WriteString(",")
+	b.WriteString(fmt.Sprintf(`"saveType":%q`, this.saveType.Value()))
+	b.WriteString(",")
+	b.WriteString(fmt.Sprintf(`"title":%q`, this.title.Value()))
+	b.WriteString(",")
+	b.WriteString(fmt.Sprintf(`"introduction":%q`, this.introduction.Value()))
 	b.WriteString("}")
 	return b.String()
 }
@@ -220,11 +268,11 @@ func (this *Media) JSON() string {
 func init() {
 	mediaTableInformation.SetTableName("media")
 	mediaColumnsArr := []string{
-		"id", "mediaId", "localName", "ctype", "created", 
+		"id", "mediaId", "localName", "ctype", "created", "url", "saveType", "title", "introduction", 
 	}
 	mediaTableInformation.SetColumns(mediaColumnsArr)
 	mediaFieldNamesArr := []string{
-		"id", "mediaId", "localName", "ctype", "created", 
+		"id", "mediaId", "localName", "ctype", "created", "url", "saveType", "title", "introduction", 
 	}
 	mediaFieldNames.SetNames(mediaFieldNamesArr)
 }

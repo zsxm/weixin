@@ -12,30 +12,77 @@ import (
 	"github.com/zsxm/scgo/cjson"
 )
 
+//上传带表单元素和媒体文件
+//formField:map key=formName value=[]string{"type[file&field]","value"}
+func PostFormFile(formField map[string][]string, target_url string) (*http.Response, error) {
+	body_buf := bytes.NewBufferString("")
+	body_writer := multipart.NewWriter(body_buf)
+	for k, val := range formField {
+		var err error
+		if len(val) == 2 {
+			var value = val[1]
+			switch val[0] {
+			case "field":
+				err = body_writer.WriteField(k, value)
+				break
+			case "file":
+				_, err = body_writer.CreateFormFile(k, value)
+				fh, err := os.Open(value)
+				if err != nil {
+					loger.Error("error opening file")
+					return nil, err
+				}
+				defer fh.Close()
+				body_buf.ReadFrom(fh)
+				break
+			default:
+				loger.Error(fmt.Errorf("form field name %s value type", k))
+			}
+			if err != nil {
+				loger.Error("error writing to buffer")
+				return nil, err
+			}
+		} else {
+			return nil, fmt.Errorf("form field name %s values lenght != 2", k)
+		}
+	}
+	boundary := body_writer.Boundary()
+	close_string := fmt.Sprintf("\r\n--%s--\r\n", boundary)
+	body_buf.WriteString(close_string)
+	request_reader := io.MultiReader(body_buf)
+
+	req, err := http.NewRequest("POST", target_url, request_reader)
+	if err != nil {
+		fmt.Println("err")
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", "multipart/form-data; boundary="+boundary)
+	req.ContentLength = int64(body_buf.Len())
+
+	return http.DefaultClient.Do(req)
+}
+
 //上传媒体文件
 func PostFile(filename string, target_url string) (*http.Response, error) {
 	body_buf := bytes.NewBufferString("")
 	body_writer := multipart.NewWriter(body_buf)
 
-	// use the body_writer to write the Part headers to the buffer
 	_, err := body_writer.CreateFormFile("media", filename)
 	if err != nil {
 		loger.Error("error writing to buffer")
 		return nil, err
 	}
 
-	// the file data will be the second part of the body
 	fh, err := os.Open(filename)
 	if err != nil {
 		loger.Error("error opening file")
 		return nil, err
 	}
 	defer fh.Close()
-	// need to know the boundary to properly close the part myself.
 	boundary := body_writer.Boundary()
 	close_string := fmt.Sprintf("\r\n--%s--\r\n", boundary)
 	close_buf := bytes.NewBufferString(close_string)
-	// use multi-reader to defer the reading of the file data until writing to the socket buffer.
 	request_reader := io.MultiReader(body_buf, fh, close_buf)
 	fi, err := fh.Stat()
 	if err != nil {
@@ -43,10 +90,11 @@ func PostFile(filename string, target_url string) (*http.Response, error) {
 		return nil, err
 	}
 	req, err := http.NewRequest("POST", target_url, request_reader)
+
 	if err != nil {
 		return nil, err
 	}
-	// Set headers for multipart, and Content Length
+
 	req.Header.Add("Content-Type", "multipart/form-data; boundary="+boundary)
 	req.ContentLength = fi.Size() + int64(body_buf.Len()) + int64(close_buf.Len())
 

@@ -1,4 +1,17 @@
 <script type="text/javascript" src="/static/js/media/media.voice.upload.js"></script>
 <p>
-	voice
+	<div class="form-group">
+      	<div>
+         	<input type="file" id="voiceFile" name="file" value="" accept="voice/*" multiple="multiple" class="file-loading"/>
+      	</div>
+   	</div>
+	<form id="voiceForm" action="/media/release/common" method="post" class="form-horizontal" role="form">
+		<div class="form-group">
+      		<div>
+				<input type="hidden" id="voiceFilePath" name="localName" value=""/>
+				<input type="hidden" name="ctype" value="voice"/>
+         		<button id="voiceReleaseBtn" type="button" class="btn btn-default">保存</button>
+      		</div>
+   		</div>
+    </form>
 </p>

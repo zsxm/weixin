@@ -1,10 +1,17 @@
 <script type="text/javascript" src="/static/js/media/media.image.upload.js"></script>
 <p>
-	<form action="/media/upload" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+	<div class="form-group">
+      	<div>
+         	<input type="file" id="imageFile" name="file" value="" accept="image/*" multiple="multiple" class="file-loading"/>
+      	</div>
+   	</div>
+	<form id="imageForm" action="/media/release/common" method="post" class="form-horizontal" role="form">
 		<div class="form-group">
-	      	<div>
-	         	<input type="file" id="imageFile" name="file" value="" accept="image/*" multiple class="file-loading"/>
-	      	</div>
-	   	</div>
+      		<div>
+				<input type="hidden" id="imageFilePath" name="localName" value=""/>
+				<input type="hidden" name="ctype" value="image"/>
+         		<button id="imageReleaseBtn" type="button" class="btn btn-default">保存</button>
+      		</div>
+   		</div>
     </form>
 </p>

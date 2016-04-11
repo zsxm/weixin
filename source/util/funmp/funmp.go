@@ -2,7 +2,6 @@ package funmp
 
 import (
 	"weixin/source/pubnum/api"
-	"weixin/source/pubnum/log"
 
 	"github.com/zsxm/scgo/funcmap"
 )
@@ -18,6 +17,5 @@ func CheckPumNumEnable(userid, pubnumid string) bool {
 }
 
 func init() {
-	log.Info("Init func map ok")
 	funcmap.AddFuncMap("checkPumNumEnable", CheckPumNumEnable)
 }

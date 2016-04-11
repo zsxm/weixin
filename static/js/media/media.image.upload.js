@@ -1,6 +1,4 @@
 $(function(){
-	var STYLE_SETTING = 'style="width:{width};height:{height};"';
-	var INPUT='<div><input type="text" id="tmpfiguretitle" name="tmpfiguretitle" class="form-control" filepath="noupload"/></div>';
 	var url="/media/upload";
 	$("#imageFile").fileinput({
 		uploadUrl: url,//上传地址
@@ -15,23 +13,49 @@ $(function(){
 		//maxImageWidth: 600,//文件宽度
        // maxFileSize: 256,//文件大小 2048kb 
 		//elErrorContainer: "#errorBlock",
-		previewFileType:["image"],//只选择image类型文件
-		allowedFileExtensions:["jpg","jpeg", "png", "gif","bmp","mp3","wma","wav","amr"],
+		previewFileType:["image"],//只选择 image 类型文件
+		allowedFileExtensions:["jpg","jpeg", "png", "gif","bmp"],
         initialCaption: "请选择上传素材",
+		dropZoneTitle:"图片文件拖拽到这里...",
 		browseLabel: '选择文件',//选择按钮文字 
 		//removeLabel: '删除所有',//移除按钮文字
 		showRemove:false//隐藏移动按钮
-		/*,previewTemplates:{//模版
-				image:'<div class="file-preview-frame" id="{previewId}" data-fileindex="{fileindex}">'
-				+'<img src="{data}" class="file-preview-image" title="{caption}" title="{caption}" ' + STYLE_SETTING + '>{footer}配图标题'+INPUT+'</div>'
-		}*/
 	}).on("fileuploaded",function(event,data,prvid,index){
-		if (data.response.Code=="0") {
-			alert("素材上传成功");						
+		var result=data.response;
+		if (result.Code=="0") {
+			var da=result.Data;
+			var dir=da.DirName;
+			var fn=da.FileNameId[0];
+			var filePath=dir+"/"+fn;
+			$("#imageFilePath").val(filePath);				
 		}else{
-			alert(data.response.Codemsg);	
+			alert(result.Codemsg);	
 		}
-	})/*.on("fileremoved",function(event,prvid,index){//未上传时点击删除
-		//alert(event+"  "+prvid+"  "+index);
-	})*/;
+	}).on("fileremoved",function(event,prvid,index){//未上传时点击删除
+		console.log("fileremoved",prvid);
+		$("#imageFilePath").val("");
+	}).on("filesuccessremove",function(event,prvid,index){//上传成功后点击删除
+		console.log("filesuccessremove",prvid);
+		$("#imageFilePath").val("");
+	});
+	
+	//保存
+	$("#imageReleaseBtn").click(function(){
+		var imageFilePath=$("#imageFilePath").val();
+		if(imageFilePath==""){
+			alert("请上传图片");
+			return;
+		}
+		$("#imageForm").ajaxSubmit({
+			dataType : "json",
+			success : function(result){
+				console.log(result);
+				if(result.Code=="0"){
+					alert("素材保存成功");
+				}else{
+					alert(result.Codemsg);
+				}
+			}
+		});
+	});
 })

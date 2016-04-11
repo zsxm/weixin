@@ -2,13 +2,13 @@
 
 <div class="col-md-10 column">
 	<p>
-		<form action="/media/upload" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+		<form id="newsForm" action="/media/upload" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
 			<div class="form-group">
 		      	<div class="col-sm-4">
-		         	<input type="text" class="form-control" id="title" name="title" placeholder="标题">
+		         	<input type="text" class="form-control" id="newsTitle" name="title" placeholder="标题">
 		      	</div>
 		      	<div class="col-sm-4">
-		         	<input type="text" class="form-control" id="author" name="author" placeholder="作者">
+		         	<input type="text" class="form-control" id="newsAuthor" name="author" placeholder="作者">
 		      	</div>
 		      	<div>
 					<input id="show_cover_pic" type="checkbox"/>
@@ -17,7 +17,7 @@
 		   	</div>
 			<div class="form-group">
 		      	<div class="col-sm-12">
-		         	<input type="text" class="form-control" id="author" name="author" placeholder="原文链接">
+		         	<input type="text" class="form-control" id="newsSourceUrl" name="sourceUrl" placeholder="原文链接">
 		      	</div>
 		   	</div>
 			<div class="form-group">
@@ -27,13 +27,14 @@
 		   	</div>
 			<div class="form-group">
 		      	<div>
-		         	<input type="file" id="newsFile" name="file" value="" accept="image/*" multiple="multiple" class="file-loading"/>
+		         	<input type="file" id="newsFile" name="file" value="" accept="image/*" class="file-loading"/>
+					<input type="hidden" id="newsFilePath" name="localName" value=""/>
+					<input type="hidden" name="ctype" value="news"/>
 		      	</div>
 		   	</div>
 			<div class="form-group">
 	      		<div>
-	         		<button type="button" class="btn btn-default">保存到本地</button>
-	         		<button type="button" class="btn btn-default">保存并发布</button>
+	         		<button type="button" class="btn btn-default">保存</button>
 	      		</div>
 	   		</div>
 	    </form>

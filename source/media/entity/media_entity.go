@@ -23,4 +23,16 @@ type Media struct {
 
 	//go:@Column value=created
 	created data.Integer
+
+	//go:@Column value=url
+	url data.String
+
+	//go:@Column value=saveType
+	saveType data.Integer
+
+	//go:@Column value=title
+	title data.String
+
+	//go:@Column value=introduction
+	introduction data.String
 }

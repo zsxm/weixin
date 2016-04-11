@@ -24,7 +24,9 @@ const (
 func AddTempMedia(filename, userid, mtype string) *cjson.JSON {
 	token := tokenapi.GetCacheToken(userid)
 	wurl := fmt.Sprintf(add_temp_media, token, mtype)
-	return webservice.SendMediaUploadJson(filename, wurl)
+	body := make(map[string][]string)
+	body["media"] = []string{"file", filename}
+	return webservice.SendMediaUploadJson(body, wurl)
 }
 
 //接口 获取临时素材

@@ -1,4 +1,27 @@
 <script type="text/javascript" src="/static/js/media/media.video.upload.js"></script>
 <p>
-	video
+	<form id="videoForm" action="/media/release/voice" method="post" class="form-horizontal" role="form">
+		<div class="form-group">
+	      	<div class="col-sm-9">
+				<input type="text" class="form-control" id="videoTitle" name="title" placeholder="视频素材的标题" />
+     		</div>
+   		</div>
+		<div class="form-group">
+      		<div class="col-sm-9">
+				<textarea type="text" class="form-control" id="videoIntroduction" name="introduction" placeholder="视频素材的描述"></textarea>
+      		</div>
+   		</div>
+		<input type="hidden" id="videoFilePath" name="localName" value=""/>
+		<input type="hidden" name="ctype" value="voice"/>
+		<div class="form-group">
+	      	<div>
+				<input type="file" id="videoFile" name="file" value="" accept="video/*" multiple="multiple" class="file-loading"/>
+	      	</div>
+	   	</div>
+		<div class="form-group">
+			<div>
+				<button id="videoReleaseBtn" type="submit" class="btn btn-default">保存</button>
+			</div>
+		</div>
+    </form>
 </p>

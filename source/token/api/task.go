@@ -19,7 +19,6 @@ func Start() {
 		ToKenCacheTask()
 	})
 	crn.Start()
-	log.Info("Pubnums List Token Task Start. OK")
 }
 
 //token 缓存任务
