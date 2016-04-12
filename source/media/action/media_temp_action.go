@@ -11,36 +11,27 @@ import (
 )
 
 func init() {
-	control.Add("/media/index", index).Get()
-	control.Add("/media/temp/toupload", tempToUpload).Get()
-	control.Add("/media/temp/upload", tempUpload).Post()
-	control.Add("/media/list", tempList).Get()
-	control.Add("/media/line/get", tempGetList).Get()       //线上
+	control.Add("/media/temp/toupload", tempToUpload).Get() //跳转临时素材页面
+	control.Add("/media/temp/release", tempRelease).Post()  //临时素材发布
+	control.Add("/media/list", tempList).Get()              //临时素材列表
 	control.Add("/media/temp/local/get", tempGetList).Get() //本地
 }
 
 //获取临时文件列表
 func tempGetList(c chttp.Context) {
-	t := c.Param("type")
 	mediaType := c.Param("mediaType")
-	if t == "local" {
-		bean := entity.NewMediaBean()
-		media := entity.NewMedia()
+	bean := entity.NewMediaBean()
+	media := entity.NewMedia()
+	if mediaType != "-1" {
 		media.SetCtype(mediaType)
 		media.Ctype().FieldExp().Eq().And()
-		media.Created().FieldSort().Desc(1)
-		bean.SetEntity(media)
-		service.MediaService.Select(bean)
-		c.JSON(bean.Entitys().JSON(), false)
-	} else if t == "line" {
-		dmp, err := c.Session().GetMap()
-		if err != nil {
-			log.Error(err)
-		}
-		userid := dmp.Get("id")
-		cjsn := service.GetMediaList(userid, mediaType, "0", "20")
-		c.JSON(cjsn.Data(), false)
 	}
+	media.SetSaveType(0)
+	media.SaveType().FieldExp().Eq().And()
+	media.Created().FieldSort().Desc(1)
+	bean.SetEntity(media)
+	service.MediaService.Select(bean)
+	c.JSON(bean.Entitys().JSON(), false)
 }
 
 //临时素材上传跳转
@@ -48,52 +39,48 @@ func tempToUpload(c chttp.Context) {
 	c.HTML("/media/temp.media.upload", nil)
 }
 
-//临时素材上传
-func tempUpload(c chttp.Context) {
-	mfile := c.MultiFile()
-	mfile.DirName = "media"
-	err := mfile.Upload("")
+//临时素材发布
+func tempRelease(c chttp.Context) {
+	dmp, err := c.Session().GetMap()
+	if err != nil {
+		log.Error(err)
+	}
+	userid := dmp.Get("id")
+	e := entity.NewMedia()
+	c.BindData(e)
 	r := c.NewResult()
-
-	if err == nil {
-		filePath := mfile.DirName + "/" + mfile.FileNameId[0]
-		dmp, err := c.Session().GetMap()
-		if err != nil {
-			log.Error(err)
-		}
-		userid := dmp.Get("id")
+	if e.LocalName().Value() == "" {
+		r.Code = "101"
+		r.Codemsg = "请先上传素材文件"
+	} else {
 		//添加临时素材
-		cjsn := service.AddTempMedia(filePath, userid, "image")
+		cjsn := service.AddTempMedia(e.LocalName().Value(), userid, e.Ctype().Value())
 		if cjsn != nil {
 			r.Code = cjsn.Get("code").String()
 			r.Codemsg = cjsn.Get("codemsg").String()
-			var ctype, mediaId, created string
-			ctype = cjsn.Get("type").String()
+			var mediaId, created, url string
 			mediaId = cjsn.Get("media_id").String()
 			created = cjsn.Get("created_at").String()
-
-			e := entity.NewMedia()
-			e.SetCtype(ctype)
-			e.SetMediaId(mediaId)
-			e.SetLocalName(filePath)
-			e.Created().SetValue(created)
-			if created == "" {
-				created = date.NowUnixStr()
-			}
-			e.SetSaveType(0) //临时素材
-			_, err = service.MediaService.Save(e)
-			if err != nil {
-				r.Code = "101"
-				r.Codemsg = "素材上成功，但保存数据失败！"
+			url = cjsn.Get("url").String()
+			if r.Code == "0" {
+				e.SetMediaId(mediaId)
+				e.Created().SetValue(created)
+				if created == "" {
+					created = date.NowUnixStr()
+				}
+				e.SetSaveType(0) //临时素材
+				e.SetUrl(url)
+				_, err = service.MediaService.Save(e)
+				if err != nil {
+					r.Code = "101"
+					r.Codemsg = "素材上成功，但保存数据失败！"
+				}
 			}
 			log.Info(cjsn.Data())
 		} else {
 			r.Code = "102"
 			r.Codemsg = "素材上传失败"
 		}
-	} else {
-		r.Code = "103"
-		r.Codemsg = "文件上传失败"
 	}
 	c.JSON(r, false)
 }

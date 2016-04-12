@@ -1,52 +1,72 @@
 $(function(){
+	//同步永久素材数据
+	$("#syncLineListBtn").click(function(){
+		var load=$.loadding.New("正在同步数据请稍候...", 6, -1, "#syncLineListBtn");
+		load.Show();
+		var url="/media/sync/line/list";
+		$.get(url,{},function(result){
+			load.Hide();
+			console.log(result);
+			if(result.code=="0"){
+				$.alertmsg("#tipsMsg","success","数据同步成功");
+			}else{
+				$.alertmsg("#tipsMsg","danger",result.codemsg);
+			}
+		});
+	});
+	
 	$("#getLocalListBtn").click(function(){
 		var url="/media/temp/local/get";
-		var mediaType=$("#mediaType").val();
-		if(mediaType=="-1"){
-			alert("请选择素材类型");
-			return;
-		}
-		var local_temp='<thead><tr><th style="min-width:50px;">MediaId</th><th>创建时间</th><th>类型</th><th>路径</th><th>操作</th></tr></thead>';
-		local_temp+='<tbody>'
-			+'{{#each .}}'
-			+'	<tr>'
-			+'		<td>{{mediaId}}</td><td>{{uyymdhms created}}</td><td>{{ctype}}</td><td>{{localName}}</td><td>操作</td>'
-			+'	</tr>'
-			+'{{/each}}'
-			+'</tbody>';
-		$.get(url,{type:"local",mediaType:mediaType},function(result){
-			var template = Handlebars.compile(local_temp);
-			var content = template(result);
-			$("#mediaList").html(content);
-		});
+		mediaList(url);
 	});
 	
 	$("#getLineListBtn").click(function(){
 		var url="/media/line/get";
+		mediaList(url);
+	});
+	
+	var mediaList=function(url){
 		var mediaType=$("#mediaType").val();
-		if(mediaType=="-1"){
-			alert("请选择素材类型");
-			return;
-		}
-		var line_temp='<thead><tr><th style="min-width:50px;">MediaId</th><th>创建时间</th><th>Url</th><th>Name</th><th>操作</th></tr></thead>';
-		line_temp+='<tbody>'
+		var local_temp='<thead><tr><th>MediaId</th><th>创建时间</th><th>类型</th><th>操作</th></tr></thead>';
+		local_temp+='<tbody>'
 			+'{{#each .}}'
 			+'	<tr>'
-			+'		<td>{{media_id}}</td><td>{{uyymdhms update_time}}</td><td>{{url}}</td><td>{{name}}</td>'
-			+'		<td><a href="/media/delete?id={{media_id}}">删除</a></td>'
+			+'		<td><a href="#modal-container-detail" onclick="show(this)" title="{{title}}" id="{{mediaId}}" type="{{ctype}}" created="{{uyymdhms created}}" local="{{localName}}" url="{{url}}" data-toggle="modal">{{mediaId}}</a></td>'
+			+'		<td>{{uyymdhms created}}</td><td>{{ctype}}</td>'
+			+'		<td><a href="javascript:void(0);" onclick="(\'{{media_id}}\')">删除</a></td>'
 			+'	</tr>'
 			+'{{/each}}'
 			+'</tbody>';
-		$.get(url,{type:"line",mediaType:mediaType},function(result){
-			console.log(result);
-			if(result.code=="0"){
-				var item=result.item;
-				var template = Handlebars.compile(line_temp);
-				var content = template(item);
-				$("#mediaList").html(content);
-			}else{
-				alert(result.codemsg);
-			}
+		$.get(url,{mediaType:mediaType},function(result){
+			var template = Handlebars.compile(local_temp);
+			var content = template(result);
+			$("#mediaList").html(content);
 		});
-	});
+	}
 })
+
+var show=function(t){
+	var o=$(t);
+	$("#title").html(o.attr("title"));
+	$("#mediaId").html(o.attr("id"));
+	$("#created").html(o.attr("created"));
+	var url=o.attr("url");
+	if(url.indexOf("http")!=-1){
+		url='<a href="'+url+'" target="_blank">查看</a>';
+	}
+	$("#url").html(url);
+	$("#local").html(o.attr("local"));
+	$("#type").html(o.attr("type"));
+}
+
+var deleteMedia=function(id){
+	var url="/media/delete";
+	$.get(url,{id:id},function(result){
+		console.log(result);
+		if(result.code=="0"){
+			layer.msg('删除成功');
+		}else{
+			layer.msg(result.codemsg);
+		}
+	});
+}

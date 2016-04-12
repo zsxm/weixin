@@ -3,16 +3,22 @@ package action
 
 import (
 	"github.com/zsxm/scgo/chttp"
-	"weixin/source/media/entity"
 )
 
 func init() {
-	control.Add("/media/index", index).Get()
+	control.Add("/media/index", index)
 }
 
 //gen
 func index(c chttp.Context) {
-	e := entity.NewMedia()
-	c.BindData(e)
-	c.JSON(e.JSON(), true)
+	page := c.Param("page")
+	action := c.Param("action")
+	saveType := c.Param("saveType")
+	r := c.NewResult()
+	r.Data = map[string]string{
+		"action":   action,
+		"saveType": saveType,
+	}
+
+	c.HTML("/media/"+page, r)
 }

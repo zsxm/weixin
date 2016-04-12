@@ -8,15 +8,46 @@ import (
 	"weixin/source/media/service"
 
 	"github.com/zsxm/scgo/chttp"
+	"github.com/zsxm/scgo/tools"
 	"github.com/zsxm/scgo/tools/date"
 )
 
 func init() {
-	control.Add("/media/release/common", releaseCommon).Post()
-	control.Add("/media/release/voice", releaseVoice).Post()
-	control.Add("/media/toupload", toUpload).Get()
-	control.Add("/media/delete", deleteMedia).Get()
-	control.Add("/media/upload", upload).Post()
+	control.Add("/media/release/common", releaseCommon).Post()  //保存普通素材
+	control.Add("/media/sync/line/list", syncLineGetList).Get() //同步线上列表
+	control.Add("/media/line/get", lineGetList).Get()           //线上列表
+	control.Add("/media/release/voice", releaseVoice).Post()    //保存视频素材
+	control.Add("/media/toupload", toUpload).Get()              //跳转上传页面
+	control.Add("/media/delete", deleteMedia).Get()             //删除素材
+	control.Add("/media/upload", upload).Post()                 //上传素材
+}
+
+//同步线上文件列表
+func syncLineGetList(c chttp.Context) {
+	dmp, err := c.Session().GetMap()
+	if err != nil {
+		log.Error(err)
+	}
+	userid := dmp.Get("id")
+	cjsn := service.GetMediaList(userid)
+	c.JSON(cjsn.Data(), false)
+}
+
+//获取永久素材列表
+func lineGetList(c chttp.Context) {
+	mediaType := c.Param("mediaType")
+	bean := entity.NewMediaBean()
+	media := entity.NewMedia()
+	if mediaType != "-1" {
+		media.SetCtype(mediaType)
+		media.Ctype().FieldExp().Eq().And()
+	}
+	media.SetSaveType(1)
+	media.SaveType().FieldExp().Eq().And()
+	media.Created().FieldSort().Desc(1)
+	bean.SetEntity(media)
+	service.MediaService.Select(bean)
+	c.JSON(bean.Entitys().JSON(), false)
 }
 
 //永久素材上传跳转
@@ -24,7 +55,7 @@ func toUpload(c chttp.Context) {
 	c.HTML("/media/media.upload", nil)
 }
 
-//永久素材上传
+//素材上传
 func upload(c chttp.Context) {
 	mfile := c.MultiFile()
 	mfile.DirName = "media"
@@ -58,14 +89,11 @@ func releaseCommon(c chttp.Context) {
 		if cjsn != nil {
 			r.Code = cjsn.Get("code").String()
 			r.Codemsg = cjsn.Get("codemsg").String()
-			var ctype, mediaId, created, url string
-			ctype = cjsn.Get("type").String()
+			var mediaId, created, url string
 			mediaId = cjsn.Get("media_id").String()
 			created = cjsn.Get("created_at").String()
 			url = cjsn.Get("url").String()
 			if r.Code == "0" {
-				e := entity.NewMedia()
-				e.SetCtype(ctype)
 				e.SetMediaId(mediaId)
 				if created == "" {
 					created = date.NowUnixStr()
@@ -103,19 +131,18 @@ func releaseVoice(c chttp.Context) {
 		r.Code = "101"
 		r.Codemsg = "请先上传素材文件"
 	} else {
+		tools.Sleep(5)
 		description := `{"title":"%s","introduction":"%s"}`
 		description = fmt.Sprintf(description, e.Title().Value(), e.Introduction().Value())
 		cjsn := service.ReleaseMediaVideo(e.LocalName().Value(), description, userid, e.Ctype().Value())
 		if cjsn != nil {
 			r.Code = cjsn.Get("code").String()
 			r.Codemsg = cjsn.Get("codemsg").String()
-			var ctype, mediaId, created, url string
-			ctype = cjsn.Get("type").String()
+			var mediaId, created, url string
 			mediaId = cjsn.Get("media_id").String()
 			created = cjsn.Get("created_at").String()
 			url = cjsn.Get("url").String()
 			if r.Code == "0" {
-				e.SetCtype(ctype)
 				e.SetMediaId(mediaId)
 				if created == "" {
 					created = date.NowUnixStr()
@@ -138,6 +165,7 @@ func releaseVoice(c chttp.Context) {
 	c.JSON(r, false)
 }
 
+//删除永久素材
 func deleteMedia(c chttp.Context) {
 	mediaId := c.Param("id")
 	dmp, err := c.Session().GetMap()

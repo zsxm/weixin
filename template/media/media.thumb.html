@@ -1,16 +1,17 @@
 <script type="text/javascript" src="/static/js/media/media.thumb.upload.js"></script>
-<p>
-	<div class="form-group">
-      	<div>
-         	<input type="file" id="thumbFile" name="file" value="" accept="image/*" multiple="multiple" class="file-loading"/>
-      	</div>
-   	</div>
-	<form id="thumbForm" action="/media/release/common" method="post" class="form-horizontal" role="form">
+<p>{{$data:=.Data.Data}}
+	<form id="thumbForm" action="{{$data.action}}" method="post" class="form-horizontal" role="form">
+		<div class="form-group">
+	      	<div>
+	         	<input type="file" id="thumbFile" name="file" value="" accept="image/*" multiple="multiple" class="file-loading"/>
+	      	</div>
+	   	</div>
 		<div class="form-group">
       		<div>
 				<input type="hidden" id="thumbFilePath" name="localName" value=""/>
 				<input type="hidden" name="ctype" value="thumb"/>
-         		<button id="thumbReleaseBtn" type="button" class="btn btn-default">保存</button>
+				<input type="hidden" id="saveType" name="saveType" value="{{$data.saveType}}"/>
+         		<button id="thumbReleaseBtn" type="submit" class="btn btn-default">保存</button>
       		</div>
    		</div>
     </form>

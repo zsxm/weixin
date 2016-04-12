@@ -1,4 +1,5 @@
 $(function(){
+	var saveType=$("#thumbForm #saveType").val();
 	var url="/media/upload";
 	$("#thumbFile").fileinput({
 		uploadUrl: url,//上传地址
@@ -29,7 +30,7 @@ $(function(){
 			var filePath=dir+"/"+fn;
 			$("#thumbFilePath").val(filePath);				
 		}else{
-			alert(result.Codemsg);	
+			$.alertmsg("#tipsMsg","danger",result.Codemsg);
 		}
 	}).on("fileremoved",function(event,prvid,index){//未上传时点击删除
 		console.log("fileremoved",prvid);
@@ -39,23 +40,31 @@ $(function(){
 		$("#thumbFilePath").val("");
 	});
 	
-	//保存
-	$("#thumbReleaseBtn").click(function(){
-		var thumbFilePath=$("#thumbFilePath").val();
-		if(thumbFilePath==""){
-			alert("请上传图片");
-			return;
-		}
-		$("#thumbForm").ajaxSubmit({
-			dataType : "json",
-			success : function(result){
-				console.log(result);
-				if(result.Code=="0"){
-					alert("素材保存成功");
-				}else{
-					alert(result.Codemsg);
-				}
+	$("#thumbForm").validate({
+		rules:{
+			localName:{
+				required:true
 			}
-		});
+		},
+		messages:{
+			localName:{
+				required:"请上传缩略图"
+			}
+		},
+		submitHandler:function(form){
+			var load=$.loadding.New("正在保存请稍候...", 6, -1, "#videoReleaseBtn");
+			load.Show();
+			$("#thumbForm").ajaxSubmit({
+				dataType : "json",
+				success : function(result){
+					load.Hide();
+					if(result.Code=="0"){
+						$.alertmsg("#tipsMsg","success","素材保存成功");
+					}else{
+						$.alertmsg("#tipsMsg","danger",result.Codemsg);
+					}
+				}
+			});
+		}
 	});
 })

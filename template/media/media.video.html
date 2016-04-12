@@ -1,6 +1,7 @@
 <script type="text/javascript" src="/static/js/media/media.video.upload.js"></script>
-<p>
-	<form id="videoForm" action="/media/release/voice" method="post" class="form-horizontal" role="form">
+<p>{{$data:=.Data.Data}}
+	<form id="videoForm" action="{{$data.action}}" method="post" class="form-horizontal" role="form">
+		{{if equal $data.saveType "1"}}
 		<div class="form-group">
 	      	<div class="col-sm-9">
 				<input type="text" class="form-control" id="videoTitle" name="title" placeholder="视频素材的标题" />
@@ -11,8 +12,10 @@
 				<textarea type="text" class="form-control" id="videoIntroduction" name="introduction" placeholder="视频素材的描述"></textarea>
       		</div>
    		</div>
+		{{end}}
 		<input type="hidden" id="videoFilePath" name="localName" value=""/>
-		<input type="hidden" name="ctype" value="voice"/>
+		<input type="hidden" name="ctype" value="video"/>
+		<input type="hidden" id="saveType" name="saveType" value="{{$data.saveType}}"/>
 		<div class="form-group">
 	      	<div>
 				<input type="file" id="videoFile" name="file" value="" accept="video/*" multiple="multiple" class="file-loading"/>

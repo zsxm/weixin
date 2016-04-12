@@ -1,4 +1,5 @@
 $(function(){
+	var saveType=$("#videoForm #saveType").val();
 	var url="/media/upload";
 	$("#videoFile").fileinput({
 		uploadUrl: url,//上传地址
@@ -29,7 +30,7 @@ $(function(){
 			var filePath=dir+"/"+fn;
 			$("#videoFilePath").val(filePath);				
 		}else{
-			alert(result.Codemsg);	
+			$.alertmsg("#tipsMsg","danger",result.Codemsg);
 		}
 	}).on("fileremoved",function(event,prvid,index){//未上传时点击删除
 		console.log("fileremoved",prvid);
@@ -37,8 +38,7 @@ $(function(){
 	}).on("filesuccessremove",function(event,prvid,index){//上传成功后点击删除
 		console.log("filesuccessremove",prvid);
 		$("#videoFilePath").val("");
-	});
-	
+	});	
 	$("#videoForm").validate({
 		rules:{
 			title:{
@@ -63,15 +63,16 @@ $(function(){
 			}
 		},
 		submitHandler:function(form){
-			console.log("form submin");
+			var load=$.loadding.New("正在保存请稍候...", 6, -1, "#videoReleaseBtn");
+			load.Show();
 			$("#videoForm").ajaxSubmit({
 				dataType : "json",
 				success : function(result){
-					console.log(result);
+					load.Hide();
 					if(result.Code=="0"){
-						alert("素材保存成功");
+						$.alertmsg("#tipsMsg","success","素材保存成功");
 					}else{
-						alert(result.Codemsg);
+						$.alertmsg("#tipsMsg","danger",result.Codemsg);
 					}
 				}
 			});

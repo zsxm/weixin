@@ -5,26 +5,32 @@ $(function(){
 		var a=$(this).find("a");
 		var t=a.attr("href");
 		var i=a.attr("index");
-		var url="/media/"
+		var url="/media/index";
+		var page,action="/media/temp/upload";
 		if(t=="#panel-news"&&loadsOk[i]){
-			url+="media.news.html";
+			page="media.news";
+			action="/media/upload";
 		}else if(t=="#panel-video"&&loadsOk[i]){
-			url="media.video.html";
+			page="media.video";
+			action="/media/release/voice";
 		}else if(t=="#panel-image"&&loadsOk[i]){
-			url="media.image.html";
+			page="media.image";
+			action="/media/release/common";
 		}else if(t=="#panel-voice"&&loadsOk[i]){
-			url="media.voice.html";
+			page="media.voice";
+			action="/media/release/common";
 		}else if(t=="#panel-thumb"&&loadsOk[i]){
-			url="media.thumb.html";
+			page="media.thumb";
+			action="/media/release/common";
 		}else{
 			return;
 		}
-		loads(t,url,i);
+		loads(t,url,page,action,i);
 	});
-	var loads=function(t,url,i){
-		$(t).load(url+"?"+Math.random(),{},function(d){
+	var loads=function(t,url,page,action,i){
+		$(t).load(url+"?"+Math.random(),{page:page,action:action,saveType:1},function(d){
 			loadsOk[i]=false;
 		});
 	}
-	loads("#panel-news","/media/media.news.html?"+Math.random(),0);
+	loads("#panel-news","/media/index?"+Math.random(),"media.news","/media/upload",0);
 });

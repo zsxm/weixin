@@ -31,8 +31,7 @@ $(function(){
 		//this.document.getBody().setHtml('<img src="/static/image/login/1.jpg" border="0" title="Hello" />');
 	});
 	
-	var STYLE_SETTING = 'style="width:{width};height:{height};"';
-	var INPUT='<div><input type="text" id="tmpfiguretitle" name="tmpfiguretitle" class="form-control" filepath="noupload"/></div>';
+	var saveType=$("#newsForm #saveType").val();
 	var url="/media/upload";
 	$("#newsFile").fileinput({
 		uploadUrl: url,//上传地址
@@ -63,7 +62,7 @@ $(function(){
 			var filePath=dir+"/"+fn;
 			$("#newsFilePath").val(filePath);				
 		}else{
-			alert(result.Codemsg);	
+			$.alertmsg("#tipsMsg","danger",result.Codemsg);
 		}
 	}).on("fileremoved",function(event,prvid,index){//未上传时点击删除
 		console.log("fileremoved",prvid);

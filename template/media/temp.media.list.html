@@ -15,21 +15,23 @@
 			{{template "temp.left.menu.html" .}}
 				<div class="col-md-9 column">
 					<div class="form-group">
-				    	<label class="control-label"><h4>临时素材列表</h4></label>
+				    	<label class="control-label"><h4>素材列表</h4></label>
 				   	</div>
 					<div class="form-group">
 				      	<div class="col-sm-3">
 							<select id="mediaType" name="mediaType" class="form-control">
-								<option value="-1">请选择素材类型</option>
+								<option value="-1">素材类型-全部</option>
 								<option value="image">图片</option>
 								<option value="video">视频</option>
 								<option value="voice">语音</option>
 								<option value="news">图文</option>
 							</select>
 				      	</div>
-		         		<button type="button" id="getLocalListBtn" class="btn btn-default">临时本地列表</button>
-						<button type="button" id="getLineListBtn" class="btn btn-default">永久线上列表</button>
+		         		<button type="button" id="getLocalListBtn" class="btn btn-default">临时列表</button>
+						<button type="button" id="getLineListBtn" class="btn btn-default">永久列表</button>
+						<button type="button" id="syncLineListBtn" class="btn btn-default">同步永久素材数据</button>
 				      	<div class="col-sm-9">
+							<div id="tipsMsg"></div>
 					    	<label class="control-label">
 								&nbsp;永久素材数量&nbsp;
 								语音总数：{{.Data.voice_count}}&nbsp;&nbsp;
@@ -41,6 +43,36 @@
 			   		</div>
 					<table id="mediaList" class="table table-bordered table-hover table-condensed">
 					</table>
+					
+					<div class="modal fade" id="modal-container-detail" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">素材详情</h4>
+								</div>
+								<div class="modal-body">
+									<dl class="dl-horizontal">
+										<dt>标题</dt>
+										<dd id="title">-</dd>
+										<dt>MediaId</dt>
+										<dd id="mediaId">-</dd>
+										<dt>创建时间</dt>
+										<dd id="created">-</dd>
+										<dt>local</dt>
+										<dd id="local">-</dd>
+										<dt>URL</dt>
+										<dd id="url">-</dd>
+										<dt>类型</dt>
+										<dd id="type">-</dd>
+									</dl>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
