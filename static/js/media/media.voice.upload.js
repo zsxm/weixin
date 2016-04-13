@@ -24,14 +24,14 @@ $(function(){
 		showRemove:false//隐藏移动按钮
 	}).on("fileuploaded",function(event,data,prvid,index){
 		var result=data.response;
-		if (result.Code=="0") {
-			var da=result.Data;
+		if (result.code=="0") {
+			var da=result.data;
 			var dir=da.DirName;
 			var fn=da.FileNameId[0];
 			var filePath=dir+"/"+fn;
 			$("#voiceFilePath").val(filePath);				
 		}else{
-			$.alertmsg("#tipsMsg","danger",result.Codemsg);
+			$.alertmsg("#tipsMsg","danger",result.codemsg);
 		}
 	}).on("fileremoved",function(event,prvid,index){//未上传时点击删除
 		console.log("fileremoved",prvid);
@@ -59,10 +59,10 @@ $(function(){
 				dataType : "json",
 				success : function(result){
 					load.Hide();
-					if(result.Code=="0"){
+					if(result.code=="0"){
 						$.alertmsg("#tipsMsg","success","素材保存成功");
 					}else{
-						$.alertmsg("#tipsMsg","danger",result.Codemsg);
+						$.alertmsg("#tipsMsg","danger",result.codemsg);
 					}
 				}
 			});

@@ -1,8 +1,9 @@
 function enable(id){
 	var url="/pubnum/enable";
 	$.get(url,{pubnumid:id},function(result){
-		if(result.Code=="0"){
-			window.location.reload();
+		console.log(result);
+		if(result.code=="0"){
+			//window.location.reload();
 		}
 	});
 }

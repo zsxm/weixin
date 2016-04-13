@@ -27,7 +27,6 @@ $(function(){
 				back=$(back);
 				back.css("height",$(document).height());   
         		back.css("width",$(document).width());
-				console.log($("#_back_mask").html());
 				if($("#_back_mask").html()==undefined){
 					$("body").append(back);
 				}
@@ -41,7 +40,7 @@ $(function(){
 						if(!loadding.time){
 							loadding.time=-1;
 						}
-						if(loadding.btn){
+						if(loadding.btn&&loadding.btn!=""){
 							$(loadding.btn).addClass("disabled");
 							var btn=$(loadding.btn).attr("type");
 							if(btn=="submit"){
@@ -54,14 +53,14 @@ $(function(){
 					},
 					Hide:function(){
 						ZENG.msgbox._hide();
-						if(loadding.btn){
+						if(loadding.btn&&loadding.btn!=""){
 							$(loadding.btn).removeClass("disabled");
 							if(loadding.btnType){
 								loadding.btnType=false;
 								$(loadding.btn).attr("type","submit");
 							}
-							$("#_back_mask").hide();
 						}
+						$("#_back_mask").hide();
 					}
 				}
 				return loadding;

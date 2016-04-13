@@ -3,6 +3,7 @@ package service
 
 import (
 	"fmt"
+	"weixin/source/media/log"
 	tokenapi "weixin/source/token/api"
 	"weixin/source/util/webservice"
 
@@ -17,11 +18,29 @@ const (
 	del_material = "https://api.weixin.qq.com/cgi-bin/material/del_material?access_token=%s"
 )
 
+//删除素材和数据库
 func DeleteMedia(mediaId, userid string) *cjson.JSON {
 	token := tokenapi.GetCacheToken(userid)
 	wurl := fmt.Sprintf(del_material, token)
 	data := `{"media_id":"` + mediaId + `"}`
 	cjsn := webservice.SendPostJson(wurl, data)
+	if cjsn.Get("code").String() == "0" {
+		del_sql := "delete from media where mediaId = ?"
+		rs, err := MediaService.Execute(del_sql, mediaId)
+		if err != nil {
+			log.Error(err)
+		} else {
+			c, err := rs.RowsAffected()
+			if c > 0 {
+				del_sql = "delete from media_news where mediaId = ?"
+				_, err = MediaService.Execute(del_sql, mediaId)
+				if err != nil {
+					log.Error(err)
+				}
+			}
+		}
+
+	}
 	return cjsn
 }
 

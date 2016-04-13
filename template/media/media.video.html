@@ -3,12 +3,12 @@
 	<form id="videoForm" action="{{$data.action}}" method="post" class="form-horizontal" role="form">
 		{{if equal $data.saveType "1"}}
 		<div class="form-group">
-	      	<div class="col-sm-9">
+	      	<div class="col-sm-12">
 				<input type="text" class="form-control" id="videoTitle" name="title" placeholder="视频素材的标题" />
      		</div>
    		</div>
 		<div class="form-group">
-      		<div class="col-sm-9">
+      		<div class="col-sm-12">
 				<textarea type="text" class="form-control" id="videoIntroduction" name="introduction" placeholder="视频素材的描述"></textarea>
       		</div>
    		</div>
@@ -17,12 +17,12 @@
 		<input type="hidden" name="ctype" value="video"/>
 		<input type="hidden" id="saveType" name="saveType" value="{{$data.saveType}}"/>
 		<div class="form-group">
-	      	<div>
+	      	<div class="col-sm-12">
 				<input type="file" id="videoFile" name="file" value="" accept="video/*" multiple="multiple" class="file-loading"/>
 	      	</div>
 	   	</div>
 		<div class="form-group">
-			<div>
+			<div class="col-sm-12">
 				<button id="videoReleaseBtn" type="submit" class="btn btn-default">保存</button>
 			</div>
 		</div>

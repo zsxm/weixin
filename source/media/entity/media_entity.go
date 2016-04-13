@@ -35,4 +35,7 @@ type Media struct {
 
 	//go:@Column value=introduction
 	introduction data.String
+
+	//go:@Column value=pubnumId
+	pubnumId data.String
 }

@@ -2,12 +2,12 @@
 <p>{{$data:=.Data.Data}}
 	<form id="imageForm" action="{{$data.action}}" method="post" class="form-horizontal" role="form">
 		<div class="form-group">
-	      	<div>
+	      	<div class="col-sm-12">
 	         	<input type="file" id="imageFile" name="file" value="" accept="image/*" multiple="multiple" class="file-loading"/>
 	      	</div>
 	   	</div>
 		<div class="form-group">
-      		<div>
+      		<div class="col-sm-12">
 				<input type="hidden" id="imageFilePath" name="localName" value=""/>
 				<input type="hidden" name="ctype" value="image"/>
 				<input type="hidden" id="saveType" name="saveType" value="{{$data.saveType}}"/>

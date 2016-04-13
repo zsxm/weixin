@@ -3,6 +3,7 @@ package service
 
 import (
 	"database/sql"
+
 	"github.com/zsxm/scgo/data"
 	"github.com/zsxm/scgo/data/scdb"
 )
@@ -36,12 +37,12 @@ func (this *pubnumService) Select(bean data.EntityBeanInterface) error {
 }
 
 //分页查询,参数 : entity data.EntityBeanInterface
-func (this *pubnumService) SelectPage(entityBean data.EntityBeanInterface, page *data.Page) error{
+func (this *pubnumService) SelectPage(entityBean data.EntityBeanInterface, page *data.Page) error {
 	return this.repository.SelectPage(entityBean, page)
 }
 
 //分页数量,参数 : entity data.EntityInterface
-func (this *pubnumService) SelectCount(entity data.EntityInterface) (int, error){
+func (this *pubnumService) SelectCount(entity data.EntityInterface) (int, error) {
 	return this.repository.SelectCount(entity)
 }
 

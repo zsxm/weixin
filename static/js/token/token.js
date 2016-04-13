@@ -12,10 +12,11 @@ $(function(){
 		var url="/token/api/get/token";
 		var pubnumid=$("#pubnumid").val();
 		$.get(url,{pubnumid:pubnumid},function(result){
-			if(result.Code=="0"){
-				$("#token").val(result.Data);
+			console.log(result);
+			if(result.code=="0"){
+				$("#token").val(result.data);
 			}else{
-				alert(result.Codemsg);
+				alert(result.codemsg);
 			}
 		});
 	});
