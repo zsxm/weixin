@@ -1,8 +1,18 @@
+<script type="text/javascript">
+	{{$data:=.Data.Data}}
+	var newsAction="{{$data.action}}";
+	var newsSaveType="{{$data.saveType}}";
+	
+</script>
 <script type="text/javascript" src="/static/js/media/media.news.add.js"></script>
-
-<div class="col-md-10 column">
-	<p>{{$data:=.Data.Data}}
-		<form id="newsForm" action="{{$data.action}}" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+<div class="col-md-10 column">	
+	<form action="{{$data.action}}" method="post" role="form">
+		<div class="form-group">
+      		<div id="_newsForms" class="col-sm-12">
+			
+      		</div>
+   		</div>
+		<!--<div id="newsForm_" class="form-horizontal">
 			<div class="form-group">
 		      	<div class="col-sm-4">
 		         	<input type="text" class="form-control" id="newsTitle" name="title" placeholder="标题">
@@ -17,7 +27,7 @@
 		   	</div>
 			<div class="form-group">
 		      	<div class="col-sm-12">
-		         	<input type="text" class="form-control" id="newsSourceUrl" name="sourceUrl" placeholder="原文链接">
+		         	<input type="text" class="form-control" id="contentSourceUrl" name="content_source_url" placeholder="原文链接">
 		      	</div>
 		   	</div>
 			<div class="form-group">
@@ -28,18 +38,23 @@
 			<div class="form-group">
 		      	<div class="col-sm-12">
 		         	<input type="file" id="newsFile" name="file" value="" accept="image/*" class="file-loading"/>
-					<input type="hidden" id="newsFilePath" name="localName" value=""/>
 					<input type="hidden" name="ctype" value="news"/>
 					<input type="hidden" id="saveType" name="saveType" value="{{$data.saveType}}"/>
 		      	</div>
 		   	</div>
 			<div class="form-group">
 	      		<div class="col-sm-12">
-	         		<button type="button" class="btn btn-default">保存</button>
+	         		<button type="submit" class="btn btn-default">保存</button>
 	      		</div>
 	   		</div>
-	    </form>
-	</p>
+		</div>-->
+		<div class="form-group">
+      		<div class="col-sm-12">
+         		<button type="submit" class="btn btn-default">保存</button>
+      		</div>
+   		</div>
+	</form>
+	
 </div>
 <div class="col-md-2 column">
 	<!--右侧拦 点后按钮-->
@@ -69,18 +84,24 @@
 	
 	<!--右侧拦 图片缩略-->
 	<div class="btn-group btn-group-vertical">
-		<!--图片缩略-->
-		<div class="file-preview-frame" style="width:100px;height:100px;">
-			<img src="" class="file-preview-image" style="width:100px;height:100px;">
-			<div class="file-actions">
-				<div class="file-footer-buttons">
-					<button type="button" class="kv-file-edit btn btn-xs btn-default" title="编辑文件"><i class="glyphicon glyphicon-edit text-info">编辑</i></button>
-				</div>
-			</div>
-		</div>
 		<!--添加-->
-		<div class="file-preview-frame" style="width:100px;height:100px;cursor:pointer;">
+		<div id="addNews" class="file-preview-frame" style="width:100px;height:100px;cursor:pointer;">
 			<img src="/static/image/media/add.gif" title="添加一个" alt="添加一个" class="file-preview-image" title="" alt="" style="width:100px;height:100px;">
+		</div>
+		<div id="_newsThumb">
+			<!--图片缩略-->
+			<!--<div class="file-preview-frame" style="width:100px;height:100px;">
+				<img src="" class="file-preview-image" style="width:100px;height:100px;">
+				<div class="file-thumbnail-footer">
+					<div>标题</div>
+				</div>
+				<div class="file-actions">
+					<div class="file-footer-buttons">
+						<button type="button" class="kv-file-edit btn btn-xs btn-default" title="编辑文件"><i class="glyphicon glyphicon-edit text-info">编辑</i></button>
+						<button type="button" class="kv-file-remove btn btn-xs btn-default" title="删除文件"><i class="glyphicon glyphicon-trash text-danger">删除</i></button>
+					</div>
+				</div>
+			</div>-->
 		</div>
 	</div>
 </div>
