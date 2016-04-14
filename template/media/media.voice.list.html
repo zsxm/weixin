@@ -1,0 +1,25 @@
+<script type="text/javascript" src="/static/js/media/media.voice.list.js"></script>
+<p>
+	{{range $i,$v:=.Data}}
+	<div class="col-md-6">
+		<div class="file-preview-frame" title="{{$v.ctype}}" style="width:213px;height:80px;">
+			<audio controls="">
+				<source src="/{{$v.localName}}" type="audio/wav">
+			</audio>
+			<div class="file-thumbnail-footer">
+				<div class="file-footer-caption" title="Audio.wav">{{$v.ctype}}</div>
+			</div>
+			<div class="file-actions">
+			    <div class="file-footer-buttons">
+					<button type="button" class="kv-file-edit btn btn-xs btn-default" title="编辑文件"><i class="glyphicon glyphicon-edit text-info">编辑</i></button>
+					<button type="button" class="kv-file-remove btn btn-xs btn-default" title="删除文件"><i class="glyphicon glyphicon-trash text-danger">删除</i></button>
+			    </div>
+			</div>
+		</div>
+	</div>
+	{{else}}
+	<div class="col-md-6">
+	没有数据
+	</div>
+	{{end}}
+</p>

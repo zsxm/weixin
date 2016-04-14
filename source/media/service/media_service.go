@@ -50,12 +50,24 @@ func GetMediaCounts(userid string) *cjson.JSON {
 var mtypes = []string{"news", "image", "video", "voice"}
 
 const (
-	media_sync = "%s_media_sync"
+	media_sync      = "%s_media_sync"
+	media_sync_time = "%s_media_sync_time"
 )
 
 //接口 获取永久素材列表
 func GetMediaList(userid, pubnumId string) *cjson.JSON {
 	var result = &cjson.JSON{}
+	mstKey := fmt.Sprintf(media_sync_time, pubnumId)
+	mst, _ := cache.Get(mstKey)
+	if mst == "" {
+		cache.Set(mstKey, "3600")
+		cache.Expire(mstKey, 3600)
+	} else {
+		time, _ := cache.TTL(mstKey)
+		result.Set("code", "-104")
+		result.Set("codemsg", fmt.Sprintf("请%s秒后再同步,一小时只能同步一次。", strconv.Itoa(time)))
+		return result
+	}
 	msKey := fmt.Sprintf(media_sync, userid)
 	cms, err := cache.Get(msKey)
 	//同步结束去除同步标记

@@ -17,28 +17,56 @@
 					<div class="tabbable" id="tabs">
 						<ul class="nav nav-tabs">
 							<div id="tipsMsg"></div>
-							<li class="active">
-								 <a href="#panel-video" data-toggle="tab" index="0">视频</a>
+							<li class="dropdown active">
+								<a id="video" data-toggle="dropdown" class="dropdown-toggle" index="2">
+									视频
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="video">
+							         <li><a id="defaultClick" href="#media-video-list" ctype="video" copt="list" action="" tabindex="-1" data-toggle="tab" c="true">列表</a></li>
+							         <li><a href="#media-video-add" ctype="video" copt="add" action="/media/temp/release" tabindex="-1" data-toggle="tab" c="true">添加</a></li>
+							    </ul>
 							</li>
-							<li>
-								 <a href="#panel-image" data-toggle="tab" index="1">图片</a>
+							<li class="dropdown">
+								<a id="image" data-toggle="dropdown" class="dropdown-toggle" index="2">
+									图片
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="image">
+							         <li><a href="#media-image-list" ctype="image" copt="list" action="" tabindex="-1" data-toggle="tab" c="true">列表</a></li>
+							         <li><a href="#media-image-add" ctype="image" copt="add" action="/media/temp/release" tabindex="-1" data-toggle="tab" c="true">添加</a></li>
+							    </ul>
 							</li>
-							<li>
-								 <a href="#panel-voice" data-toggle="tab" index="2">语音</a>
+							<li class="dropdown">
+								<a id="voice" data-toggle="dropdown" class="dropdown-toggle" index="2">
+									语音
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="voice">
+							         <li><a href="#media-voice-list" ctype="voice" copt="list" action="" tabindex="-1" data-toggle="tab" c="true">列表</a></li>
+							         <li><a href="#media-voice-add" ctype="voice" copt="add" action="/media/temp/release" tabindex="-1" data-toggle="tab" c="true">添加</a></li>
+							    </ul>
 							</li>
-							<li>
-								 <a href="#panel-thumb" data-toggle="tab" index="3">缩略图</a>
+							<li class="dropdown">
+								<a id="thumb" data-toggle="dropdown" class="dropdown-toggle" index="2">
+									缩略图
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="thumb">
+							         <li><a href="#media-thumb-list" ctype="thumb" copt="list" action="" tabindex="-1" data-toggle="tab" c="true">列表</a></li>
+							         <li><a href="#media-thumb-add" ctype="thumb" copt="add" action="/media/temp/release" tabindex="-1" data-toggle="tab" c="true">添加</a></li>
+							    </ul>
 							</li>
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane active" id="panel-video">
-							</div>
-							<div class="tab-pane" id="panel-image">
-							</div>
-							<div class="tab-pane" id="panel-voice">
-							</div>
-							<div class="tab-pane" id="panel-thumb">
-							</div>
+							<div class="tab-pane fade active" id="media-video-list">loading...</div>
+							<div class="tab-pane fade" id="media-video-add">loading...</div>
+							<div class="tab-pane fade" id="media-image-list">loading...</div>
+							<div class="tab-pane fade" id="media-image-add">loading...</div>
+							<div class="tab-pane fade" id="media-voice-list">loading...</div>
+							<div class="tab-pane fade" id="media-voice-add">loading...</div>
+							<div class="tab-pane fade" id="media-thumb-list">loading...</div>
+							<div class="tab-pane fade" id="media-thumb-add">loading...</div>
 						</div>
 					</div>
 				</div>

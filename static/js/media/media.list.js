@@ -6,6 +6,7 @@ $(function(){
 		var url="/media/sync/line/list";
 		$.get(url,{},function(result){
 			load.Hide();
+			console.log(result);
 			if(result.code=="0"){
 				$.alertmsg("#tipsMsg","success","数据同步成功");
 			}else{

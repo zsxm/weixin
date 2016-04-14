@@ -14,11 +14,11 @@ func LoginFilter(fc chttp.FilterContext) error {
 	dmp, err := fc.Session().GetMap()
 	if err != nil {
 		fc.HTML("/login", "未登录")
-		return errors.New("未登录")
+		return errors.New("未登录 IP " + fc.Request().RemoteAddr)
 	}
 	if dmp.Get("id") == "" {
 		fc.HTML("/login", "未登录")
-		return errors.New("未登录")
+		return errors.New("未登录 IP " + fc.Request().RemoteAddr)
 	}
 	return nil
 }

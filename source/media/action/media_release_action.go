@@ -37,7 +37,9 @@ func syncLineGetList(c chttp.Context) {
 		c.JSON(r, false)
 	} else {
 		cjsn := service.GetMediaList(userid, pubnumId)
-		syncCount(c)
+		if cjsn.Get("code").String() == "0" {
+			syncCount(c)
+		}
 		r.Code = cjsn.Get("code").String()
 		r.Codemsg = cjsn.Get("codemsg").String()
 		c.JSON(r, false)

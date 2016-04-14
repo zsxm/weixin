@@ -1,36 +1,26 @@
 $(function(){
-	
-	var loadsOk=[true,true,true,true,true];
-	$(".nav-tabs li").click(function(){
+	//素材文件添加
+	$(".dropdown-menu li").click(function(){
 		var a=$(this).find("a");
+		var c=a.attr("c");
 		var t=a.attr("href");
-		var i=a.attr("index");
+		var ctype=a.attr("ctype");
+		var copt=a.attr("copt");
+		var action=a.attr("action");
+		var page=t.substr(1,t.length).replace("-",".").replace("-",".");
 		var url="/media/index";
-		var page,action="/media/temp/upload";
-		if(t=="#panel-news"&&loadsOk[i]){
-			page="media.news";
-			action="/media/upload";
-		}else if(t=="#panel-video"&&loadsOk[i]){
-			page="media.video";
-			action="/media/release/voice";
-		}else if(t=="#panel-image"&&loadsOk[i]){
-			page="media.image";
-			action="/media/release/common";
-		}else if(t=="#panel-voice"&&loadsOk[i]){
-			page="media.voice";
-			action="/media/release/common";
-		}else if(t=="#panel-thumb"&&loadsOk[i]){
-			page="media.thumb";
-			action="/media/release/common";
+		console.log(ctype);
+		if(ctype=="news"&&copt=="list"){
+			
 		}else{
-			return;
+			if(c=="true"||copt=="list"){
+				a.attr("c","false");
+				load(t,url,page,ctype,copt,action);
+			}
 		}
-		loads(t,url,page,action,i);
 	});
-	var loads=function(t,url,page,action,i){
-		$(t).load(url+"?"+Math.random(),{page:page,action:action,saveType:1},function(d){
-			loadsOk[i]=false;
-		});
+	var load=function(t,url,page,ctype,copt,action){
+		$(t).load(url+"?"+Math.random(),{page:page,action:action,saveType:1,ctype:ctype,copt:copt});
 	}
-	loads("#panel-news","/media/index?"+Math.random(),"media.news","/media/upload",0);
+	$("#defaultClick").click();
 });
