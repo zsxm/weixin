@@ -6,3 +6,4 @@ golang 开发的 微信配置平台<br/>
 token<br/>
 websocket即时通知<br/>
 素材<br/>
+http://bj.96weixin.com/<br/>

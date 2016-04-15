@@ -32,8 +32,10 @@ var selectMedia=function(o,ctype,st){
 		}else if(ctype=="voice"){
 			html='<audio controls=""><source src="/'+src+'" type="audio/wav"></audio>';
 		}
-		var element = CKEDITOR.dom.element.createFromHtml(html);
-		CKEDITOR.instances[content].insertElement(element);//插入html代码 追加
+		
+        UE.getEditor(content).execCommand('insertHtml', html)
+		//var element = CKEDITOR.dom.element.createFromHtml(html);
+		//CKEDITOR.instances[content].insertElement(element);//插入html代码 追加
 	}
 	$("#modal-container-mediaselect").modal("hide");//隐藏素材容器
 	//console.log(mediaId,id);

@@ -28,11 +28,11 @@ var newsFormLen=function(){
 $(function(){
 	var toolbars={
 		toolbars: [
-			['fullscreen', 'source', 'undo', 'redo'],
-			['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc']
+			['fullscreen', 'source', 'undo', 'redo','bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 
+			'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 
+			'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc','preview']
 		]
 	}
-    var ue = UE.getEditor('editor',toolbars);
 	//CKEDITOR.config.readOnly = true;//禁用或启用ckeditor
 	//CKEDITOR.instances.content.setData("正文");//设置内容
 	//CKEDITOR.instances.content.getData();//获取内容
@@ -41,11 +41,13 @@ $(function(){
 	
 	var newsFormEditor=function(id){
 		var content='content_'+id;
-		var editor1=CKEDITOR.replace(content,{
-			toolbar:[
-				['Font','Bold','Underline','Italic','TextColor','RemoveFormat','FontSize']
-			]
-		});
+    	var ue = UE.getEditor(content,toolbars);
+		
+//		var editor1=CKEDITOR.replace(content,{
+//			toolbar:[
+//				['Font','Bold','Underline','Italic','TextColor','RemoveFormat','FontSize']
+//			]
+//		});
 //		var defaultText="正文";
 //		CKEDITOR.instances[content].on("instanceReady",function(){
 //			this.document.on("click", function(){
@@ -157,12 +159,10 @@ $(function(){
 			var contents=$("textarea[name='content']");
 			for(var i=0;i<contents.length;i++){
 				var content=$(contents[i]);
-				var id=content.attr("id");
+				var id=content.attr("identif");
 				id=id.split("_")[1];
 				var content='content_'+id;
-				var text=CKEDITOR.instances[content].document.getBody().getHtml();
-				console.log(text);
-				if(text=="<p><br></p>"||text.length>20000){
+				if(!UE.getEditor(content).hasContents()){
 					var form=$("#newsForm_"+id);
 					var dp=form.css("display");
 					if(dp=="none"){
@@ -170,8 +170,20 @@ $(function(){
 					}
 					$.alertmsg("#tipsMsg","danger","正文不能为空且长度不能超过20000字");
 					bool=false;
-					break;
+					break
 				}
+//				var text=CKEDITOR.instances[content].document.getBody().getHtml();
+//				console.log(text);
+//				if(text=="<p><br></p>"||text.length>20000){
+//					var form=$("#newsForm_"+id);
+//					var dp=form.css("display");
+//					if(dp=="none"){
+//						showNewsForm('edit',id);
+//					}
+//					$.alertmsg("#tipsMsg","danger","正文不能为空且长度不能超过20000字");
+//					bool=false;
+//					break;
+//				}
 			}
 			if(false){
 				load.Show();
@@ -214,7 +226,8 @@ $(function(){
 				   	+'</div>'
 					+'<div class="form-group">'
 				    +'  	<div class="col-sm-12">'
-					+'			<textarea id="content_{{id}}" name="content"></textarea>'
+					+'			<script id="editor_{{id}}" type="text/plain" style="width:1024px;height:500px;"></script>'
+					+'			<textarea identif="content_{{id}}" id="content_{{id}}" name="content"></textarea>'
 				    +'  	</div>'
 				   	+'</div>'
 					+'<div class="form-group">'
