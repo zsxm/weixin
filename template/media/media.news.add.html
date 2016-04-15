@@ -4,10 +4,23 @@
 	var newsSaveType="{{$data.saveType}}";
 	
 </script>
+		
+<script type="text/javascript" charset="utf-8" src="/static/js/comm/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/js/comm/ueditor/ueditor.all.js"> </script>
+<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" charset="utf-8" src="/static/js/comm/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<script type="text/javascript" src="/static/js/media/media.news.add.other.js"></script>
 <script type="text/javascript" src="/static/js/media/media.news.add.js"></script>
-<div class="col-md-10 column">	
-	<form action="{{$data.action}}" method="post" role="form">
+<!--图文-->
+<div class="col-md-10 column">
+	<input id="activityForm" type="hidden" value=""/><!--存放当前活动的表单id-->
+	<form id="newsMediaForm" action="{{$data.action}}" method="post" role="form">
 		<div class="form-group">
+      		<div id="" class="col-sm-12">
+				<script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+      		</div>
       		<div id="_newsForms" class="col-sm-12">
 			
       		</div>
@@ -15,13 +28,13 @@
 		<!--<div id="newsForm_" class="form-horizontal">
 			<div class="form-group">
 		      	<div class="col-sm-4">
-		         	<input type="text" class="form-control" id="newsTitle" name="title" placeholder="标题">
+		         	<input type="text" class="form-control" id="newsTitle" name="title" maxlength="64" placeholder="标题">
 		      	</div>
 		      	<div class="col-sm-4">
-		         	<input type="text" class="form-control" id="newsAuthor" name="author" placeholder="作者">
+		         	<input type="text" class="form-control" id="newsAuthor" name="author" maxlength="20" placeholder="作者">
 		      	</div>
 		      	<div>
-					<input id="show_cover_pic" type="checkbox"/>
+					<input id="show_cover_pic" name="show_cover_pic" type="checkbox"/>
 		         	<lable>是否显示封面</lable>
 		      	</div>
 		   	</div>
@@ -58,25 +71,21 @@
 </div>
 <div class="col-md-2 column">
 	<!--右侧拦 点后按钮-->
-	<div class="btn-group btn-group-vertical">
-		<a href="#modal-container-149424" role="button" class="btn btn-default" data-toggle="modal">视频</a>
-		<a href="#modal-container-149424" role="button" class="btn btn-default" data-toggle="modal">图片</a>
-		<a href="#modal-container-149424" role="button" class="btn btn-default" data-toggle="modal">语音</a>
+	<div id="leftBar" class="btn-group btn-group-vertical">
+		<a href="javascript:void(0)" ctype="video" role="button" class="btn btn-default" >视频</a>
+		<a href="javascript:void(0)" ctype="image" role="button" class="btn btn-default" >图片</a>
+		<a href="javascript:void(0)" ctype="voice" role="button" class="btn btn-default" >语音</a>
 	</div>
 	<!--右侧拦 点后按钮后弹出层-->
-	<div class="modal fade" id="modal-container-149424" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="modal-container-mediaselect" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">
+			<div class="modal-content" style="min-width: 700px">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h4 class="modal-title" id="myModalLabel">标题</h4>
+					<h4 class="modal-title" id="mediaSelectTitle">线上永久素材选择</h4>
 				</div>
-				<div class="modal-body">
-					内容...
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary">保存</button>
+				<div id="mediaSelect" class="modal-footer">
+					
 				</div>
 			</div>
 		</div>
@@ -86,7 +95,7 @@
 	<div class="btn-group btn-group-vertical">
 		<!--添加-->
 		<div id="addNews" class="file-preview-frame" style="width:100px;height:100px;cursor:pointer;">
-			<img src="/static/image/media/add.gif" title="添加一个" alt="添加一个" class="file-preview-image" title="" alt="" style="width:100px;height:100px;">
+			<img src="/static/image/media/add_96.png" title="添加一个" alt="添加一个" class="file-preview-image" title="" alt="" style="width:100px;height:100px;">
 		</div>
 		<div id="_newsThumb">
 			<!--图片缩略-->

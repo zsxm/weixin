@@ -15,7 +15,7 @@ func main() {
 		Static: config.Mapping{
 			Dir:    "static",
 			Prefix: "/static",
-			Ext:    []string{"js", "css", "gif", "jpg", "png", "ico", "map", "woff2", "ttf", "woff", "svg", "eot"},
+			Ext:    []string{"js", "css", "gif", "jpg", "png", "ico", "map", "woff2", "ttf", "woff", "svg", "eot", "swf", "html"},
 		},
 		Html: config.Mapping{
 			Dir:    "template",

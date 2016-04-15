@@ -20,7 +20,7 @@ $(function(){
 		dropZoneTitle:"缩略图文件拖拽到这里...",
 		browseLabel: '选择文件',//选择按钮文字 
 		//removeLabel: '删除所有',//移除按钮文字
-		showRemove:false//隐藏移动按钮
+		showRemove:false//隐藏移除按钮
 	}).on("fileuploaded",function(event,data,prvid,index){
 		var result=data.response;
 		if (result.code=="0") {

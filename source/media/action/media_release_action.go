@@ -77,11 +77,11 @@ func lineGetList(c chttp.Context) {
 		r.Code = "103"
 		r.Codemsg = "请启用一个公众号"
 	} else {
-		mediaType := c.Param("mediaType")
+		ctype := c.Param("mediaType")
 		bean := entity.NewMediaBean()
 		media := entity.NewMedia()
-		if mediaType != "-1" {
-			media.SetCtype(mediaType)
+		if ctype != "-1" {
+			media.SetCtype(ctype)
 			media.Ctype().FieldExp().Eq().And()
 		}
 		media.SetPubnumId(pubnumId)
