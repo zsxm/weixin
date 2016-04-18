@@ -11,6 +11,14 @@ import (
 
 func init() {
 	control.Add("/media/index", index)
+	control.Add("/media/news/add/temp", newsAddTemp).Get()
+}
+
+//获得媒体添加模版
+func newsAddTemp(c chttp.Context) {
+	pid := c.Param("pid")
+	res := service.GetNewsAddTemp(pid)
+	c.JSON(res.Data, false)
 }
 
 //gen

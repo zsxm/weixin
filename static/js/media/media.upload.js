@@ -9,7 +9,6 @@ $(function(){
 		var action=a.attr("action");
 		var page=t.substr(1,t.length).replace("-",".").replace("-",".");
 		var url="/media/index";
-		console.log(ctype);
 		if(ctype=="news"&&copt=="list"){
 			
 		}else{

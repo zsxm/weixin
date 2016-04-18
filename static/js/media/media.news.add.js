@@ -1,3 +1,25 @@
+//模版点击后添加到编辑器中
+var tempClick=function(t){
+	var o=$(t);
+	var id=$("#activityForm").val();
+	var content="content_"+id;
+	UE.getEditor(content).execCommand('insertHtml', o.html())
+}
+//模版类型按钮点击
+var tempBtnClick=function(t,id){
+	var o=$(t);
+	var pid=o.attr("id");
+	var url="/media/news/add/temp";
+	var temp=$("#newsFormTemplate_"+id);
+	var tempList=temp.find("#tempList");
+	tempList.hide();
+	$.get(url,{pid:pid},function(result){
+		var template = Handlebars.compile('{{#each .}}<div id="temp_'+id+'_{{id}}" onclick="tempClick(this)" style="cursor:pointer;border:1px solid gray;margin: 3px 3px 3px 3px ;">{{{content}}}</div>{{/each}}');
+		var content = template(result);
+		tempList.html(content);
+		tempList.fadeIn(300);//显示
+	});
+}
 
 //显示活动的form
 var showNewsForm=function(t,id){
@@ -25,51 +47,46 @@ var deleteNewsForm=function(id){
 var newsFormLen=function(){
 	return $(".form-horizontal").length;
 }
+//预览
+var preview=function(){
+}
+//清空
+var clear=function(){
+}
 $(function(){
+	$.bootstrapGrowl('<button onclick="preview()" class="btn btn-default">预览</button>', {
+		ele: 'body',
+		type: 'info',
+		offset: {from: 'bottom', amount: 220},
+		align: 'right',
+		width: 85,
+		delay: -1,
+		allow_dismiss: false,
+		stackup_spacing: 10
+	});
+	$.bootstrapGrowl('<button onclick="clear()" class="btn btn-default">清空</button>', {
+		ele: 'body',
+		type: 'success',
+		offset: {from: 'bottom', amount: 160},
+		align: 'right',
+		width: 85,
+		delay: -1,
+		allow_dismiss: false,
+		stackup_spacing: 10
+	});
+	
 	var toolbars={
 		toolbars: [
-			['fullscreen', 'source', 'undo', 'redo','bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 
+			['fullscreen', 'source', 'undo', 'redo','bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', '|', 
 			'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 
+			'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'webapp', 'pagebreak', 'template', 'background', '|',
 			'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc','preview']
 		]
 	}
-	//CKEDITOR.config.readOnly = true;//禁用或启用ckeditor
-	//CKEDITOR.instances.content.setData("正文");//设置内容
-	//CKEDITOR.instances.content.getData();//获取内容
-	//CKEDITOR.instances.content.document.getBody().getText();//获得纯文本
-
-	
+		
 	var newsFormEditor=function(id){
 		var content='content_'+id;
     	var ue = UE.getEditor(content,toolbars);
-		
-//		var editor1=CKEDITOR.replace(content,{
-//			toolbar:[
-//				['Font','Bold','Underline','Italic','TextColor','RemoveFormat','FontSize']
-//			]
-//		});
-//		var defaultText="正文";
-//		CKEDITOR.instances[content].on("instanceReady",function(){
-//			this.document.on("click", function(){
-//				var txt=this.getBody().getText();
-//				var html=this.getBody().getHtml();
-//				if(html=='<h1 style="color:#888888">正文</h1>'){
-//					this.getBody().setText("");
-//				}
-//			});
-//			this.on("blur",function(){
-//				//var txt=this.document.getBody().getText();
-//				var html=this.document.getBody().getHtml();
-//				if(html=="<p><br></p>"||html=='<h1 style="color:#888888">正文</h1>'){
-//					this.document.getBody().setHtml("<h1 style='color:#888888'>"+defaultText+"</h1>");
-//				}
-//			});
-//			this.document.getBody().setHtml("<h1 style='color:#888888'>"+defaultText+"</h1>");
-//		});
-		//插入内容
-//		CKEDITOR.instances[content].on("instanceReady",function(){
-//			this.document.getBody().setHtml('<img src="/static/image/login/1.jpg" border="0" title="Hello" />');
-//		});
 	}
 
 	//上传控件
@@ -172,22 +189,11 @@ $(function(){
 					bool=false;
 					break
 				}
-//				var text=CKEDITOR.instances[content].document.getBody().getHtml();
-//				console.log(text);
-//				if(text=="<p><br></p>"||text.length>20000){
-//					var form=$("#newsForm_"+id);
-//					var dp=form.css("display");
-//					if(dp=="none"){
-//						showNewsForm('edit',id);
-//					}
-//					$.alertmsg("#tipsMsg","danger","正文不能为空且长度不能超过20000字");
-//					bool=false;
-//					break;
-//				}
 			}
-			if(false){
+			if(bool){
+				var load=$.loadding.New("正在保存请稍候...", 6, -1, "#newsReleaseBtn");
 				load.Show();
-				$("#newsForm_"+id).ajaxSubmit({
+				$("#newsMediaForm").ajaxSubmit({
 					dataType : "json",
 					success : function(result){
 						load.Hide();
@@ -226,8 +232,11 @@ $(function(){
 				   	+'</div>'
 					+'<div class="form-group">'
 				    +'  	<div class="col-sm-12">'
-					+'			<script id="editor_{{id}}" type="text/plain" style="width:1024px;height:500px;"></script>'
-					+'			<textarea identif="content_{{id}}" id="content_{{id}}" name="content"></textarea>'
+					+'			<div id="template_{{id}}" class="col-md-5 column">模版内容</div>'
+					+'			<div class="col-md-7 column"><div class="row">'
+					+'				<script id="editor_{{id}}" type="text/plain" style="width:1024px;height:500px;"></script>'
+					+'				<textarea identif="content_{{id}}" id="content_{{id}}" name="content"></textarea>'
+				    +'  		</div></div>'
 				    +'  	</div>'
 				   	+'</div>'
 					+'<div class="form-group">'
@@ -261,6 +270,7 @@ $(function(){
 				+'		</div>'
 				+'	</div>'
 				+'</div>{{/each}}';
+	//标题事件			
 	var newsFormTitleKeyUp=function(id){
 		$("#newsTitle_"+id).keydown(function(){
 			var val=$(this).val();
@@ -277,6 +287,28 @@ $(function(){
 			$("#titleMsg_"+id).html(val);
 		});
 	}
+	
+	//模版加载
+	var createNewsFormTemplate=function(id){
+		var temp=$("#newsFormTemplate_"+id);
+		if(temp.attr("temp")!="ok"){
+			var url="/media/index?"+Math.random();
+			$("#template_"+id).load(url,{page:"media.news.add.edit.temp"},function(d){
+				temp=$("#newsFormTemplate_");
+				temp.attr("temp","ok");
+				temp.attr("id","newsFormTemplate_"+id);
+				var url="/media/news/add/temp";
+				var btnList=temp.find("#btnList");
+				$.get(url,{pid:"root"},function(result){
+					var template = Handlebars.compile('{{#each .}}<button id="{{id}}" onclick="tempBtnClick(this,\''+id+'\')" class="btn btn-default" type="button">{{name}}</button>{{/each}}');
+					var content = template(result);
+					btnList.html(content);
+					btnList.find("button:eq(0)").click();//默认执行第一个
+				});
+			});
+		}
+	}
+	
 	var createNewsForm=function(){
 		var id=new Date().getTime();
 		var formLen=newsFormLen();
@@ -295,12 +327,11 @@ $(function(){
 			content = template(data);
 			$("#_newsThumb").append(content);
 			showNewsForm("add",id);//显示当前创建的form
+			createNewsFormTemplate(id);//模版加载
 		}
 	}
 	$("#addNews").click(function(){
 		createNewsForm();
 	});
 	createNewsForm();//默认创建一个
-	
-	
 });

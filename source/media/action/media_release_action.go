@@ -9,6 +9,7 @@ import (
 	pubnumApi "weixin/source/pubnum/api"
 
 	"github.com/zsxm/scgo/chttp"
+	"github.com/zsxm/scgo/tools"
 	"github.com/zsxm/scgo/tools/date"
 )
 
@@ -20,6 +21,15 @@ func init() {
 	control.Add("/media/toupload", toUpload).Get()              //跳转上传页面
 	control.Add("/media/delete", deleteMedia).Get()             //删除素材
 	control.Add("/media/upload", upload).Post()                 //上传素材
+	control.Add("/media/news/save", newsSave).Post()            //图片保存
+}
+
+//图片保存
+func newsSave(c chttp.Context) {
+	log.Info(c.ParamMaps())
+	r := c.NewResult()
+	tools.Sleep(5)
+	c.JSON(r, false)
 }
 
 //同步线上素材文件列表

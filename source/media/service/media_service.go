@@ -10,6 +10,7 @@ import (
 	"weixin/source/util/webservice"
 
 	"github.com/zsxm/scgo/cjson"
+	"github.com/zsxm/scgo/data"
 	"github.com/zsxm/scgo/data/cache"
 )
 
@@ -179,4 +180,13 @@ func sync(cjsn *cjson.JSON, ctype, pubnumId string) {
 		}
 	}
 
+}
+
+func GetNewsAddTemp(pid string) data.QueryResult {
+	sql := "select * from media_news_temp where pid = ?"
+	res, err := MediaService.Query(sql, pid)
+	if err != nil {
+		log.Error(err)
+	}
+	return res
 }

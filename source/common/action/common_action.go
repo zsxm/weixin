@@ -5,8 +5,8 @@ import (
 )
 
 func init() {
-	chttp.Action("/error404", error404).Get()
-	chttp.Action("/error500", error500).Get()
+	control.Add("/error404", error404).Get()
+	control.Add("/error500", error500).Get()
 }
 
 func error404(c chttp.Context) {

@@ -8061,31 +8061,24 @@ UE.Editor.defaultOptions = function(editor){
                 me.options.imageUrl && me.setOpt('serverUrl', me.options.imageUrl.replace(/^(.*[\/]).+([\.].+)$/, '$1controller$2'));
 
                 var configUrl = me.getActionUrl('config'), isJsonp = utils.isCrossDomainUrl(configUrl);
-
-                me._serverConfigLoaded = false;
-                utils.extend(me.options, configJson);
-                me.fireEvent('serverConfigLoaded');
-                me._serverConfigLoaded = true;
-				
-                	/* 发出ajax请求 */
-//                configUrl && UE.ajax.request(configUrl,{
-//                    'method': 'GET',
-//                    'dataType': isJsonp ? 'jsonp':'',
-//                    'onsuccess':function(r){
-//                        try {
-//                            var config = isJsonp ? r:eval("("+r.responseText+")");
-//                            utils.extend(me.options, config);
-//                            me.fireEvent('serverConfigLoaded');
-//                            me._serverConfigLoaded = true;
-//                        } catch (e) {
-//                            showErrorMsg(me.getLang('loadconfigFormatError'));
-//                        }
-//                    },
-//                    'onerror':function(){
-//                        showErrorMsg(me.getLang('loadconfigHttpError'));
-//                    }
-//                });
-				
+                /* 发出ajax请求 */
+                configUrl && UE.ajax.request(configUrl,{
+                    'method': 'GET',
+                    'dataType': isJsonp ? 'jsonp':'',
+                    'onsuccess':function(r){
+                        try {
+                            var config = isJsonp ? r:eval("("+r.responseText+")");
+                            utils.extend(me.options, config);
+                            me.fireEvent('serverConfigLoaded');
+                            me._serverConfigLoaded = true;
+                        } catch (e) {
+                            showErrorMsg(me.getLang('loadconfigFormatError'));
+                        }
+                    },
+                    'onerror':function(){
+                        showErrorMsg(me.getLang('loadconfigHttpError'));
+                    }
+                });
             } catch(e){
                 showErrorMsg(me.getLang('loadconfigError'));
             }
