@@ -202,6 +202,7 @@ $(function(){
 						}else{
 							$.alertmsg("#tipsMsg","danger",result.codemsg);
 						}
+						$("html,body").animate({scrollTop:$("#tipsMsg").offset().top},500);
 					}
 				});
 			}else{

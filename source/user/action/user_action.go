@@ -11,8 +11,8 @@ import (
 )
 
 func init() {
-	chttp.Action("/", index).Get()        //首页登录
-	chttp.Action("/login", toLogin).Get() //首页登录
+	control.Add("/", index).Get()        //首页登录
+	control.Add("/login", toLogin).Get() //首页登录
 	control.Add("/user/login", login).Post()
 }
 
@@ -26,7 +26,8 @@ func index(c chttp.Context) {
 		log.Error(err)
 	}
 	if dmp.Get("id") != "" {
-		c.Redirect("/pubnum/list")
+		//c.Redirect("/pubnum/list")
+		c.HTML("/index", nil)
 	} else {
 		c.Redirect("/login")
 	}
