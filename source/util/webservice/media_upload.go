@@ -101,6 +101,7 @@ func PostFile(filename string, target_url string) (*http.Response, error) {
 	return http.DefaultClient.Do(req)
 }
 
+//获取文件
 func GetFile(target_url string) *cjson.JSON {
 	response, err := http.Get(target_url)
 	if err != nil {

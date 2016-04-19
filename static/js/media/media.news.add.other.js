@@ -1,13 +1,13 @@
 var newsTemplates={
-	image:'{{#each data}}<div id="{{mediaId}}" src="{{localName}}" onclick="selectMedia(this,\'image\',\'{{../st}}\')" title="选择" class="file-preview-frame" style="width:100px;height:100px;cursor:pointer;">'
+	image:'{{#each data}}<div id="{{mediaId}}" src="{{url}}" onclick="selectMedia(this,\'image\',\'{{../st}}\')" title="选择" class="file-preview-frame" style="width:100px;height:100px;cursor:pointer;">'
 			+'	<img src="/{{localName}}" class="file-preview-image" style="width:100px;height:100px;">'
 			+'</div>{{/each}}',
-	video:'{{#each data}}<div id="{{mediaId}}" src="{{localName}}" onclick="selectMedia(this,\'video\',\'{{../st}}\')" title="选择" class="file-preview-frame" style="width:100px;height:100px;cursor:pointer;">'
+	video:'{{#each data}}<div id="{{mediaId}}" src="/{{localName}}" onclick="selectMedia(this,\'video\',\'{{../st}}\')" title="选择" class="file-preview-frame" style="width:100px;height:100px;cursor:pointer;">'
 			+'	<video width="100px" height="100px" controls="">'
 			+'		<source src="/{{localName}}" type="video/mp4">'
 			+'	</video>'
 			+'</div>{{/each}}',
-	voice:'{{#each data}}<div id="{{mediaId}}" src="{{localName}}" onclick="selectMedia(this,\'voice\',\'{{../st}}\')" title="选择" class="file-preview-frame" style="width:100px;height:100px;cursor:pointer;">'
+	voice:'{{#each data}}<div id="{{mediaId}}" src="/{{localName}}" onclick="selectMedia(this,\'voice\',\'{{../st}}\')" title="选择" class="file-preview-frame" style="width:100px;height:100px;cursor:pointer;">'
 			+'	<audio controls="">'
 			+'		<source src="/{{localName}}" type="audio/wav">'
 			+'	</audio>'
@@ -20,17 +20,17 @@ var selectMedia=function(o,ctype,st){
 	var src=o.attr("src");
 	if(st=="cover"){//封面选择
 		$("#thumb_media_id_"+id).val(mediaId);//封面id
-		$("#newsThumb_"+id).attr("src","/"+src);
+		$("#newsThumb_"+id).attr("src",src);
 	}else if(st=="content"){//内容
 		var content="content_"+id;
 		//CKEDITOR.instances[content].document.getBody().setHtml('<img src="/'+src+'" border="0" title="Hello" />');//设置html代码 覆盖所有
 		var html="";
 		if(ctype=="image"){
-			html='<img src="/'+src+'"/>';
+			html='<img src="'+src+'"/>';
 		}else if(ctype=="video"){
-			html='<video controls=""><source src="/'+src+'" type="video/mp4"></video>';
+			html='<video controls=""><source src="'+src+'" type="video/mp4"></video>';
 		}else if(ctype=="voice"){
-			html='<audio controls=""><source src="/'+src+'" type="audio/wav"></audio>';
+			html='<audio controls=""><source src="'+src+'" type="audio/wav"></audio>';
 		}
 		
         UE.getEditor(content).execCommand('insertHtml', html)

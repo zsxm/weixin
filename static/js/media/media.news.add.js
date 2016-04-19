@@ -101,6 +101,7 @@ $(function(){
 
 	//上传控件
 	var newsFormFileInput=function(id){
+		var load;
 		var url="/media/upload";
 		$("#newsFile_"+id).fileinput({
 			uploadUrl: url,//上传地址
@@ -116,6 +117,8 @@ $(function(){
 			removeLabel: "删除",//移除按钮文字
 			showRemove:true//隐藏移除按钮
 		}).on("fileuploaded",function(event,data,prvid,index){
+			load.Hide()
+			console.log(2);
 			var result=data.response;
 			//console.log(id,result);
 			if (result.code=="0") {
@@ -123,12 +126,29 @@ $(function(){
 				var dir=da.DirName;
 				var fn=da.FileNameId[0];
 				var filePath=dir+"/"+fn;
-				$("#newsFilePath_"+id).val(filePath);
-				$("#newsThumb_"+id).attr("src","/"+filePath);	
-				$("#thumb_media_id_"+id).val("");//封面图片mediaId
+				load=$.loadding.New("正在保存到微信服务器...", 6, -1);
+				load.Show();
+				//本地上传成功后，再上传到微信服务器
+				var url="/media/release/common";
+				$.post(url,{localName:filePath,ctype:"image"},function(result){
+					load.Hide()
+					console.log(result)
+					if (result.code=="0") {
+						$("#thumb_media_id_"+id).val(result.data);//封面图片mediaId
+						$("#newsFilePath_"+id).val(filePath);
+						$("#newsThumb_"+id).attr("src","/"+filePath);	
+						$.alertmsg("#tipsMsg","success","封面保存成功");
+					}else{
+						$.alertmsg("#tipsMsg","danger",result.codemsg);
+					}
+					console.log(result);
+				});
 			}else{
 				$.alertmsg("#tipsMsg","danger",result.codemsg);
 			}
+		}).on("filepreupload",function(event,prvid,index){//上传之前
+			load=$.loadding.New("正在上传...", 6, -1, "#newsReleaseBtn");
+			load.Show();
 		}).on("fileclear",function(event,prvid,index){//移除按钮点击事件
 			$("#newsFilePath_"+id).val("");
 			$("#thumb_media_id_"+id).val("");
@@ -226,10 +246,10 @@ $(function(){
 				+'<div id="newsForm_{{id}}" class="form-horizontal">'
 					+'<div class="form-group">'
 				    +'  	<div class="col-sm-4">'
-				    +'     		<input type="text" class="form-control" id="newsTitle_{{id}}" name="title" maxlength="64" placeholder="标题">'
+				    +'     		<input type="text" class="form-control" id="newsTitle_{{id}}" name="title" maxlength="64" placeholder="标题" value="测试标题数据">'
 				    +'  	</div>'
 				    +'  	<div class="col-sm-4">'
-				    +'    		<input type="text" class="form-control" id="newsAuthor_{{id}}" name="author" maxlength="20" placeholder="作者">'
+				    +'    		<input type="text" class="form-control" id="newsAuthor_{{id}}" name="author" maxlength="20" placeholder="作者" value="测试作者数据">'
 				    +'  	</div>'
 				    +'  	<div>'
 					+'			<input id="show_cover_pic_{{id}}" name="show_cover_pic" type="checkbox"/>'
@@ -238,7 +258,7 @@ $(function(){
 				   	+'</div>'
 					+'<div class="form-group">'
 				    +'  	<div class="col-sm-12">'
-				    +'     		<input type="text" class="form-control" id="contentSourceUrl_{{id}}" name="content_source_url" maxlength="255" placeholder="原文链接">'
+				    +'     		<input type="text" class="form-control" id="contentSourceUrl_{{id}}" name="content_source_url" maxlength="255" placeholder="原文链接" value="http://www.baidu.com">'
 				    +'  	</div>'
 				   	+'</div>'
 					+'<div class="form-group">'
@@ -246,7 +266,7 @@ $(function(){
 					+'			<div id="template_{{id}}" class="col-md-5 column">模版内容</div>'
 					+'			<div class="col-md-7 column"><div class="row">'
 					+'				<script id="editor_{{id}}" type="text/plain" style="width:1024px;height:500px;"></script>'
-					+'				<textarea identif="content_{{id}}" id="content_{{id}}" name="content"></textarea>'
+					+'				<textarea identif="content_{{id}}" id="content_{{id}}" name="content">测试模版内容数据</textarea>'
 				    +'  		</div></div>'
 				    +'  	</div>'
 				   	+'</div>'

@@ -21,15 +21,55 @@ func init() {
 	control.Add("/media/toupload", toUpload).Get()              //跳转上传页面
 	control.Add("/media/delete", deleteMedia).Get()             //删除素材
 	control.Add("/media/upload", upload).Post()                 //上传素材
-	control.Add("/media/news/save", newsSave).Post()            //图片保存
+	control.Add("/media/news/save", newsSave).Post()            //图文保存
 }
 
-//图片保存
+//图文保存
 func newsSave(c chttp.Context) {
-	log.Info(c.ParamMaps())
-	r := c.NewResult()
-	tools.Sleep(5)
-	c.JSON(r, false)
+	responseResult := c.NewResult()
+	dmp, err := c.Session().GetMap()
+	if err != nil {
+		log.Error(err)
+	}
+	userid := dmp.Get("id")
+	result, err, data := service.ReleaseMediaNews(c, userid)
+	if err != nil {
+		log.Error(err)
+	}
+	if result.Get("code").String() == "0" { //图文消息保存成功、向数据库保存图文数据
+		pubnumId := pubnumApi.GetCachePubNumId(userid)
+		mediaId := result.Get("media_id").String()
+		e := entity.NewMedia()
+		e.SetMediaId(mediaId)
+		e.SetCtype("news")
+		e.SetPubnumId(pubnumId)
+		e.SetSaveType(1)
+		e.Created().SetValue(date.NowUnixStr())
+		res, err := service.MediaService.Save(e)
+		if err != nil {
+			log.Error(err)
+			responseResult.Code = "120"
+			responseResult.Codemsg = "向数据库保存图文消息失败"
+		} else {
+			r, _ := res.RowsAffected()
+			if r > 0 {
+				for _, tmap := range data {
+					tmap["id"] = tools.GEN_SQL_IDENTIFY
+					sql, args := tools.MapToSQL_Insert(tmap, "media_news")
+					_, err = service.MediaService.Execute(sql, args...)
+					if err != nil {
+						log.Error(err)
+						responseResult.Code = "120"
+						responseResult.Codemsg = "向数据库保存图文消息失败"
+						break
+					}
+				}
+			}
+		}
+	}
+	responseResult.Code = result.Get("code").String()
+	responseResult.Codemsg = result.Get("codemsg").String()
+	c.JSON(responseResult, false)
 }
 
 //同步线上素材文件列表
@@ -154,6 +194,7 @@ func releaseCommon(c chttp.Context) {
 			created = cjsn.Get("created_at").String()
 			url = cjsn.Get("url").String()
 			if r.Code == "0" {
+				r.Data = mediaId
 				e.SetMediaId(mediaId)
 				if created == "" {
 					created = date.NowUnixStr()
