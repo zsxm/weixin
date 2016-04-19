@@ -54,7 +54,7 @@ var preview=function(){
 var clear=function(){
 }
 $(function(){
-	$.bootstrapGrowl('<button onclick="preview()" class="btn btn-default">预览</button>', {
+	$.bootstrapGrowl('<button onclick="preview()" class="btn btn-default" id="mediaNewPreview">预览</button>', {
 		ele: 'body',
 		type: 'info',
 		offset: {from: 'bottom', amount: 220},
@@ -63,8 +63,8 @@ $(function(){
 		delay: -1,
 		allow_dismiss: false,
 		stackup_spacing: 10
-	});
-	$.bootstrapGrowl('<button onclick="clear()" class="btn btn-default">清空</button>', {
+	},$(window.document));
+	$.bootstrapGrowl('<button onclick="clear()" class="btn btn-default" id="mediaNewClearBtn">清空</button>', {
 		ele: 'body',
 		type: 'success',
 		offset: {from: 'bottom', amount: 160},
@@ -73,14 +73,14 @@ $(function(){
 		delay: -1,
 		allow_dismiss: false,
 		stackup_spacing: 10
-	});
+	},$(window.document));
 	
 	var toolbars={
 		toolbars: [
 			['fullscreen', 'source', 'undo', 'redo','bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', '|', 
 			'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 
 			'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'webapp', 'pagebreak', 'template', 'background', '|',
-			'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc','preview']
+			'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc']//,'preview'
 		]
 	}
 		

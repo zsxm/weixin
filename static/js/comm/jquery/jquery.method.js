@@ -1,3 +1,4 @@
+//添加的公共提示框和层
 $(function(){
 	$.extend({
 		alertmsg:function(ele,type,msg){
@@ -12,25 +13,23 @@ $(function(){
 				stackup_spacing: 10 // spacing between consecutively stacked growls.
 			});
 		},//type=1 4 5 6
-		loaddingShow:function(msg,type,time){
-			if(!time){
-				time=-1;
-			}
-			ZENG.msgbox.show(msg, type, time);
-		},
-		loaddingHide:function(){
-			ZENG.msgbox._hide();
-		},
 		loadding:{
 			New:function(msg,type,time,btn){
-				var back='<div id="_back_mask" style="position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #777;z-index: 9999; left: 0px;opacity:0.5;-moz-opacity:0.5;display:none;"></div>';
-				back=$(back);
-				back.css("height",$(document).height());   
-        		back.css("width",$(document).width());
-				if($("#_back_mask").html()==undefined){
-					$("body").append(back);
+				var doc = $(window.parent.document);
+				var iframeLen=doc.find("iframe").length;
+				if(iframeLen==0){
+					doc=$(window.document)
 				}
+				var back='<div id="_back_mask" style="position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #777;z-index: 9999; left: 0px;opacity:0.5;-moz-opacity:0.5;display:none;"></div>';
+				back = $(back);
+				back.css("height",doc.height());   
+        		back.css("width",doc.width());
+				if(doc.find("#_back_mask").length==0){
+					doc.find("body").append(back);
+				}
+				console.log(iframeLen,doc.height(),doc.width(),$(document).height(),$(document).width());
 				var loadding = {
+					doc:doc,
 					btn:btn,
 					msg:msg,
 					type:type,
@@ -49,7 +48,7 @@ $(function(){
 							}
 						}
 						ZENG.msgbox.show(loadding.msg, loadding.type, loadding.time);
-						$("#_back_mask").show();
+						loadding.doc.find("#_back_mask").show();
 					},
 					Hide:function(){
 						ZENG.msgbox._hide();
@@ -60,7 +59,7 @@ $(function(){
 								$(loadding.btn).attr("type","submit");
 							}
 						}
-						$("#_back_mask").hide();
+						loadding.doc.find("#_back_mask").hide();
 					}
 				}
 				return loadding;
@@ -78,5 +77,4 @@ $(function(){
 		errorPlacement: function(error, element) {
 		}
 	});
-	
 })

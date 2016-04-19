@@ -6,13 +6,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>微信配置平台_{{.CC.Title}}</title>
 		{{template "temp.header.html" .}}
+		<script type="text/javascript" src="/static/js/pubnum/pubnum.js"></script>
 	</head>
 	<body>
-			{{template "temp.top.html" .}}
+		<div class="container-fluid">
 			<div class="row clearfix">
-			{{template "temp.left.menu.html" .}}
 				<div class="col-md-9 column">
-					<form action="/pubnum/save" method="post" class="form-horizontal" role="form">
+					<div id="tipsMsg"></div>
+					<form id="pubnumForm" action="/pubnum/save" method="post" class="form-horizontal" role="form">
 						<div class="form-group">
 					    	<label class="col-sm-4 control-label"><h4>公众微信号添加</h4></label>
 					   	</div>

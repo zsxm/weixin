@@ -60,10 +60,14 @@ func get(c chttp.Context) {
 func save(c chttp.Context) {
 	e := entity.NewPubnum()
 	c.BindData(e)
-
+	result := c.NewResult()
 	dmp, err := c.Session().GetMap()
 	if err != nil {
 		log.Error(err)
+		result.Code = "100"
+		result.Codemsg = "未登录"
+		c.JSON(result, false)
+		return
 	}
 	userid := dmp.Get("id")
 	e.Userid().SetValue(userid)             //用户id
@@ -71,13 +75,21 @@ func save(c chttp.Context) {
 	res, err := service.PubnumService.Save(e)
 	if err != nil {
 		log.Error(err)
+		result.Code = "101"
+		result.Codemsg = "保存失败"
+		c.JSON(result, false)
+		return
 	}
 	r, err := res.RowsAffected()
 	if err != nil {
 		log.Error(err)
+		result.Code = "101"
+		result.Codemsg = "保存失败"
+		c.JSON(result, false)
+		return
 	}
 	log.Println("add pubnum res row", r)
-	c.Redirect("/pubnum/list")
+	c.JSON(result, false)
 }
 
 //跳转添加页面

@@ -70,7 +70,7 @@ var lineGetList=function(st,ctype){
 	});
 }
 $(function(){
-	$("#leftBar a").click(function(){
+	$("#leftBar_video,#leftBar_image,#leftBar_voice").click(function(){
 		var o=$(this);
 		var ctype=o.attr("ctype");
 		lineGetList("content",ctype);

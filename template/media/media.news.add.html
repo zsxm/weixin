@@ -32,12 +32,12 @@
 	
 </div>
 <div class="col-md-2 column">
-	<!--右侧拦 点后按钮-->
+	<!--右侧拦 点后按钮
 	<div id="leftBar" class="btn-group btn-group-vertical">
 		<a href="javascript:void(0)" ctype="video" role="button" class="btn btn-default" >视频</a>
 		<a href="javascript:void(0)" ctype="image" role="button" class="btn btn-default" >图片</a>
 		<a href="javascript:void(0)" ctype="voice" role="button" class="btn btn-default" >语音</a>
-	</div>
+	</div>-->
 	<!--右侧拦 点后按钮后弹出层-->
 	<div class="modal fade" id="modal-container-mediaselect" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -55,6 +55,15 @@
 	
 	<!--右侧拦 图片缩略-->
 	<div class="btn-group btn-group-vertical">
+		<div id="leftBar_video" class="file-preview-frame" ctype="video" style="width:100px;height:30px;cursor:pointer;">
+			<img src="/static/image/media/video.jpg" title="视 频" class="file-preview-image" title="" alt="" style="width:100px;height:30px;">
+		</div>
+		<div id="leftBar_image" class="file-preview-frame" ctype="image" style="width:100px;height:30px;cursor:pointer;">
+			<img src="/static/image/media/image.jpg" title="图 片" class="file-preview-image" title="" alt="" style="width:100px;height:30px;">
+		</div>
+		<div id="leftBar_voice" class="file-preview-frame" ctype="voice" style="width:100px;height:30px;cursor:pointer;">
+			<img src="/static/image/media/voice.jpg" title="语 音" class="file-preview-image" title="" alt="" style="width:100px;height:30px;">
+		</div>
 		<!--添加-->
 		<div id="addNews" class="file-preview-frame" style="width:100px;height:100px;cursor:pointer;">
 			<img src="/static/image/media/add_96.png" title="添加一个" alt="添加一个" class="file-preview-image" title="" alt="" style="width:100px;height:100px;">
