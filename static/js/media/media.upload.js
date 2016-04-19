@@ -9,9 +9,16 @@ $(function(){
 		var action=a.attr("action");
 		var page=t.substr(1,t.length).replace("-",".").replace("-",".");
 		var url="/media/index";
-		if(ctype=="news"&&copt=="list"){
+		if(ctype=="news"&&copt=="list"){//图文列表
 			
-		}else{
+		}else{//图文添加和其它
+			if(ctype=="news"){
+				$("#previewEditorBtn").parent().show();
+				$("#clearEditorBtn").parent().show();
+			}else{
+				$("#previewEditorBtn").parent().hide();
+				$("#clearEditorBtn").parent().hide();
+			}
 			if(c=="true"||copt=="list"){
 				a.attr("c","false");
 				load(t,url,page,ctype,copt,action);

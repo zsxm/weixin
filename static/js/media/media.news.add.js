@@ -44,17 +44,27 @@ var deleteNewsForm=function(id){
 		$(otherObj).fadeIn(300);
 	}
 }
+//获得图文数量
 var newsFormLen=function(){
 	return $(".form-horizontal").length;
 }
 //预览
-var preview=function(){
+var previewEditor=function(){
+	var id=$("#activityForm").val();
+	var content='content_'+id;
+	var content=UE.getEditor(content).getContent()
+	console.log(content);
 }
+
 //清空
-var clear=function(){
+var clearEditor=function(){
+	var id=$("#activityForm").val();
+	var content='content_'+id;
+	UE.getEditor(content).setContent('', false);
 }
+
 $(function(){
-	$.bootstrapGrowl('<button onclick="preview()" class="btn btn-default" id="mediaNewPreview">预览</button>', {
+	$.bootstrapGrowl('<button id="previewEditorBtn" onclick="previewEditor()" class="btn btn-default">预览</button>', {
 		ele: 'body',
 		type: 'info',
 		offset: {from: 'bottom', amount: 220},
@@ -64,7 +74,7 @@ $(function(){
 		allow_dismiss: false,
 		stackup_spacing: 10
 	},$(window.document));
-	$.bootstrapGrowl('<button onclick="clear()" class="btn btn-default" id="mediaNewClearBtn">清空</button>', {
+	$.bootstrapGrowl('<button id="clearEditorBtn" onclick="clearEditor()" class="btn btn-default">清空</button>', {
 		ele: 'body',
 		type: 'success',
 		offset: {from: 'bottom', amount: 160},
