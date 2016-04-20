@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	chttp.Add("/*", LoginFilter, "/", "/user/login", "/error404", "/error500", "/weixin/demo")
+	chttp.Add("/*", LoginFilter, "/", "/user/login", "/error404", "/error500", "/weixin/demo", "/weixin/share")
 }
 
 func LoginFilter(fc chttp.FilterContext) error {

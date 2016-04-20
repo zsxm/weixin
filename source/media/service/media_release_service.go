@@ -3,6 +3,7 @@ package service
 
 import (
 	"bytes"
+	//	"encoding/json"
 	"fmt"
 	"weixin/source/media/log"
 	tokenapi "weixin/source/token/api"
@@ -107,6 +108,10 @@ func ReleaseMediaNews(c chttp.Context, userid string) (*cjson.JSON, error, []map
 			pic = "1"
 		}
 		m["show_cover_pic"] = pic
+		//		val, err := json.Marshal(value(contents, i))
+		//		if err != nil {
+		//			log.Error("json.Marshal error", err)
+		//		}
 		m["content"] = value(contents, i)
 		m["content_source_url"] = value(content_source_urls, i)
 		bjsn, err := cjson.MapToJson(m)
@@ -121,6 +126,7 @@ func ReleaseMediaNews(c chttp.Context, userid string) (*cjson.JSON, error, []map
 	b.WriteString("]}")
 
 	return webservice.SendPostJson(wurl, b.String()), nil, datas
+	//return result, nil
 }
 
 func value(values []string, i int) string {

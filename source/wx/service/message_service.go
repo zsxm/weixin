@@ -68,6 +68,8 @@ func TokenChk(c chttp.Context) bool {
 	var timestamp = c.Param("timestamp")
 	var nonce = c.Param("nonce")
 	var echostr = c.Param("echostr")
+	//9066f01aff253ab20379b97a0e337d7d4b22910e 1461141818 1788485870 4496037518575137658
+	log.Println(signature, timestamp, nonce, echostr)
 	b := util.SignValidation(signature, timestamp, nonce)
 	if b {
 		if echostr != "" {

@@ -9,19 +9,21 @@ import (
 	pubnumApi "weixin/source/pubnum/api"
 
 	"github.com/zsxm/scgo/chttp"
-	"github.com/zsxm/scgo/tools"
 	"github.com/zsxm/scgo/tools/date"
 )
 
 func init() {
-	control.Add("/media/release/common", releaseCommon).Post()  //保存普通素材
+	control.Add("/media/release/common", releaseCommon).Post() //保存普通素材
+
 	control.Add("/media/sync/line/list", syncLineGetList).Get() //同步线上列表
-	control.Add("/media/line/get", lineGetList).Get()           //线上列表
-	control.Add("/media/release/voice", releaseVoice).Post()    //保存视频素材
-	control.Add("/media/toupload", toUpload).Get()              //跳转上传页面
-	control.Add("/media/delete", deleteMedia).Get()             //删除素材
-	control.Add("/media/upload", upload).Post()                 //上传素材
-	control.Add("/media/news/save", newsSave).Post()            //图文保存
+	control.Add("/media/sync/line/media", syncLineMedia).Get()  //同步线上素材
+
+	control.Add("/media/line/get", lineGetList).Get()        //线上列表
+	control.Add("/media/release/voice", releaseVoice).Post() //保存视频素材
+	control.Add("/media/toupload", toUpload).Get()           //跳转上传页面
+	control.Add("/media/delete", deleteMedia).Get()          //删除素材
+	control.Add("/media/upload", upload).Post()              //上传素材
+	control.Add("/media/news/save", newsSave).Post()         //图文保存
 }
 
 //图文保存
@@ -32,7 +34,7 @@ func newsSave(c chttp.Context) {
 		log.Error(err)
 	}
 	userid := dmp.Get("id")
-	result, err, data := service.ReleaseMediaNews(c, userid)
+	result, err, _ := service.ReleaseMediaNews(c, userid)
 	if err != nil {
 		log.Error(err)
 	}
@@ -45,12 +47,12 @@ func newsSave(c chttp.Context) {
 		e.SetPubnumId(pubnumId)
 		e.SetSaveType(1)
 		e.Created().SetValue(date.NowUnixStr())
-		res, err := service.MediaService.Save(e)
+		_, err := service.MediaService.Save(e)
 		if err != nil {
 			log.Error(err)
 			responseResult.Code = "120"
 			responseResult.Codemsg = "向数据库保存图文消息失败"
-		} else {
+		} /*else {
 			r, _ := res.RowsAffected()
 			if r > 0 {
 				for _, tmap := range data {
@@ -65,11 +67,24 @@ func newsSave(c chttp.Context) {
 					}
 				}
 			}
-		}
+		}*/
+	} else {
+		responseResult.Code = result.Get("code").String()
+		responseResult.Codemsg = result.Get("codemsg").String()
 	}
-	responseResult.Code = result.Get("code").String()
-	responseResult.Codemsg = result.Get("codemsg").String()
 	c.JSON(responseResult, false)
+}
+
+//线上-同步素材
+func syncLineMedia(c chttp.Context) {
+	var ctype = c.Param("type")
+	var id = c.Param("id")
+	dmp, err := c.Session().GetMap()
+	if err != nil {
+		log.Error(err)
+	}
+	userid := dmp.Get("id")
+	service.GetMaterial(userid, ctype, id)
 }
 
 //同步线上素材文件列表
@@ -129,18 +144,7 @@ func lineGetList(c chttp.Context) {
 	} else {
 		ctype := c.Param("mediaType")
 		bean := entity.NewMediaBean()
-		media := entity.NewMedia()
-		if ctype != "-1" {
-			media.SetCtype(ctype)
-			media.Ctype().FieldExp().Eq().And()
-		}
-		media.SetPubnumId(pubnumId)
-		media.PubnumId().FieldExp().Eq().And()
-		media.SetSaveType(1)
-		media.SaveType().FieldExp().Eq().And()
-		media.Created().FieldSort().Desc(1)
-		bean.SetEntity(media)
-		service.MediaService.Select(bean)
+		service.GetMediaByType(ctype, pubnumId, bean)
 		r.Data = bean.Entitys().JSON()
 	}
 	c.JSON(r, false)

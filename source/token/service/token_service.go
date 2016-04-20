@@ -44,9 +44,14 @@ func GetWeiXinIP(token string) *cjson.JSON {
 //3 公众号基本信息获取tokenw
 func GetCacheToken(userid string) string {
 	pubnumid := api.GetCachePubNumId(userid)
-	pubnum := api.CachePubNum(pubnumid)
+	pubnum := GetPubNum(pubnumid)
 	token := pubnum.Token
 	return token
+}
+
+//根据公众号id获取pubnum
+func GetPubNum(pubnumid string) api.CachePubnum {
+	return api.CachePubNum(pubnumid)
 }
 
 //获取token poor做数据时间比较

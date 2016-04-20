@@ -3,6 +3,7 @@ package action
 import (
 	"weixin/source/util"
 	"weixin/source/util/consts"
+	"weixin/source/wx/api"
 	"weixin/source/wx/log"
 	"weixin/source/wx/service"
 
@@ -10,7 +11,16 @@ import (
 )
 
 func init() {
-	chttp.Action("/weixin/demo", weixin)
+	control.Add("/weixin/demo", weixin)
+	control.Add("/weixin/share", share)
+}
+
+//jssdk
+func share(c chttp.Context) {
+	pubnumid := c.Param("pubnumid")
+	url := c.Param("url")
+	mp := api.GenSign(pubnumid, url)
+	c.JSON(mp, false)
 }
 
 func weixin(c chttp.Context) {

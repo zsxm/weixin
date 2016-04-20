@@ -1,5 +1,11 @@
 $(function(){
-	//同步永久素材数据
+	//线上-同步素材
+	$("#syncLineMediaBtn").click(function(){
+		var mediaType=$("#mediaType").val();
+		syncLineMedia(mediaType,"")
+	});
+	
+	//线上-同步素材列表
 	$("#syncLineListBtn").click(function(){
 		var load=$.loadding.New("正在同步数据,请稍候...", 6, -1, "#syncLineListBtn");
 		load.Show();
@@ -14,17 +20,17 @@ $(function(){
 			}
 		});
 	});
-	
+	//获取本地临时素材列表
 	$("#getLocalListBtn").click(function(){
 		var url="/media/temp/local/get";
 		mediaList(url);
 	});
-	
+	//获取本地永久素材列表
 	$("#getLineListBtn").click(function(){
 		var url="/media/line/get";
 		mediaList(url);
 	});
-	
+	//获取素材
 	var mediaList=function(url){
 		var mediaType=$("#mediaType").val();
 		var local_temp='<thead><tr><th>MediaId</th><th>创建时间</th><th>类型</th><th>操作</th></tr></thead>';
@@ -33,7 +39,7 @@ $(function(){
 			+'	<tr>'
 			+'		<td><a href="#modal-container-detail" onclick="show(this)" title="{{title}}" id="{{mediaId}}" type="{{ctype}}" created="{{uyymdhms created}}" local="{{localName}}" url="{{url}}" data-toggle="modal">{{mediaId}}</a></td>'
 			+'		<td>{{uyymdhms created}}</td><td>{{ctype}}</td>'
-			+'		<td>{{#if (eq saveType 1)}}<a href="javascript:void(0);" onclick="deleteMedia(this,\'{{mediaId}}\')">删除</a>{{/if}}</td>'
+			+'		<td>{{#if (eq saveType 1)}}<a href="javascript:void(0);" onclick="syncLineMedia(\'{{ctype}}\',\'{{mediaId}}\')">同步</a> <a href="javascript:void(0);" onclick="deleteMedia(this,\'{{mediaId}}\')">删除</a>{{/if}}</td>'
 			+'	</tr>'
 			+'{{/each}}'
 			+'</tbody>';
@@ -49,7 +55,21 @@ $(function(){
 		});
 	}
 })
-
+//线上-同步素材 根据类型或id同步
+var syncLineMedia=function(mediaType,id){
+	var load=$.loadding.New("正在同步数据,请稍候...", 6, -1, "#syncLineListBtn");
+	load.Show();
+	var url="/media/sync/line/media";
+	$.get(url,{type:mediaType,id:id},function(result){
+		load.Hide();
+		console.log(result);
+		if(result.code=="0"){
+			$.alertmsg("#tipsMsg","success","数据同步成功");
+		}else{
+			$.alertmsg("#tipsMsg","danger",result.codemsg);
+		}
+	});
+}
 var show=function(t){
 	var o=$(t);
 	$("#title").html(o.attr("title"));
