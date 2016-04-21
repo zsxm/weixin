@@ -15,26 +15,19 @@ import (
 )
 
 const (
-	//获取token
-	token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s"
 	//获取微信服务器IP地址
 	weixin_ip = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=%s"
 )
 
 //接口 获取token
 func GetWeiXinToKen(appid, secret string) *cjson.JSON {
-	if appid != "" && secret != "" {
-		url := fmt.Sprintf(token_url, appid, secret)
-		cjson := webservice.SendGetJson(url, "")
-		return cjson
-	}
-	return nil
+	return webservice.GetWeiXinToKen(appid, secret)
 }
 
 //接口 获取微信服务器IP地址
-func GetWeiXinIP(token string) *cjson.JSON {
+func GetWeiXinIP(sessionId, token string) *cjson.JSON {
 	url := fmt.Sprintf(weixin_ip, token)
-	cjson := webservice.SendGetJson(url, "")
+	cjson := webservice.SendGetJson(sessionId, url, "")
 	return cjson
 }
 

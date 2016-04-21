@@ -1,13 +1,34 @@
 package webservice
 
 import (
+	"errors"
+	"fmt"
 	"io"
+	"regexp"
 	"strconv"
+	pubNumApi "weixin/source/pubnum/api"
 	"weixin/source/util"
 
 	"github.com/zsxm/scgo/chttplib"
 	"github.com/zsxm/scgo/cjson"
+	"github.com/zsxm/scgo/data/cache"
+	"github.com/zsxm/scgo/session"
 )
+
+const (
+	//获取token
+	token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s"
+)
+
+//接口 获取token
+func GetWeiXinToKen(appid, secret string) *cjson.JSON {
+	if appid != "" && secret != "" {
+		url := fmt.Sprintf(token_url, appid, secret)
+		cjson := SendGetJson("", url, "")
+		return cjson
+	}
+	return nil
+}
 
 //Get请求发送数据,响应string
 func SendGet(url, data string) string {
@@ -51,8 +72,40 @@ func SendPost(url, data string) string {
 	return ""
 }
 
+//通过sessionid 获取token并缓存
+func GetToKen(sessionId string) (string, error) {
+	if sessionId != "" {
+		pubNum, pubNumId := CachePubNumBySessionId(sessionId)
+		cjsn := GetWeiXinToKen(pubNum.Appid, pubNum.Secret)
+		if cjsn != nil && pubNumId != "" {
+			//缓存公众号基本信息
+			pubNum.Token = cjsn.Get("access_token").String()
+			//设置缓存
+			pubNumApi.SetCachePubNum(pubNumId, pubNum)
+			return pubNum.Token, nil
+		}
+		return "", errors.New("webservice.GetToKen 获取token失败")
+	}
+	return "", errors.New("webservice.GetToKen sessionId为空")
+}
+
+//获得缓存的公众号
+func CachePubNumBySessionId(sessionId string) (pubNumApi.CachePubnum, string) {
+	sessionMap, err := cache.HGetMap(session.SessionPrefix + sessionId)
+	if err != nil {
+		loger.Error(err)
+	} else {
+		userId := sessionMap.Get("id")                 //获取用户id
+		pubNumId := pubNumApi.GetCachePubNumId(userId) //获取启用的公众号id
+		pubNum := pubNumApi.CachePubNum(pubNumId)      //获取缓存的公众号
+		fmt.Printf("%+v\n", pubNum)
+		return pubNum, pubNumId //返回 缓存的公众号
+	}
+	return pubNumApi.CachePubnum{}, ""
+}
+
 //Get请求发送数据,响应json
-func SendGetJson(url, data string) *cjson.JSON {
+func SendGetJson(sessionId, url, data string) *cjson.JSON {
 	res := SendGet(url, data)
 	loger.Info("send url", url, "data", data)
 	var cjsn *cjson.JSON
@@ -61,7 +114,17 @@ func SendGetJson(url, data string) *cjson.JSON {
 		var code, codemsg string
 		if cjsn.Size() > 0 {
 			code = cjsn.Get("errcode").String()
-			if code != "" {
+			if code == "41001" || code == "42001" || code == "40014" || code == "40001" { //判断是否为token错误
+				tk, err := GetToKen(sessionId)
+				if err == nil {
+					reg := regexp.MustCompile(`access_token.*?&{0,1}`)
+					url = reg.ReplaceAllString(url, `access_token=`+tk+`&`)
+					return SendGetJson(sessionId, url, data) //重新发送请求
+				}
+				loger.Error("SendGetJson", err)
+				cjsn.Set("code", "130")
+				cjsn.Set("codemsg", err.Error())
+			} else if code != "" {
 				cjsn.Set("code", code)
 				ec, err := strconv.Atoi(code)
 				if err != nil {
@@ -81,7 +144,7 @@ func SendGetJson(url, data string) *cjson.JSON {
 }
 
 //Post请求发送数据,响应json
-func SendPostJson(url, data string) *cjson.JSON {
+func SendPostJson(sessionId, url, data string) *cjson.JSON {
 	res := SendPost(url, data)
 	loger.Info("send url", url, "data", data)
 	var cjsn *cjson.JSON
@@ -90,7 +153,17 @@ func SendPostJson(url, data string) *cjson.JSON {
 		var code, codemsg string
 		if cjsn.Size() > 0 {
 			code = cjsn.Get("errcode").String()
-			if code != "" {
+			if code == "41001" || code == "42001" || code == "40014" || code == "40001" { //判断是否为token错误
+				tk, err := GetToKen(sessionId)
+				if err == nil {
+					reg := regexp.MustCompile(`access_token.*?&`)
+					url = reg.ReplaceAllString(url, `access_token=`+tk+`&`)
+					return SendPostJson(sessionId, url, data) //重新发送请求
+				}
+				loger.Error("SendGetJson", err)
+				cjsn.Set("code", "130")
+				cjsn.Set("codemsg", err.Error())
+			} else if code != "" {
 				cjsn.Set("code", code)
 				ec, err := strconv.Atoi(code)
 				if err != nil {
@@ -107,10 +180,6 @@ func SendPostJson(url, data string) *cjson.JSON {
 		return cjsn
 	}
 	return cjsn
-}
-
-func SendGetXml(url, xmlData string) {
-
 }
 
 //上传媒体素材 带表单元素和媒体文件
@@ -133,25 +202,6 @@ func SendMediaUpload(formField map[string][]string, target_url string) string {
 	loger.Info("Response Body Read Size:", c)
 	return string(bye)
 }
-
-////上传媒体素材 return json str
-//func SendMediaUpload(filename string, target_url string) string {
-//	response, err := PostFile(filename, target_url)
-//	if err != nil {
-//		loger.Error("PostFile:", err)
-//		return ""
-//	}
-//	defer response.Body.Close()
-//	bye := make([]byte, response.ContentLength)
-//	c, err := response.Body.Read(bye)
-
-//	if err != nil && err != io.EOF {
-//		loger.Error("Response Body Read:", err)
-//		return ""
-//	}
-//	loger.Info("Response Body Read Size:", c)
-//	return string(bye)
-//}
 
 //上传媒体素材 带表单元素和媒体文件
 //formField:map key=formName value=[]string{"type[file&field]","value"}

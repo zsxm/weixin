@@ -20,7 +20,7 @@ const (
 )
 
 //获取临时票据根据公众号
-func GetJsApiTicket(pubnumid string) string {
+func GetJsApiTicket(sessionId, pubnumid string) string {
 	key := fmt.Sprintf(cache_jsapi_ticket, pubnumid)
 	ticket, err := cache.Get(key)
 	var b = true
@@ -34,7 +34,7 @@ func GetJsApiTicket(pubnumid string) string {
 	if !b {
 		pubnum := api.GetCacheTokenByPubnumId(pubnumid)
 		wurl := fmt.Sprintf(jsapi_ticket, pubnum.Token)
-		cjsn := webservice.SendGetJson(wurl, "")
+		cjsn := webservice.SendGetJson(sessionId, wurl, "")
 		if cjsn.Get("code").String() == "0" {
 			ticket = cjsn.Get("ticket").String()
 			cache.Set(key, ticket)
@@ -48,9 +48,9 @@ func GetJsApiTicket(pubnumid string) string {
 }
 
 //获得jssdk签名数据
-func GenSign(pubnumid, url string) map[string]string {
+func GenSign(sessionId, pubnumid, url string) map[string]string {
 	//获得jsapi ticket
-	ticket := GetJsApiTicket(pubnumid)
+	ticket := GetJsApiTicket(sessionId, pubnumid)
 	pubnum := api.GetCacheTokenByPubnumId(pubnumid)
 
 	noncestr := uuid.NewV1().String()

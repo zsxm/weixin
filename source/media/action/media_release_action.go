@@ -84,7 +84,7 @@ func syncLineMedia(c chttp.Context) {
 		log.Error(err)
 	}
 	userid := dmp.Get("id")
-	service.GetMaterial(userid, ctype, id)
+	service.GetMaterial(c.Session().Id(), userid, ctype, id)
 }
 
 //同步线上素材文件列表
@@ -101,7 +101,7 @@ func syncLineGetList(c chttp.Context) {
 		r.Codemsg = "请启用一个公众号"
 		c.JSON(r, false)
 	} else {
-		cjsn := service.GetMediaList(userid, pubnumId)
+		cjsn := service.GetMediaList(c.Session().Id(), userid, pubnumId)
 		if cjsn.Get("code").String() == "0" {
 			syncCount(c)
 		}
@@ -118,7 +118,7 @@ func syncCount(c chttp.Context) {
 		log.Error(err)
 	}
 	userid := dmp.Get("id")
-	cjsn := service.GetMediaCounts(userid)
+	cjsn := service.GetMediaCounts(c.Session().Id(), userid)
 	log.Println("cjsn ", cjsn.DataMap())
 	if cjsn.Get("code").String() == "0" {
 		err = c.Session().SetKeyMap("media_counts", cjsn.DataMap())
@@ -284,6 +284,6 @@ func deleteMedia(c chttp.Context) {
 		log.Error(err)
 	}
 	userid := dmp.Get("id")
-	cjsn := service.DeleteMedia(mediaId, userid)
+	cjsn := service.DeleteMedia(c.Session().Id(), mediaId, userid)
 	c.JSON(cjsn.Data(), false)
 }

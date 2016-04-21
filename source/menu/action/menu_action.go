@@ -40,7 +40,8 @@ func get(c chttp.Context) {
 		log.Error(err)
 	}
 	userid := dmp.Get("id")
-	cjsn := service.GetMenu(userid)
+
+	cjsn := service.GetMenu(c.Session().Id(), userid)
 	c.JSON(cjsn.Data(), false)
 }
 
@@ -64,7 +65,7 @@ func save(c chttp.Context) {
 	}
 	userid := dmp.Get("id")
 	data := c.Param("data")
-	cjsn := service.CreateMenu(userid, data)
+	cjsn := service.CreateMenu(c.Session().Id(), userid, data)
 	c.JSON(cjsn.Data(), false)
 }
 

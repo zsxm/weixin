@@ -19,7 +19,7 @@ func init() {
 func share(c chttp.Context) {
 	pubnumid := c.Param("pubnumid")
 	url := c.Param("url")
-	mp := api.GenSign(pubnumid, url)
+	mp := api.GenSign(c.Session().Id(), pubnumid, url)
 	c.JSON(mp, false)
 }
 

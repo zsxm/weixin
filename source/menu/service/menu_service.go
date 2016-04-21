@@ -17,18 +17,18 @@ const (
 )
 
 //创建菜单
-func CreateMenu(userid, data string) *cjson.JSON {
+func CreateMenu(sessionId, userid, data string) *cjson.JSON {
 	token := tokenapi.GetCacheToken(userid)
 	url := fmt.Sprintf(menu_create, token)
-	cjsn := webservice.SendPostJson(url, data)
+	cjsn := webservice.SendPostJson(sessionId, url, data)
 	return cjsn
 }
 
 //通过接口获得菜单
-func GetMenu(userid string) *cjson.JSON {
+func GetMenu(sessionId, userid string) *cjson.JSON {
 	token := tokenapi.GetCacheToken(userid)
 	url := fmt.Sprintf(menu_get, token)
-	cjsn := webservice.SendGetJson(url, "")
+	cjsn := webservice.SendGetJson(sessionId, url, "")
 	return cjsn
 }
 

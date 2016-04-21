@@ -12,14 +12,14 @@ import (
 )
 
 const (
-	cache_pubnum_userid_id_key = "%s_userid_pubnumid"
-	cache_pubnum_key           = "%s_pubnumid"
-	cache_pubnum_field_name    = "_name"
-	cache_pubnum_field_appid   = "_appid"
-	cache_pubnum_field_secret  = "_secret"
-	cache_pubnum_field_wxtoken = "_wxtoken"
-	cache_pubnum_field_token   = "_token"
-	cache_pubnum_field_userid  = "_userid"
+	cache_pubnum_userid_id_key = "pubnumid_userid:%s"
+	cache_pubnum_key           = "pubnumid:%s"
+	cache_pubnum_field_name    = "name"
+	cache_pubnum_field_appid   = "appid"
+	cache_pubnum_field_secret  = "secret"
+	cache_pubnum_field_wxtoken = "wxtoken"
+	cache_pubnum_field_token   = "token"
+	cache_pubnum_field_userid  = "userid"
 )
 
 //通过pubnum(公众号名称)获得持有的用户id
@@ -72,9 +72,9 @@ func SetCachePubNum(pubnum string, cpn CachePubnum) error {
 }
 
 //通过公众号id获得公众号基本信息
-func CachePubNum(pubnum string) CachePubnum {
+func CachePubNum(pubnumid string) CachePubnum {
 	cpn := CachePubnum{}
-	key := fmt.Sprintf(cache_pubnum_key, pubnum)
+	key := fmt.Sprintf(cache_pubnum_key, pubnumid)
 	log.Info("获取缓存的公众号基本信息 key=", key)
 	if name, err := cache.HGet(key, cache_pubnum_field_name); err == nil {
 		cpn.Name = name

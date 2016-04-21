@@ -29,11 +29,11 @@ const (
 )
 
 //删除素材和数据库
-func DeleteMedia(mediaId, userid string) *cjson.JSON {
+func DeleteMedia(sessionId, mediaId, userid string) *cjson.JSON {
 	token := tokenapi.GetCacheToken(userid)
 	wurl := fmt.Sprintf(del_material, token)
 	data := `{"media_id":"` + mediaId + `"}`
-	cjsn := webservice.SendPostJson(wurl, data)
+	cjsn := webservice.SendPostJson(sessionId, wurl, data)
 	if cjsn.Get("code").String() == "0" {
 		del_sql := "delete from media where mediaId = ?"
 		rs, err := MediaService.Execute(del_sql, mediaId)
@@ -125,7 +125,7 @@ func ReleaseMediaNews(c chttp.Context, userid string) (*cjson.JSON, error, []map
 	}
 	b.WriteString("]}")
 
-	return webservice.SendPostJson(wurl, b.String()), nil, datas
+	return webservice.SendPostJson(c.Session().Id(), wurl, b.String()), nil, datas
 	//return result, nil
 }
 

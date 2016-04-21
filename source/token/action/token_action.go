@@ -50,7 +50,7 @@ func apiGetWxIP(c chttp.Context) {
 	}
 	userid := dmp.Get("id")
 	token := service.GetCacheToken(userid)
-	cjson := service.GetWeiXinIP(token)
+	cjson := service.GetWeiXinIP(c.Session().Id(), token)
 	c.HTML("/token/wxip", cjson.Data())
 }
 

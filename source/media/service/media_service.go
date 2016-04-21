@@ -46,10 +46,10 @@ func GetTempMediag(userid, mediaId string) *cjson.JSON {
 }
 
 //接口 素材总数
-func GetMediaCounts(userid string) *cjson.JSON {
+func GetMediaCounts(sessionId, userid string) *cjson.JSON {
 	token := tokenapi.GetCacheToken(userid)
 	wurl := fmt.Sprintf(get_media_counts, token)
-	return webservice.SendGetJson(wurl, "")
+	return webservice.SendGetJson(sessionId, wurl, "")
 }
 
 var mtypes = []string{"news", "image", "video", "voice"}
@@ -60,7 +60,7 @@ const (
 )
 
 //接口 获取永久素材列表
-func GetMediaList(userid, pubnumId string) *cjson.JSON {
+func GetMediaList(sessionId, userid, pubnumId string) *cjson.JSON {
 	var result = &cjson.JSON{}
 	mstKey := fmt.Sprintf(media_sync_time, pubnumId)
 	mst, _ := cache.Get(mstKey)
@@ -100,7 +100,7 @@ func GetMediaList(userid, pubnumId string) *cjson.JSON {
 		data = fmt.Sprintf(`{"type":"%s","offset":%s,"count":%s}`, v, strconv.Itoa(offset), strconv.Itoa(count))
 
 		//cjsn := cjson.JsonToMap(newsresult)
-		cjsn := webservice.SendPostJson(wurl, data)
+		cjsn := webservice.SendPostJson(sessionId, wurl, data)
 		code := cjsn.Get("code").String()
 		if code == "0" {
 			totalCount := cjsn.Get("total_count").Integer()
@@ -204,7 +204,7 @@ func GetMediaByType(ctype, pubnumId string, bean data.EntityBeanInterface) {
 }
 
 //同步素材
-func GetMaterial(userid, ctype, id string) {
+func GetMaterial(sessionId, userid, ctype, id string) {
 	token := tokenapi.GetCacheToken(userid)
 	wurl := fmt.Sprintf(get_material, token)
 	if id == "" { //如果id为空根据类型同步
@@ -220,20 +220,20 @@ func GetMaterial(userid, ctype, id string) {
 			es := bean.Datas()
 			for i := 0; i < es.Len(); i++ {
 				e := es.Get(i)
-				cjsn := GetMaterialById(e.MediaId().Value(), wurl)
+				cjsn := GetMaterialById(sessionId, e.MediaId().Value(), wurl)
 				log.Info(cjsn.Data())
 			}
 		}
 	} else {
 		//同步指定id素材
-		cjsn := GetMaterialById(id, wurl)
+		cjsn := GetMaterialById(sessionId, id, wurl)
 		log.Info(cjsn.Data())
 	}
 }
 
 //接口 通过 mediaId 获取指定素材
-func GetMaterialById(mediaId, wurl string) *cjson.JSON {
-	return webservice.SendPostJson(wurl, `{"media_id":"`+mediaId+`"}`)
+func GetMaterialById(sessionId, mediaId, wurl string) *cjson.JSON {
+	return webservice.SendPostJson(sessionId, wurl, `{"media_id":"`+mediaId+`"}`)
 }
 
 //获取素材 图文模版
