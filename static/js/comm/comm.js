@@ -20,7 +20,7 @@ comm.closeTab=function(o,id){
 $(function(){
 	var tabTitle=$("#tabTitle");
 	var tabContent=$("#tabContent");
-	$(".panel-body a").click(function(){
+	$("a[name='menu-link']").click(function(){
 		var o=$(this);
 		var href=o.attr("href");
 		var id="",bool=false;
