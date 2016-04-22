@@ -195,7 +195,7 @@ var menu={
 			menu.showAddBtn(level,pid,id);
 		});
 	},
-	showAddBtn:function(level,pid,id){
+	showAddBtn:function(level,pid,id){//显示添加按钮
 		if(level=="1"){
 			if(menu.leve1BtnsSize()==menu.leve1-1){
 				$("#defaultBtn").show();
@@ -255,13 +255,26 @@ var menu={
 				$("#divUrl").hide();
 				menu.removeMenuForAttr("leve1_"+menuid,"url");
 				menu.removeMenuForAttr("tleve2_"+menuid,"url");
-			break;
+				break;
 			case "view":
 				$("#divUrl").show();
 				$("#divKey").hide();
 				menu.removeMenuForAttr("leve1_"+menuid,"key");
 				menu.removeMenuForAttr("tleve2_"+menuid,"key");
-			break;
+				break;
+			case "scancode_waitmsg":
+			case "scancode_push":
+			case "pic_sysphoto":
+			case "pic_photo_or_album":
+			case "pic_weixin":
+			case "location_select":
+//			case "media_id":
+//			case "view_limited":
+				$("#divKey").show();
+				$("#divUrl").hide();
+				menu.removeMenuForAttr("leve1_"+menuid,"url");
+				menu.removeMenuForAttr("tleve2_"+menuid,"url");
+				break;
 			default:
 				$("#divUrl").hide();
 				$("#divKey").hide();
@@ -275,17 +288,20 @@ var menu={
 		var jsn={};
 		jsn.type=json.type;
 		jsn.name=json.name;
-		if(json.type=="click"){
+		var type=json.type;
+		if(type=="click"){
 			jsn.key=json.key;
-		}else if(json.type=="view"){
+		}else if(type=="view"){
 			jsn.url=json.url;
-		}else if(json.type=="scancode_waitmsg"||json.type=="scancode_push"){
+		}else if(type=="scancode_waitmsg"||type=="scancode_push"||type=="pic_sysphoto"||type=="pic_photo_or_album"||type=="pic_weixin"||type=="location_select"){
 			jsn.key=json.key;
 			jsn.sub_button=[];
 		}
 		return jsn;
 	},
-	saveBtn:function(){//保存,获得所有配置的菜单，封装为json数据，请求发送到后台
+	saveBtn:function(){//保存
+		//获得所有配置的菜单，封装为json数据，请求发送到后台
+		//未验证填写的数据或选择的类型
 		$("#saveBtn").click(function(){
 			var btns=$("#btns .dropup");//所有一级菜单
 			var menus={};

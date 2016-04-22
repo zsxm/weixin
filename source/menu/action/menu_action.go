@@ -29,8 +29,13 @@ func typeList(c chttp.Context) {
 
 //保存菜单类型
 func typeSave(c chttp.Context) {
-	service.SaveMenuType(c.ParamMaps())
-	c.Redirect("/menu/type/list")
+	r := service.SaveMenuType(c.ParamMaps())
+	res := c.NewResult()
+	if r <= 0 {
+		res.Code = "100"
+		res.Codemsg = "保存失败"
+	}
+	c.JSON(res, false)
 }
 
 //查询菜单

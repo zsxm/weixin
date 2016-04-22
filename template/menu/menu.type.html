@@ -6,30 +6,68 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>微信配置平台_{{.CC.Title}}</title>
 		{{template "temp.header.html" .}}
+		<script type="text/javascript">
+			$(function(){
+				$("#menuTypeForm").validate({
+					rules:{
+						name:{
+							required:true
+						},
+						value:{
+							required:true
+						}
+					},
+					messages:{
+						name:{
+							required:"请填写菜单名称"
+						},
+						value:{
+							required:"请填写菜单值"
+						}
+					},
+					submitHandler:function(form){
+						var load=$.loadding.New("正在保存请稍候...", 6, -1, "#menuTypeSaveBtn");
+						load.Show();
+						$("#menuTypeForm").ajaxSubmit({
+							dataType : "json",
+							success : function(result){
+								load.Hide();
+								if(result.code=="0"){
+									$.alertmsg("#tipsMsg","success","保存成功");
+									location.reload()
+								}else{
+									$.alertmsg("#tipsMsg","danger",result.codemsg);
+								}
+							}
+						});
+					}
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<div class="container-fluid">
 			<div class="row clearfix">
 				<div class="col-md-12 column">
-					<form action="/menu/type/save" method="post" class="form-horizontal" role="form">
+					<form id="menuTypeForm" action="/menu/type/save" method="post" class="form-horizontal" role="form">
 						<div class="form-group">
 					    	<label class="col-sm-4 control-label"><h4>菜单类型添加</h4></label>
 					   	</div>
 						<div class="form-group">
 					     	<label for="name" class="col-sm-2 control-label">菜单名称</label>
-					      	<div class="col-sm-3">
+					      	<div class="col-sm-6">
 					         	<input type="text" class="form-control" id="name" name="name" placeholder="菜单名称">
 					      	</div>
 					   	</div>
 						<div class="form-group">
 					     	<label for="name" class="col-sm-2 control-label">菜单值</label>
-					      	<div class="col-sm-3">
+					      	<div class="col-sm-6">
 					         	<input type="text" class="form-control" id="value" name="value" placeholder="菜单值">
 					      	</div>
 					   	</div>
 						<div class="form-group">
 				      		<div class="col-sm-offset-2 col-sm-10">
-				         		<button type="submit" class="btn btn-default">保存</button>
+				         		<button id="menuTypeSaveBtn" type="submit" class="btn btn-default">保存</button>
 				      		</div>
 				   		</div>
 					</form>

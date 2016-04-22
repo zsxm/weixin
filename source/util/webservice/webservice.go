@@ -84,9 +84,9 @@ func GetToKen(sessionId string) (string, error) {
 			pubNumApi.SetCachePubNum(pubNumId, pubNum)
 			return pubNum.Token, nil
 		}
-		return "", errors.New("webservice.GetToKen 获取token失败")
+		return "", errors.New("获取token失败,请检查是否启用了一个公众号!")
 	}
-	return "", errors.New("webservice.GetToKen sessionId为空")
+	return "", errors.New("请登录!")
 }
 
 //获得缓存的公众号
