@@ -8,7 +8,6 @@ import (
 )
 
 func init() {
-	chttp.Action("/weixin/index", index)
 	chttp.Action("/weixin/save", save)
 	chttp.Action("/weixin/add", add)
 }
@@ -28,9 +27,4 @@ func save(c chttp.Context) {
 	}
 	log.Println("save row", ra)
 	c.Redirect("/weixin/index")
-}
-
-func index(c chttp.Context) {
-	log.Println("index")
-	c.HTML("/weixin/weixin.list", nil)
 }

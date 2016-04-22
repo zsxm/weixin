@@ -7,8 +7,8 @@ import (
 
 var controlConf *chttp.ControlConfig = &chttp.ControlConfig{
 	Project: "weixin",
-	Module:  "wx",
-	Title:   "微信接口",
-	Comment: "微信接口开发",
+	Module:  "message",
+	Title:   "消息管理",
+	Comment: "消息",
 }
 var control = chttp.NewControl(controlConf)

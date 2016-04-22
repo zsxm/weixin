@@ -42,30 +42,36 @@ func weixin(c chttp.Context) {
 		*/
 		log.Println("request msg type:", reqMsg.MsgType)
 		log.Printf("%+v msg struct:\n", reqMsg)
+		//保存发送来的消息
 		switch reqMsg.MsgType {
-		case consts.MSG_TEXT: //文本
-			service.Text(reqMsg, c)
-			break
-		case consts.MSG_IMAGE: //图片
-			service.Image(reqMsg, c)
-			break
-		case consts.MSG_VOICE: //语音
-			break
-		case consts.MSG_VIDEO: //视频
-			break
-		case consts.MSG_SHORTVIDEO: //小视频
-			break
-		case consts.MSG_LOCATION: //地理
-			break
-		case consts.MSG_LINK: //连接
-			break
-		case consts.MSG_NEWS: //图文
-			break
-		case consts.MSG_MUSIC: //音乐
-			break
 		case consts.MSG_EVENT: //事件
-			service.Event(reqMsg, c)
+			service.SaveMessage(string(msg), reqMsg.Event.Event, reqMsg.FromUserName, reqMsg.ToUserName)
+			service.Event(msg, reqMsg, c)
 			break
+		default:
+			service.SaveMessage(string(msg), reqMsg.MsgType, reqMsg.FromUserName, reqMsg.ToUserName)
+			switch reqMsg.MsgType {
+			case consts.MSG_TEXT: //文本
+				service.Text("你好", reqMsg, c)
+				break
+			case consts.MSG_IMAGE: //图片
+				service.Image(reqMsg, c)
+				break
+			case consts.MSG_VOICE: //语音
+				break
+			case consts.MSG_VIDEO: //视频
+				break
+			case consts.MSG_SHORTVIDEO: //小视频
+				break
+			case consts.MSG_LOCATION: //地理
+				break
+			case consts.MSG_LINK: //连接
+				break
+			case consts.MSG_NEWS: //图文
+				break
+			case consts.MSG_MUSIC: //音乐
+				break
+			}
 		}
 	}
 }

@@ -6,6 +6,7 @@ import (
 	_ "weixin/source/filter"
 	_ "weixin/source/media/action"
 	_ "weixin/source/menu/action"
+	_ "weixin/source/message/action"
 	_ "weixin/source/pubnum/action"
 	_ "weixin/source/token/action"
 	_ "weixin/source/user/action"

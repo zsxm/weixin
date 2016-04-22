@@ -14,8 +14,8 @@ const (
 	MSG_EVENT      = "event"      //事件
 
 	//事件类型
-	EVENT_SUBSCRIBE   = "subscribe"   //订阅
-	EVENT_UNSUBSCRIBE = "unsubscribe" //取消订阅
+	EVENT_SUBSCRIBE   = "subscribe"   //关注
+	EVENT_UNSUBSCRIBE = "unsubscribe" //取消关注
 	EVENT_SCAN        = "SCAN"        //已关注
 	EVENT_LOCATION    = "LOCATION"    //上报地理位置
 	EVENT_CLICK       = "CLICK"       //自定义菜单事件

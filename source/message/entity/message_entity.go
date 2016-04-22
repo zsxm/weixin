@@ -4,7 +4,7 @@ import (
 	"github.com/zsxm/scgo/data"
 )
 
-//go:generate $GOPATH/src/github.com/zsxm/scgo/tools/scgen/scgen.exe -fileDir=$GOFILE -projectDir=weixin -moduleName=wx -goSource=source
+//go:generate $GOPATH/src/github.com/zsxm/scgo/tools/scgen/scgen.exe -fileDir=$GOFILE -projectDir=weixin -moduleName=message -goSource=source
 //go:@Table value=message comment=消息 title=消息管理
 type Message struct {
 
