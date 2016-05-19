@@ -56,7 +56,8 @@ func GenSign(sessionId, pubnumid, url string) map[string]string {
 	noncestr := uuid.NewV1().String()
 	timestamp := date.NowUnixStr()
 	appid := pubnum.Appid
-
+	log.Println("ticket:", ticket)
+	log.Println("appid:", appid)
 	var b bytes.Buffer
 	b.WriteString("jsapi_ticket=")
 	b.WriteString(ticket)

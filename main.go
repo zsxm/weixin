@@ -42,7 +42,7 @@ func main() {
 			},
 		},
 		Debug:   true,
-		Port:    ":8080",
+		Port:    ":9093",
 		Welcome: "/",
 	}
 	//redis 配置
