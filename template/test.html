@@ -1,0 +1,21 @@
+<script type="text/javascript" src="/static/js/comm/jquery/jquery-2.2.3.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var content=$("#content img");
+	content.parent().attr("tmpAttr","cattr");
+	var attrs=$("[tmpAttr='cattr']");
+	attrs.each(function(i,o){
+		console.log(i,$(o).siblings().html());
+	});
+})
+</script>
+<div id="content">
+ ttt <img src="/d"/>eee
+ <figure>
+  <figcaption>
+  	bbbb <img  src="/d"/>bbbbbb<br/>
+  	bbbb <img  src="/d"/>bbbbbb
+  </figcaption>
+ aaaa <img src="/d"/>bbbb
+ </figure>
+</div>
