@@ -10,9 +10,8 @@ import (
 	"weixin/source/wx/log"
 	"weixin/source/wx/service"
 
-	"github.com/zsxm/scgo/cjson"
-
 	"github.com/zsxm/scgo/chttp"
+	"github.com/zsxm/scgo/cjson"
 )
 
 func init() {

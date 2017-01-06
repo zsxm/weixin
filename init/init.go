@@ -8,6 +8,7 @@ import (
 	_ "weixin/source/menu/action"
 	_ "weixin/source/message/action"
 	_ "weixin/source/pubnum/action"
+	_ "weixin/source/smallprogram/action"
 	_ "weixin/source/token/action"
 	_ "weixin/source/user/action"
 	_ "weixin/source/util/funmp"
