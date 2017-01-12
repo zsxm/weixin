@@ -97,6 +97,8 @@ var (
 //	&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect
 //	&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
 func redirect(c chttp.Context) {
+	param := c.Param("param")
+	log.Println("----------------------------", param)
 	rtest := url.QueryEscape("http://1p48j81052.imwork.net/weixin/redirect/test") + scop_userinfo
 	rurl := fmt.Sprintf(wxReadirect, appid, rtest)
 	c.Redirect(rurl)

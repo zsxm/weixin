@@ -12,6 +12,8 @@ import (
 func main() {
 	//web项目配置
 	config.Conf = &config.Config{
+		TLSCrt: "E:/gopath/src/weixin/cert/test_server.crt",
+		TLSKey: "E:/gopath/src/weixin/cert/test_server.key",
 		Static: config.Mapping{
 			Dir:    "static",
 			Prefix: "/static",
@@ -41,8 +43,8 @@ func main() {
 				},
 			},
 		},
-		Debug:   true,
-		Port:    ":9093",
+		Debug: true,
+		//HttpPort: ":9093",
 		Welcome: "/",
 	}
 	//redis 配置
