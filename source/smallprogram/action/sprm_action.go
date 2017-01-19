@@ -28,13 +28,8 @@ func sprm(c chttp.Context) {
 		if err != nil {
 			log.Error(err)
 		}
-		/*
-			在发送方看待：
-			FromUserName 发送者
-			ToUserName 接收者
-			反之倒过来
-		*/
 		log.Println("request msg type:", reqMsg.MsgType)
 		log.Printf("%+v msg struct:\n", reqMsg)
 	}
+	log.Println(c.Method())
 }
