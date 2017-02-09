@@ -2,6 +2,7 @@
 package action
 
 import (
+	"strconv"
 	"weixin/source/util"
 	"weixin/source/wx/log"
 	"weixin/source/wx/service"
@@ -15,6 +16,7 @@ import (
 //EncodingAESKey=iVtJJ5WRj0hntnDU2k05qr0tItUUnJItaPMSgRByrtv
 func init() {
 	control.Add("/sprm/demo", sprm).Get()
+	control.Add("/sprm/list", list).Get()
 }
 
 func sprm(c chttp.Context) {
@@ -32,4 +34,16 @@ func sprm(c chttp.Context) {
 		log.Printf("%+v msg struct:\n", reqMsg)
 	}
 	log.Println(c.Method())
+}
+
+func list(c chttp.Context) {
+	datas := make([]interface{}, 0, 10)
+	for i := 0; i < 10; i++ {
+		data := make(map[string]string)
+		data["id"] = strconv.Itoa(i + 1)
+		data["name"] = "张" + strconv.Itoa(i+1)
+		data["age"] = strconv.Itoa(i + i)
+		datas = append(datas, data)
+	}
+	c.JSON(datas, false)
 }
