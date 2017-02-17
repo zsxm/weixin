@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>维修物品信息</title>
+		<link rel="stylesheet" type="text/css" href="/static/js/comm/jquery.easyui.1.5.1/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="/static/js/comm/jquery.easyui.1.5.1/themes/icon.css">
+		<script type="text/javascript" src="/static/js/comm/jquery.easyui.1.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/static/js/comm/jquery.easyui.1.5.1/locale/easyui-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="/static/js/comm/jquery.easyui.1.5.1/jquery.easyui.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var miitGridColms=[
+					[
+					    {field:"type",title:"类别（种类）",width:80,align:"center"},
+					    {field:"typeValue",title:"",width:80,align:"center"},
+					    {field:"brand",title:"品牌",width:80,align:"center"},
+					    {field:"brandValue",width:80,align:"center"},
+					    {field:"type",title:"显示图片",width:150,rowspan:5,colspan:2,align:"center"}
+					],[
+					    {field:"name",title:"名称",width:80,align:"center"},
+					    {field:"nameValue",width:80,align:"center"},
+					    {field:"enName",title:"英文",width:80,align:"center"},
+					    {field:"enNameValue",width:80,align:"center"}
+					],[
+					    {field:"buyTime",title:"购买时间",width:80,align:"center"},
+					    {field:"buyTimeValue",width:80,align:"center"},
+					    {field:"enName",title:"中文",width:80,align:"center"},
+					    {field:"enNameValue",width:80,align:"center"}
+					],[
+					    {field:"buyAddr",title:"购买地点",width:80,align:"center"},
+					    {field:"buyAddrValue",width:80,align:"center"},
+					    {field:"series",title:"系列",width:80,align:"center"},
+					    {field:"seriesValue",width:80,align:"center"}
+					],[
+					    {field:"marketPri",title:"市场估价",width:80,align:"center"},
+					    {field:"marketPriValue",width:80},
+					    {field:"no",title:"型号",width:80,align:"center"},
+					    {field:"noValue",width:80,align:"center"}
+					],[
+					    {field:"isRepaired",title:"是否维修过",width:80,align:"center"},
+					    {field:"isRepairedValue",width:80},
+					    {field:"noCode",title:"编号\代码",width:80,align:"center"},
+					    {field:"noCodeValue",width:80,align:"center"},
+					    {field:"officialParam",title:"官方提供技术参数",colspan:2,align:"center"}
+					],[
+					    {field:"noOriginal",title:"非原装",width:80,align:"center"},
+					    {field:"noOriginalValue",width:80},
+					    {field:"ot1",title:"",width:80,align:"center"},
+					    {field:"ot2",width:80,align:"center"},
+					    {field:"officialPrice",title:"官方价格",width:80,align:"center"},
+					    {field:"officialPriceValue",title:"-",width:80,align:"center"}
+					],[
+					    {field:"cnName1",title:"物品外观详细特征",colspan:6,align:"center"}
+					],[
+					    {field:"isRepaired",title:"尺寸",width:80,align:"center"},
+					    {field:"isRepairedValue",width:80},
+					    {field:"noCode",title:"品种",width:80,align:"center"},
+					    {field:"noCodeValue",width:80,align:"center"},
+					    {field:"officialParam",title:"适用人群",align:"center"},
+					    {field:"officialPriceValue",width:80,align:"center"}
+					],[
+					    {field:"type",title:"形状",width:80,align:"center"},
+					    {field:"typeValue",title:"",width:80,align:"center"},
+					    {field:"brand",title:"材质",width:80,align:"center"},
+					    {field:"brandValue",width:80,align:"center"},
+					    {field:"type",title:"外观品相",width:150,rowspan:5,colspan:2,align:"center"}
+					],[
+					    {field:"name",title:"规格",width:80,align:"center"},
+					    {field:"nameValue",width:80,align:"center"},
+					    {field:"enName",title:"颜色",width:80,align:"center"},
+					    {field:"enNameValue",width:80,align:"center"}
+					],[
+					    {field:"buyTime",title:"数量",width:80,align:"center"},
+					    {field:"buyTimeValue",width:80,align:"center"},
+					    {field:"enName",title:"级别",width:80,align:"center"},
+					    {field:"enNameValue",width:80,align:"center"}
+					],[
+					    {field:"buyAddr",title:"重量",width:80,align:"center"},
+					    {field:"buyAddrValue",width:80,align:"center"},
+					    {field:"series",title:"净度",width:80,align:"center"},
+					    {field:"seriesValue",width:80,align:"center"}
+					],[
+					    {field:"marketPri",title:"总重量",width:80,align:"center"},
+					    {field:"marketPriValue",width:80},
+					    {field:"no",title:"成色",width:80,align:"center"},
+					    {field:"noValue",width:80,align:"center",editor:"text"}
+					]
+				]
+				var custDescColms=[
+					[
+					]
+				]
+				/*	
+				$("#matceItemInfoTable").datagrid({
+					title:"维修物品信息",
+					width:483,
+					iconCls:"icon-save",
+					url:"data/datagrid_data.json",
+					loadMsg:"加载数据...",
+					columns:miitGridColms
+				});
+				$("#custDescTable").datagrid({
+					title:"客户描述",
+					width:483,
+					iconCls:"icon-save",
+					url:"data/datagrid_data.json",
+					loadMsg:"加载数据...",
+					columns:custDescColms
+				});
+				*/
+			});
+		</script>
+		<style>
+			.grid{border:1px solid #8DB2E3;font-size:12px;width:100%;border-collapse:collapse}
+			.grid td{border:1px solid #8DB2E3;text-align:center;}
+			.grid input{width:100px;}
+			.colWidth100{
+				width:100px;
+			}
+			.colHeight80{
+				height:80px;
+			}
+			.colWidth200{
+				width:200px;
+			}
+			.colWidth210{
+				width:210px;
+			}
+			.colWidth300{
+				width:300px;
+			}
+			.colWidth200 input{
+				width:200px;
+			}
+			.colWidth500{
+				width:500px;
+			}
+			.colWidth600{
+				width:600px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="matceItemInfoTable" class="easyui-datagrid" style="">
+		</div>
+		<div id="custDescTable" class="easyui-datagrid">
+		</div>
+		
+		<div class="easyui-panel" title="维修物品信息" style="width:610px;">
+	    	<table class="grid">
+	    		<tr>
+	    			<td class="colWidth100">类别（种类）</td>
+	    			<td class="colWidth100"><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td class="colWidth100">品牌</td>
+	    			<td class="colWidth100"><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td rowspan="5" colspan="2">显示图片</td>
+	    		</tr>
+	    		<tr>
+	    			<td>名称</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>英文</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>购买时间</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>中文</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>购买地点</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>系列</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>市场估价</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>型号</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>是否维修过</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>编号\代码</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td colspan="2">官方提供技术参数</td>
+	    		</tr>
+	    		<tr>
+	    			<td>非原装</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>&nbsp;</td>
+	    			<td>&nbsp;</td>
+	    			<td class="colWidth100">官方价格</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td colspan="6">物品外观详细特征</td>
+	    		</tr>
+	    		<tr>
+	    			<td>尺寸</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>品种</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>适用人群</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+				<tr>
+	    			<td>形状</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>材质</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td rowspan="5" colspan="2">外观品相</td>
+	    		</tr>
+	    		<tr>
+	    			<td>规格</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>颜色</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>数量</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>级别</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>重量</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>净度</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>总重量</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td>成色</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    	</table>
+	    </div>
+		<p></p>
+		<div class="easyui-panel" title="客户描述" style="width:610px;">
+			<table class="grid">
+	    		<tr>
+	    			<td class="colWidth100">送修部件</td>
+	    			<td class="colWidth200"><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td class="colWidth100">送修次数</td>
+	    			<td class="colWidth200">此故障初次、多次送修</td>
+	    		</tr>
+	    		<tr>
+	    			<td class="colWidth100">故障或要求</td>
+	    			<td class="colWidth500" colspan="3" style="text-align:left;">
+						<textarea class="easyui-textareabox" type="text" id="" name="" value="" style="height:80px;width:500px;"></textarea>
+					</td>
+	    		</tr>
+	    	</table>
+	    </div>
+		<p></p>
+		<div class="easyui-panel" title="检查与报价" style="width:610px;">
+			<table class="grid">
+	    		<tr>
+	    			<td colspan="6">照片</td>
+	    		</tr>
+	    		<tr>
+	    			<td class="colWidth100">前面</td>
+	    			<td class="colWidth100">后面</td>
+	    			<td class="colWidth100">左侧面</td>
+	    			<td class="colWidth100">右侧面</td>
+	    			<td class="colWidth100">&nbsp;</td>
+	    			<td class="colWidth100">&nbsp;</td>
+	    		</tr>
+	    		<tr>
+	    			<td class="colHeight80"><img src="#" /></td>
+	    			<td><img src="#" /></td>
+	    			<td><img src="#" /></td>
+	    			<td><img src="#" /></td>
+	    			<td><img src="#" /></td>
+	    			<td><img src="#" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td class="colWidth100">有问题部位1</td>
+	    			<td class="colWidth100">有问题部位2</td>
+	    			<td class="colWidth100">有问题部位3</td>
+	    			<td class="colWidth100">有问题部位4</td>
+	    			<td class="colWidth100">有问题部位5</td>
+	    			<td class="colWidth100">有问题部位6</td>
+	    		</tr>
+	    		<tr>
+	    			<td class="colHeight80"><img src="#" /></td>
+	    			<td><img src="#" /></td>
+	    			<td><img src="#" /></td>
+	    			<td><img src="#" /></td>
+	    			<td><img src="#" /></td>
+	    			<td><img src="#" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td class="colWidth100">外观品相</td>
+	    			<td class="colWidth100">&nbsp;</td>
+	    			<td class="colWidth100">&nbsp;</td>
+	    			<td class="colWidth100">&nbsp;</td>
+	    			<td class="colWidth100">&nbsp;</td>
+	    			<td class="colWidth100">&nbsp;</td>
+	    		</tr>
+	    		<tr>
+	    			<td colspan="6">&nbsp;</td>
+	    		</tr>
+	    		<tr>
+	    			<td class="colHeight80">检测结果</td>
+	    			<td class="colWidth500" colspan="5" style="text-align:left;"></td>
+	    		</tr>
+	    		<tr>
+	    			<td class="colWidth100">检查日期</td>
+	    			<td class="colWidth100">&nbsp;</td>
+	    			<td class="colWidth100">&nbsp;</td>
+	    			<td class="colWidth100">检查人员</td>
+	    			<td class="colWidth100">&nbsp;</td>
+	    			<td class="colWidth100">&nbsp;</td>
+	    		</tr>
+	    	</table>
+	    </div>
+		<p></p>
+		<div class="easyui-panel" title="维修费用" style="width:910px;">
+			<table class="grid">
+	    		<tr>
+	    			<td class="colWidth100">方案</td>
+	    			<td class="colWidth200">更换或维修部件</td>
+	    			<td class="colWidth100">零件费用</td>
+	    			<td class="colWidth100">工时费用</td>
+	    			<td class="colWidth100">合计</td>
+	    			<td class="colWidth100">vip折扣</td>
+	    			<td class="colWidth100">少算金额</td>
+	    			<td class="colWidth100">实收金额</td>
+	    		</tr>
+	    		<tr>
+	    			<td>方案一</td>
+	    			<td class="colWidth200"><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>方案二</td>
+	    			<td class="colWidth200"><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>方案三</td>
+	    			<td class="colWidth200"><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>方案四</td>
+	    			<td class="colWidth200"><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td colspan="5">&nbsp;</td>
+	    			<td>总计</td>
+	    			<td><input class="easyui-textbox" type="text" id="" name="" value="" /></td>
+	    			<td></td>
+	    		</tr>
+	    	</table>
+	    </div>
+		<p></p>
+		<div class="easyui-panel" title="确认是否维修" style="width:810px;">
+			<table class="grid">
+	    		<tr>
+	    			<td class="colWidth100">联系时间</td>
+	    			<td class="colWidth100">联系方式</td>
+	    			<td class="colWidth300">确认内容</td>
+	    			<td class="colWidth100">交付日期</td>
+	    			<td class="colWidth100">领取（交付）方式</td>
+	    			<td class="colWidth100">付款时间</td>
+	    		</tr>
+	    		<tr>
+	    			<td colspan="3">当面、电话、信息、微信、其他</td>
+	    			<td></td>
+	    			<td></td>
+	    			<td>维修前已付清、维修后取表时</td>
+	    		</tr>
+	    	</table>
+	    </div>
+	</body>
+<html>
