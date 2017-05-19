@@ -50,8 +50,8 @@ func main() {
 	//redis 配置
 	//redis 初始化化
 	cache.Init(&cache.Config{
-		Address:  "127.0.0.1:6379",
-		Password: "foobared",
+		Address: "127.0.0.1:6379",
+		//	Password: "foobared",
 	})
 
 	//session选项配置
